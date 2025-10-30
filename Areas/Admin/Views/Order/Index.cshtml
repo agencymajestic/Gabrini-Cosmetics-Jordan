@@ -1,0 +1,189 @@
+﻿@model IEnumerable<GabriniCosmetics.Areas.Admin.Models.Order>
+@inject GabriniCosmetics.Areas.Admin.Models.Interface.IOrder _order
+
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header card-no-border pb-0">
+                    <div class="header-top">
+                        <h4>Recent Orders</h4>
+                    </div>
+                </div>
+                <div class="card-body pt-0 recent-orders px-0">
+                    <div class="table-responsive theme-scrollbar" style="padding: 16px 24px 0px;">
+                        <table class="table display" id="recent-orders" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Customer</th>
+                                    <th>Order Date</th>
+                                    <th>QTY</th>
+                                    <th>Price </th>
+                                    <th>Status</th>
+                                    <th>Payment Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    var orderItems = await _order.GetOrderItemsByOrderId(item.ID);
+                                    if(orderItems.Count > 0)
+                                    {
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td class="customer-img">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="flex-grow-1">
+                                                        <h6> @item.FirstName @item.LastName </h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            @{
+                                                // Trim the semicolon if it exists
+                                                string timestamp = item.Timestamp.TrimEnd(';');
+                                                DateTime originalDate = DateTime.ParseExact(timestamp, "M/d/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture);
+                                                string formattedDate = originalDate.ToString("dd-MM-yyyy - hh.mmtt");
+                                            }
+                                            <td>@formattedDate</td>
+                                            @{
+                                                double? subtotal = 0;
+                                                int quantity = 0;
+                                                foreach (var orderItem in orderItems)
+                                                {
+                                                    quantity += orderItem.Quantity;
+                                                    subtotal += orderItem.Quantity * ((orderItem.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale"))
+                                                    ? orderItem.Subproduct.Product.PriceAfterDiscount
+                                                    : orderItem.Subproduct.Product.Price);
+                                                }
+                                                <td>QTY:@quantity</td>
+                                                @if (orderItems?.FirstOrDefault() != null && orderItems.FirstOrDefault().TotalPrice != null)
+                                                {
+                                                    <td>
+                                                        <p>@orderItems.FirstOrDefault().TotalPrice</p>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        <p>@subtotal</p>
+                                                    </td>
+                                                }
+                                            }
+                                            @if (item.OrderStatus == "Accepted")
+                                            {
+                                                <td>
+                                                    <div class="status-box">
+                                                        <div class="btn background-light-success font-success f-w-500">@item.OrderStatus</div>
+                                                    </div>
+                                                </td>
+                                            }
+                                            else if (item.OrderStatus == "Pending")
+                                            {
+                                                <td>
+                                                    <div class="status-box">
+                                                        @* <div class="btn background-light-warning font-warning f-w-500">@item.OrderStatus</div> *@
+                                                        <div class="btn bg-warning text-dark f-w-500">@item.OrderStatus</div>
+                                                    </div>
+                                                </td>
+                                            }
+                                            else if (item.OrderStatus == "Rejected")
+                                            {
+                                                <td>
+                                                    <div class="status-box">
+                                                        <div class="btn background-light-danger font-danger f-w-500">@item.OrderStatus</div>
+                                                    </div>
+                                                </td>
+                                            }
+                                            else if (item.OrderStatus.ToLower().Contains("cancelled"))
+                                            {
+                                                <td>
+                                                    <div class="status-box">
+                                                        <div class="btn background-light-danger font-danger f-w-500">@item.OrderStatus</div>
+                                                    </div>
+                                                </td>
+                                            }
+                                            @if (item.PaymentStstus == "Paid")
+                                            {
+                                                <td style="color:#0DA759">@item.PaymentStstus</td>
+                                            }
+                                            else if (item.PaymentStstus == "UnPaid")
+                                            {
+                                                <td style="color:#E44141">@item.PaymentStstus</td>
+                                            }
+                                            <td>
+                                                <div>
+                                                    <button type="button" class="btn-model-edit" data-bs-toggle="modal" data-bs-target="#exampleModal_@item.ID">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <a href="/Admin/Order/Details/@item.ID" class="btn-model-eye">
+                                                        <i class="fa-sharp fa-regular fa-eye"></i>
+                                                    </a>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal_@item.ID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit order</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="/Admin/Order/Edit" method="post">
+                                                                        <input type="hidden" name="id" value="@item.ID" />
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-name" class="col-form-label">Name:</label>
+                                                                            <input type="text" class="form-control" id="recipient-name" value="@item.FirstName @item.LastName" disabled>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="recipient-phone" class="col-form-label">Phone:</label>
+                                                                            <input type="text" class="form-control" id="recipient-phone" value="@item.Phone" disabled>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="order-status" class="col-form-label">Order Status:</label>
+                                                                            <select class="form-select" id="order-status" name="orderStatus">
+                                                                                <option value="Pending" @(item.OrderStatus == "Pending" ? "selected" : "")>Pending</option>
+                                                                                <option value="Accepted" @(item.OrderStatus == "Accepted" ? "selected" : "")>Accepted</option>
+                                                                                <option value="Rejected" @(item.OrderStatus == "Rejected" ? "selected" : "")>Rejected</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="payment-status" class="col-form-label">Payment Status:</label>
+                                                                            <select class="form-select" id="payment-status" name="paymentStatus">
+                                                                                <option value="Paid" @(item.PaymentStstus == "Paid" ? "selected" : "")>Paid</option>
+                                                                                <option value="UnPaid" @(item.PaymentStstus == "UnPaid" ? "selected" : "")>UnPaid</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                    
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

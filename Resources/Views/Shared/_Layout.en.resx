@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>Addresses</value>
+  </data>
+  <data name="AllProducts" xml:space="preserve">
+    <value>All Products</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="BestSaleProduct" xml:space="preserve">
+    <value>Best Sale Product</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>&lt;strong&gt;WE ARE THE FIRST CHOICE FOR COSMETICS IN JORDAN&lt;/strong&gt;</value>
+  </data>
+  <data name="ConditionsOfUse" xml:space="preserve">
+    <value>Conditions of Use</value>
+  </data>
+  <data name="Contactus" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright © 2024 &lt;strong&gt;Gabrini Cosmetics - Jordan&lt;/strong&gt; All rights reserved.</value>
+  </data>
+  <data name="Dealofthedays" xml:space="preserve">
+    <value>Deal of the Days</value>
+  </data>
+  <data name="DeliveryReturns" xml:space="preserve">
+    <value>Delivery &amp; Returns</value>
+  </data>
+  <data name="desc01" xml:space="preserve">
+    <value>Gabrini Cosmetics Company,</value>
+  </data>
+  <data name="desc02" xml:space="preserve">
+    <value>Jordan, Al-Zarqa, Al-Russayfah, Queen Rania Street, Near Rusayfah Municipality, Zip 1007.</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>We are the first choice for cosmetics in Jordan</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Enter your email here ...</value>
+  </data>
+  <data name="FastDelivery" xml:space="preserve">
+    <value>Fast Delivery</value>
+  </data>
+  <data name="FastDeliveryDec" xml:space="preserve">
+    <value>Delivery inside Amman within 48 hours and outside Amman within 72 hours.</value>
+  </data>
+  <data name="FeatureProducts" xml:space="preserve">
+    <value>Feature Products</value>
+  </data>
+  <data name="Followus" xml:space="preserve">
+    <value>Follow Us</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="items" xml:space="preserve">
+    <value>items</value>
+  </data>
+  <data name="JOD" xml:space="preserve">
+    <value>JOD</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Gabrini, Best Makeup Shop In Jordan, Best Cosmetics Shop In Jordan, Beauty And Cosmetics Products, Beauty, Cosmetics, Cosmetics Products, Beauty Products, Hair, Contour, Shampoos, Conditioners, Oils, Treatments, Hair Color,  Hair Spray, Hair Straighteners, Hair Tools, Hair Styling, Hair Accessories, Make-up, Shop In Jordan Amman, Irbid, Karak, Cosmetics Online Shopping, Online Shopping, Deals, Shop, E- Commerce, Cosmetics, Makeup, Haircare, Hair Products, Shampoo, Conditioner, Skincare, Skin, Care, Nails, Nashi, Lakme, Pierre Rene, Mayo, Black Professional, Benefit, L'oreal, Hair Dryer, Hair Curler, Curling Iron, Nail Polish, Buy, Online Market, Ecommerce, Best Cosmetics Shop In Jordan, Skin Care, Shop Makeup, Haircare, Tajclass, Beesline, Bellápierre, Bioderma, Bourjois, C Products, Catrice, Clarins Paris, Cocoa Brow, Cover Fx, Divage, Emper, Essence, Eveline, Garnier, Johnson's, Karl Lagerfeld + Model Co, Loreal, Mason's, Mavala, Max Factor, Maybelline, Mega, Misslyn, Multiple Brands, Nacomi, Neutrogena, Nivea, Note, Oznaturals, Panthenol Plus, Radiant Real Techniques, Rimmel, Schwarzkopf, Seventeen, St Ives, Vaseline, Sunblock, Mask, Lotion, Eyes Makeup, Face Makeup, Lips Makeup, Perfumes, Powder Brush, Face Shaping Brush, Mascara, Powder Blush, Blush, Powder, Ink Eyeliner, Eyeliner, Eyes, Face, Lips, Nails, Nails Care, Whitening Cleanser, Personal Care, Cotton, Makeup Removel, Free Delivery, Shopping Online, Makeup Online Shopping, Best Makeup Online Shopping, Gabrini Cosmetics, Concealer, Lipstick, Eyeliners, Eyeshadows, Foundation, Mascara, Moisturizer, Body Powder, Hair Oil, C C Cream, Lip Gloss, The Color Max Kajal, Lash, Blush On, Bb Mate, Lipgloss Cream, Nail Polish Remover, Acetone, Dipliner, Waterproof, Eye Pencil, Lip Pencil, Long Lash, Matte, Lip Balm, Eye Brow Pencil, Visble Mate, Full Lash, Lip Oil, Highlighter, Glow Shine, Derma Make Up, Touch Me Matte, Matte Powder, Primer,</value>
+  </data>
+  <data name="LocalDelivery" xml:space="preserve">
+    <value>Local Delivery</value>
+  </data>
+  <data name="LocalDeliveryDec" xml:space="preserve">
+    <value>Delivery to all areas of Jordan.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>My Account</value>
+  </data>
+  <data name="NewProduct" xml:space="preserve">
+    <value>New Product</value>
+  </data>
+  <data name="newsletter" xml:space="preserve">
+    <value>RELAX AT HOME &amp; GET YOUR BEAUTY NEEDS FROM OUR SHOP</value>
+  </data>
+  <data name="newsletter2" xml:space="preserve">
+    <value>Start Your Shopping Now !</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="ReturnPolicy" xml:space="preserve">
+    <value>7 Days Return</value>
+  </data>
+  <data name="ReturnPolicyDec" xml:space="preserve">
+    <value>You may return goods and receive a refund provided 7 days.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchStore" xml:space="preserve">
+    <value>Search Store</value>
+  </data>
+  <data name="ShoppingCart" xml:space="preserve">
+    <value>Shopping Cart</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support 24/7</value>
+  </data>
+  <data name="SupportDec" xml:space="preserve">
+    <value>Our team is ready to answer all your questions.</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>Wishlist</value>
+  </data>
+</root>

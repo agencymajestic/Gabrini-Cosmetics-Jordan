@@ -1,0 +1,95 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<GabriniCosmetics.Areas.Admin.Models.DealOfTheDays>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="list-product list-category">
+                        <table class="table table-striped" id="slider-banner-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox-primary" type="checkbox">
+                                        </div>
+                                    </th>
+                                    <th><span class="f-light f-w-600">Deal Of The Days</span></th>
+                                    <th><span class="f-light f-w-600">End Time For Sale</span></th>
+                                    <th><span class="f-light f-w-600">Action</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="slider-banner-removes">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input checkbox-primary" type="checkbox">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-names">
+                                                <div class="light-product-box">
+                                                    <img class="img-fluid" src="~/@item.ImageUpload" alt="Slider Banner Image" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.EndTime</td>
+                                        <td>
+                                            <div class="product-action">
+                                                <a class="action-icon" href="/Admin/DealOfTheDays/Update/@item.Id">
+                                                    <i class="fa-sharp fa-light fa-pen-to-square"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var sliderBannerId;
+
+        // Ensure the modal event is properly set up
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            sliderBannerId = button.data('id');
+            console.log('Slider Banner ID to delete:', sliderBannerId); // Debug log
+        });
+
+        // Confirm delete button click event
+        $('#confirmDeleteButton').click(function () {
+            console.log('Confirm delete button clicked'); // Debug log
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/SliderBanner/Delete',
+                contentType: 'application/json',
+                data: JSON.stringify(sliderBannerId),
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function () {
+                    console.log('Slider Banner deleted successfully'); // Debug log
+                    location.reload();
+                },
+                error: function () {
+                    console.log('Error deleting slider banner'); // Debug log
+                    alert('Error deleting slider banner');
+                }
+            });
+        });
+    });
+</script>
+

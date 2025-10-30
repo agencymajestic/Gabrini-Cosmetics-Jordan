@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="PrivacyPolicyPage" xml:space="preserve">
+    <value>&lt;p&gt;شكرا لزيارتكم لنا! نحن نقدر علاقتنا بعملائنا، ونولي خصوصيتك بأولوية قصوى، بصفتنا شركة تقع في الزرقاء-الأردن، نود أن نعلمك كيف نجمع المعلومات، ونوع المعلومات التي نجمعها، والاستخدام المحتمل لتلك المعلومات. نحن نستخدم جميع الموارد والمعلومات المتاحة لنا لتحسين خدماتنا التي نقدمها لك باستمرار واكتساب نظرة ثاقبة على ممارساتنا بياناتنا التسويقية. شعارنا هو السعي المستمر كأفضل مورد رائد في الصناعة.&lt;/p&gt;
+&lt;p&gt;تحدد سياسة الخصوصية هذه كيفية قيام شركة جابريني لمستحضرات التجميل - الأردن يستخدم ويحمي أي معلومات تقدمها أنت، كمستخدم ، عندما تزور  موقع الويب www.gabrinijo.com باستثناء ما هو منصوص عليه خلافًا لذلك ، تنطبق سياسة الخصوصية هذه على جميع الخدمات التي نقدمها على هذا الموقع. باستثناء ما هو منصوص عليه في هذه الوثيقة ، تنطبق سياسة الخصوصية هذه فقط على المعلومات التي يتم جمعها من خلال موقعنا الإلكتروني. قد نقوم بجمع معلومات مثل معلوماتك الشخصية ومعلومات الدفع ومعلومات التحقق من الهوية والموقع الجغرافي باستخدام موقعنا الإلكتروني والاشتراك في رسائل البريد الإلكتروني الخاصة بنا والنقر فوق الروابط وشراء المنتجات ، فأنت تقدم الموافقة على استخدام وجمع الاتصالات ونشاط الموقع الإلكتروني المنقولة عن طريق جهاز الكتروني. قد نقوم أيضًا بجمع معلومات الجهاز والمعلومات عبر الإنترنت مثل معرفات الجهاز ، بما في ذلك على سبيل المثال لا الحصر عناوين IP وعنوان MAC ، والنشاط عبر الإنترنت مثل التفاعل والنشاط على موقعنا الإلكتروني ، ونوع الأجهزة التي تستخدمها ، ونوع المتصفح ، ونشاط موقع الويب الآخر . باستخدام موقعنا ، فإنك تقدم موافقتك على أن نشاط الموقع والاتصالات وأي معلومات أخرى بإستثناء المعلومات الشخصية قد يتم جمعها من قبلنا أو من قبل أطراف ثالثة لتحسين أعمالنا واكتساب نظرة ثاقبة على بيانات التسويق أو لأغراض أخرى.&lt;/p&gt;
+&lt;p&gt;هناك طرق مختلفة نجمع من خلالها المعلومات. قد نتلقى معلومات منك مباشرةً ، على سبيل المثال ، عندما تفتح حسابًا شخصيًا ، أو عندما تجري عمليات شراء ، أو تستخدم نماذج الاتصال الخاصة بنا أو أي حقول أخرى مستخدمة لإدخال المعلومات ، ورسائل البريد الإلكتروني. نستخدم أيضًا طرقًا أخرى مثل ملفات تعريف الارتباط وطرق جمع البيانات الآلية بما في ذلك على سبيل المثال لا الحصر الأطراف الثالثة ، مثل تطبيقات وخدمات التسويق ، المستخدمة لجمع بيانات التسويق لتحسين الخدمة. هناك أيضًا أنواع أخرى من طرق جمع بيانات الجهات الخارجية مثل شركاء الإعلان وشركاء الأعمال الآخرين أو المتعاونين.&lt;/p&gt;
+&lt;p&gt;لا تغطي سياسة الخصوصية هذه ممارسات المعلومات الخاصة بالأطراف الثالثة ، بما في ذلك الشركات الأخرى التي قد تعلن على هذا الموقع. بالإضافة إلى ذلك ، قد يحتوي الموقع على روابط لمواقع طرف ثالث. يرجى ملاحظة أنه بمجرد النقر فوق هذا الرابط ، ستكون قد غادرت موقعنا الإلكتروني ويجب أن تدرك أنه ليس لدينا أي سيطرة على مواقع الطرف الثالث. يخضع استخدام مواقع الطرف الثالث وجمع المعلومات من قبل تلك الأطراف لسياسات الخصوصية الخاصة بهم. نحن نشجعك على توخي الحذر ومراجعة سياسات الخصوصية الخاصة بهم قبل استخدام مواقع الويب الخاصة بهم. ومع ذلك ، فإننا نسعى لحماية سلامة موقعنا ونرحب بأي ملاحظات حول مواقع الطرف الثالث هذه. نحن نقدر خصوصيتك ولا نبيع معلوماتك أبدًا. نريد التأكد من أن معلوماتك الشخصية محمية من الاستخدام العرضي أو غير القانوني أو غير المصرح به والتدمير والفقدان والتعديل والوصول والإفشاء. تهدف جميع عمليات جمع البيانات إلى تحسين خدماتنا ، وأي معلومات نشاركها تقتصر على الشركات التابعة لنا ومقدمي الخدمات والمنصات والأطراف المشاركة في المعاملات والتفاعلات التي تجعل خدماتنا ممكنة بالنسبة لك وشركات الإعلان والجهات الخارجية الأخرى الأطراف ، مثل أغراض حماية المستهلك. لديك الحق في إلغاء الاشتراك في الخدمات التي لا توافق عليها ، مثل إلغاء الاشتراك في البريد الإلكتروني ورفض ملفات تعريف الارتباط أو تخصيصها ، من بين خيارات أخرى&lt;/p&gt;
+&lt;p&gt;يرجى قراءة سياسة الخصوصية هذه بعناية لفهم سياساتنا وممارساتنا المتعلقة بمعلوماتك وكيف سنتعامل معها. إذا كنت لا توافق على سياساتنا وممارساتنا ، فلا تستخدم موقعنا. من خلال الوصول إلى هذا الموقع أو استخدامه ، فإنك توافق على سياسة الخصوصية هذه. قد نقوم بمراجعة وتحديث سياسة الخصوصية الخاصة بنا من وقت لآخر ، وسيتم نشر جميع التحديثات على هذه الصفحة. ما لم يقتض القانون خلاف ذلك ، يعتبر استمرار استخدامك لهذا الموقع بعد إجراء التغييرات بمثابة قبول لهذه التغييرات ، لذا يرجى مراجعة سياسة الخصوصية بشكل دوري للحصول على التحديثات.&lt;/p&gt;
+&lt;p&gt;باستخدام موقعنا ، فإنك تمنحنا موافقتك على هذه الشروط المذكورة أعلاه. إذا كنت تشعر بأي قلق أو لديك أي أسئلة ، فلا تتردد في التواصل معنا في الوقت الذي يناسبك حتى نتمكن من مساعدتك على الشعور بالراحة أثناء التسوق معنا. نحن هنا لنحقق أهدافك وخططك.&lt;/p&gt;</value>
+  </data>
+</root>

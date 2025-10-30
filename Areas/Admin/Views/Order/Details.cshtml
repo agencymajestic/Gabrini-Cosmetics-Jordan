@@ -1,0 +1,274 @@
+﻿@model GabriniCosmetics.Models.ViewModel.OrderDetailVM
+
+@{
+    // double? total = 0.0;
+    double? OrderTotal = 0.0;
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive theme-scrollbar" style="padding: 16px 24px 0px;">
+                <table class="table display" style="width: 1070px; margin: 0 auto;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr style="display: flex; justify-content: space-between; border-top: 1px solid rgba(82, 82, 108, 0.3); border-bottom: 1px solid rgba(82, 82, 108, 0.3); padding: 25px 0;">
+                                            <td style="display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 500;">Invoice No.</span>
+                                                <h4 style="margin: 0; font-weight: 400; font-size: 18px;">#@Model.OrderItems.First().Order.ID</h4>
+                                            </td>
+                                            <td style="display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 500;">Date : </span>
+                                                <h4 style="margin: 0; font-weight: 400; font-size: 18px;">@Model.OrderItems.First().Order.Timestamp</h4>
+                                            </td>
+                                            <td style="display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 500;">Payment Status :</span>
+                                                @if (Model.OrderItems.First().Order.PaymentStstus == "Paid")
+                                                {
+                                                    <h4 style="margin: 0; font-weight: 400; font-size: 18px; padding: 6px 18px; background-color: rgba(84, 186, 74, 0.1); color: #54ba4a; border-radius: 5px;">
+                                                        @Model.OrderItems.First().Order.PaymentStstus
+                                                    </h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4 style="margin: 0; font-weight: 400; font-size: 18px; padding: 6px 18px; background-color: rgb(186 74 104 / 10%); color: #c91818; border-radius: 5px;">
+                                                        @Model.OrderItems.First().Order.PaymentStstus
+                                                    </h4>
+                                                }
+                                            </td>
+                                            <td style="display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 500;">Total Amount :</span>
+                                                @foreach (var item in Model.OrderItems)
+                                                {
+
+                                                    double? total = item.Quantity * (item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale")
+                                                    ? item.Subproduct.Product.PriceAfterDiscount
+                                                    : item.Subproduct.Product.Price);
+
+                                                    OrderTotal += total;
+                                                }
+                                                @if (Model.OrderItems.First().TotalPrice != null && OrderTotal != Model.OrderItems.First().TotalPrice)
+                                                {
+                                                    <h4 style="margin: 0; font-weight: 500; font-size: 18px;">@Model.OrderItems.First().TotalPrice JOD</h4>
+                                                }
+                                                else
+                                                {
+                                                    <h4 style="margin: 0; font-weight: 500; font-size: 18px;">@OrderTotal JOD</h4>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width: 100%;">
+                                    <tbody>
+                                        <tr style="padding: 28px 0; display: block;">
+                                            <td style="width: 63%;">
+                                                <span style="color: #52526c; opacity: 0.8; font-size: 16px; font-weight: 500;">BILLING ADDRESS</span>
+                                                <h4 style="font-weight: 600; margin: 12px 0 6px 0; font-size: 18px;">@Model.OrderItems.First().Order.FirstName @Model.OrderItems.First().Order.LastName</h4>
+                                                <div>
+                                                    <span style="line-height: 2.6; color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 400;">Email : <strong style="margin: 0; font-weight: 500; font-size: 18px;color:#3D434A;">@Model.OrderItems.First().Order.Email</strong></span>
+                                                </div>
+                                                <span style="line-height: 2.6; color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 400;">Phone : <strong style="margin: 0; font-weight: 500; font-size: 18px;color:#3D434A;">@Model.OrderItems.First().Order.Phone</strong></span>
+                                                <span style="width: 100%; display: block; line-height: 1.5; color: #52526c; opacity: 0.8; font-size: 18px; font-weight: 400;">Address : <strong style="color:#3D434A;margin: 0; font-weight: 500; font-size: 18px;">@Model.OrderItems.First().Order.Country - @Model.OrderItems.First().Order.City. @Model.OrderItems.First().Order.Address, @Model.OrderItems.First().Order.Address2</strong></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid rgba(82, 82, 108, 0.1);">
+                                    <thead>
+                                        <tr style="
+                                background: #7a70ba;
+                                border-radius: 8px;
+                                overflow: hidden;
+                                box-shadow: 0px 10.9412px 10.9412px rgba(82, 77, 141, 0.04), 0px 9.51387px 7.6111px rgba(82, 77, 141, 0.06), 0px 5.05275px 4.0422px rgba(82, 77, 141, 0.0484671);
+                                border-radius: 5.47059px;
+                            ">
+                                            <th style="padding: 18px 15px; text-align: left;"><span style="color: #fff; font-size: 18px;">Product</span></th>
+                                            <th style="padding: 18px 15px; text-align: left;"><span style="color: #fff; font-size: 18px;">Sub Product</span></th>
+                                            <th style="padding: 18px 15px; text-align: left;"><span style="color: #fff; font-size: 18px;">Quantity</span></th>
+                                            <th style="padding: 18px 15px; text-align: left;"><span style="color: #fff; font-size: 18px;">Price</span></th>
+                                            <th style="padding: 18px 15px; text-align: left;"><span style="color: #fff; font-size: 18px;">Total</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var count = 1;
+                                            double? subtotal = 0.0;
+                                        }
+                                        @foreach (var item in Model.OrderItems)
+                                        {
+
+                                            @*                             total = item.Quantity * (item.Product.Flags.Any(x => x.FlagType == "Sale")
+                            ? item.Product.PriceAfterDiscount
+                            : item.Product.Price);
+
+                            OrderTotal += total; *@
+                                            foreach (var orderItem in Model.OrderItems.Where(orderItem => orderItem.OrderID == item.ID))
+                                            {
+
+                                                subtotal += orderItem.Quantity *
+                                                (orderItem.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale")
+                                                ? orderItem.Subproduct.Product.PriceAfterDiscount
+                                                : orderItem.Subproduct.Product.Price);
+                                            }
+                                        <tr style="background-color: rgba(245, 246, 249, 1); box-shadow: 0px 1px 0px 0px rgba(82, 82, 108, 0.15);">
+                                            <td style="padding: 18px 15px; display: flex; align-items: center; gap: 10px;">
+                                                <span style="width: 54px; height: 51px; background-color: #f5f6f9; display: flex; justify-content: center; align-items: center; border-radius: 5px;">
+                                                    <img src="~/uploads/@item.Subproduct.Image.ImagePath" alt="laptop" style="height: 29px;" />
+                                                </span>
+                                                <ul style="padding: 0; margin: 0; list-style: none;">
+                                                    <li>
+                                                        <h4 style="font-weight: 400; margin: 4px 0px; font-size: 18px;">@item.Subproduct.Product.NameEn</h4>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td style="padding: 18px 15px;"><span style="font-size: 18px;">@item.Subproduct.DescriptionEn</span></td>
+                                            <td style="padding: 18px 15px;"><span style="font-size: 18px;">@item.Quantity</span></td>
+                                            <td style="padding: 18px 15px; width: 12%;">
+                                                <span style="font-size: 18px;">
+                                                    @(item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale") ? item.Subproduct.Product.PriceAfterDiscount : item.Subproduct.Product.Price) JOD
+                                                </span>
+                                            </td>
+                                            <td style="padding: 18px 15px;">
+                                                <span style="font-size: 18px;">
+                                                    @String.Format("{0:F2}", item.Quantity * (item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale")
+                                                                                                        ? item.Subproduct.Product.PriceAfterDiscount
+                                                                                                        : item.Subproduct.Product.Price)) JOD
+                                                </span>
+                                            </td>
+                                        </tr>
+                                                                                }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="float: right;">
+                                    <tfoot>
+                                        @if (!string.IsNullOrEmpty(Model.OrderItems.First().DiscountCode))
+                                        {
+                                            <tr>
+                                                <td style="padding: 5px 24px 5px 0; padding-top: 15px; text-align: end;">
+                                                    <span style="color: #52526c; font-size: 18px; font-weight: 400;">Discount Code </span><span style="margin-left: 8px; font-size: 18px;">:</span>
+                                                </td>
+                                                <td style="padding: 5px 0; text-align: left; padding-top: 15px;"><span style="font-size: 18px;">@Model.OrderItems.First().DiscountCode</span></td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td style="padding: 5px 24px 5px 0; text-align: end;">
+                                                <span style="color: #52526c; font-size: 18px; font-weight: 400;">Subtotal </span><span style="margin-left: 8px; font-size: 18px;">:</span>
+                                            </td>
+                                            <td style="padding: 5px 0; text-align: left; padding-top: 5px;"><span style="font-size: 18px;">@String.Format("{0:F2}", OrderTotal) JOD</span></td>
+                                        </tr>
+                                        @if (!string.IsNullOrEmpty(Model.OrderItems.First().DiscountCode))
+                                        {
+                                            <tr>
+                                                <td style="padding: 5px 24px 5px 0; text-align: end;">
+                                                    <span style="color: #52526c; font-size: 18px; font-weight: 400;">Subtotal After Discount </span><span style="margin-left: 8px; font-size: 18px;">:</span>
+                                                </td>
+                                                <td style="padding: 5px 0; text-align: left; padding-top: 5px;"><span style="font-size: 18px;">@String.Format("{0:F2}", Model.PriceAfterDiscount) JOD</span></td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td style="padding: 5px 24px 5px 0; text-align: end;"><span style="color: #52526c; font-size: 18px; font-weight: 400;">Delivery </span><span style="margin-left: 8px; font-size: 18px;">:</span></td>
+                                            <td style="padding: 5px 0; text-align: left; padding-top: 0;"><span style="font-size: 18px;"> @Model.Tax.0 JOD</span></td>
+                                        </tr>
+                                        @if (Model.OrderItems.First().TotalPrice != null && OrderTotal != Model.OrderItems.First().TotalPrice)
+                                        {
+                                            <tr>
+                                                <td><span style="font-weight: 600; font-size: 20px; color: rgba(0, 2, 72, 1);">Total Amount</span><span style="margin-left: 8px;">:</span></td>
+                                                <td style="text-align: right;"><span style="font-weight: 500; font-size: 20px; color: rgba(122, 112, 186, 1);">@String.Format("{0:F2}", Model.OrderItems.First().TotalPrice) JOD</span></td>
+                                            </tr>
+                                        }
+                                        @*  <tr>
+                            <td style="padding: 12px 24px 22px 0;"><span style="font-weight: 600; font-size: 20px; color: rgba(0, 2, 72, 1);">Total Amount</span><span style="margin-left: 8px;">:</span></td>
+                            <td style="padding: 12px 24px 22px 0; text-align: right;"><span style="font-weight: 500; font-size: 20px; color: rgba(122, 112, 186, 1);">@String.Format("{0:F2}", OrderTotal) JOD</span></td>
+                        </tr> *@
+                                    </tfoot>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="display: block; background: rgba(82, 82, 108, 0.3); height: 1px; width: 100%; margin-bottom: 24px;"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="d-flex justify-content-end gap-3">
+                                <span style="display: flex; justify-content: end; gap: 15px;">
+                                    <button type="button" class="btn-model-edit" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: rgba(122, 112, 186, 1); color: rgb(227 228 238); border-radius: 10px; padding: 18px 27px; font-size: 16px; font-weight: 600; outline: 0; border: 0; text-decoration: none;"
+                                            href="/Admin">
+                                        Edit
+                                    </button>
+                                </span>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit order</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/Admin/Order/Edit" method="post">
+                                                    <input type="hidden" name="id" value="@Model.OrderItems.First().Order.ID" />
+
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">Name:</label>
+                                                        <input type="text" class="form-control" id="recipient-name" value="@Model.OrderItems.First().Order.FirstName @Model.OrderItems.First().Order.LastName" disabled>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="recipient-phone" class="col-form-label">Phone:</label>
+                                                        <input type="text" class="form-control" id="recipient-phone" value="@Model.OrderItems.First().Order.Phone" disabled>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="order-status" class="col-form-label">Order Status:</label>
+                                                        <select class="form-select" id="order-status" name="orderStatus">
+                                                            <option value="Pending" @(Model.OrderItems.First().Order.OrderStatus == "Pending" ? "selected" : "")>Pending</option>
+                                                            <option value="Accepted" @(Model.OrderItems.First().Order.OrderStatus == "Accepted" ? "selected" : "")>Accepted</option>
+                                                            <option value="Rejected" @(Model.OrderItems.First().Order.OrderStatus == "Rejected" ? "selected" : "")>Rejected</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="payment-status" class="col-form-label">Payment Status:</label>
+                                                        <select class="form-select" id="payment-status" name="paymentStatus">
+                                                            <option value="Paid" @(Model.OrderItems.First().Order.PaymentStstus == "Paid" ? "selected" : "")>Paid</option>
+                                                            <option value="UnPaid" @(Model.OrderItems.First().Order.PaymentStstus == "UnPaid" ? "selected" : "")>UnPaid</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="display: flex; justify-content: end; gap: 15px;">
+                                    <a style="background: rgba(122, 112, 186, 0.1); color: rgba(122, 112, 186, 1); border-radius: 10px; padding: 18px 27px; font-size: 16px; font-weight: 600; outline: 0; border: 0; text-decoration: none;"
+                                       href="/Admin">
+                                        Cancel
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

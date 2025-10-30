@@ -1,0 +1,135 @@
+﻿@model GabriniCosmetics.Areas.Admin.Models.ShoppingCart
+
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+<style>
+    .cart th, .cart td {
+        text-align: center !important;
+        vertical-align: middle;
+        width: 11.11%; /* 100% divided by 9 columns */
+        white-space: nowrap;
+    }
+
+    .cart .product-picture img {
+        max-width: 50px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+<div class="master-column-wrapper">
+    <div class="center-1">
+        <div class="page wishlist-page">
+            <div class="page-title">
+                <h1>@Localizer["ShoppingCart"]</h1>
+            </div>
+            <div class="page-body master-wrapper-content">
+                <div class="wishlist-content">
+                    <form method="post" action="/Cart">
+                        <div class="table-wrapper">
+                            <table class="cart jsmartable jsmatable-initialized">
+                                @* <colgroup> *@
+                                @*     <col class="table-info" width="1"> *@
+                                @*     <col width="1"> *@
+                                @*     <col width="1"> *@
+                                @*     <col width="1"> *@
+                                @*     <col> *@
+                                @*     <col width="1"> *@
+                                @*     <col width="1"> *@
+                                @*     <col width="1"> *@
+                                @* </colgroup> *@
+                                <thead>
+                                    <tr>
+                                        @* <th class="table-info">Info</th> *@
+                                        <th data-breakpoint="md" class="sku">@Localizer["Category"]</th>
+                                        <th data-breakpoint="md" class="sku">@Localizer["SubCategory"]</th>
+                                        <th data-breakpoint="sm" class="product-picture">@Localizer["Image"]</th>
+                                        <th data-breakpoint="md" class="product">@Localizer["Products"]</th>
+                                        <th data-breakpoint="md" class="product">@Localizer["Subproduct"]</th>
+                                        <th data-breakpoint="md" class="unit-price">@Localizer["Price"]</th>
+                                        <th data-breakpoint="md" class="quantity">@Localizer["Qty"]</th>
+                                        <th data-breakpoint="md" class="subtotal">@Localizer["Total"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CartDetails)
+                                    {
+                                        var categoryName = culture.StartsWith("en") ? @item.Subproduct.Product.Subcategory.Category.NameEn : @item.Subproduct.Product.Subcategory.Category.NameAr;
+                                        var subCategoryName = culture.StartsWith("en") ? @item.Subproduct.Product.Subcategory.NameEn : @item.Subproduct.Product.Subcategory.NameAr;
+                                        var productName = culture.StartsWith("en") ? @item.Subproduct.Product.NameEn : @item.Subproduct.Product.NameAr;
+                                        var subProductName = culture.StartsWith("en") ? @item.Subproduct.DescriptionEn : @item.Subproduct.DescriptionAr;
+
+                                        <tr>
+                                            <td class="sku">
+                                                <label class="td-title">@Localizer["Category"]:</label>
+                                                <span class="sku-number">@categoryName</span>
+                                            </td>
+                                            <td class="sku">
+                                                <label class="td-title">@Localizer["SubCategory"]:</label>
+                                                <span class="sku-number">@subCategoryName</span>
+                                            </td>
+                                            <td class="product-picture">
+                                                <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Subproduct.Product.Id"><img width="150" alt="@Localizer["PictureOf"] @productName" src="~/uploads/@item.Subproduct.Image.ImagePath" title="@Localizer["ShowDetailsFor"] @productName"></a>
+                                            </td>
+                                            <td class="product">
+                                                <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Subproduct.Product.Id" class="product-name">@productName</a>
+                                            </td>
+                                            <td class="product">
+                                                <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Subproduct.Product.Id" class="product-name">@subProductName</a>
+                                            </td>
+                                            <td class="unit-price">
+                                                <label class="td-title">@Localizer["Price"]:</label>
+                                                @if (item.Subproduct.Product.Flags.Any(f => f.FlagType == "Sale"))
+                                                {
+                                                    <span class="product-unit-price">@item.Subproduct.Product.PriceAfterDiscount @Localizer["JOD"]</span>
+                                                }else{
+                                                    <span class="product-unit-price">@item.Subproduct.Product.Price @Localizer["JOD"]</span>
+                                                }
+                                            </td>
+                                            <td class="quantity">
+                                                <label class="td-title">@Localizer["Qty"].:</label>
+                                                <div class="qty-input-wrap">
+                                                    <button type="button" class="qty-btn qty-minus" value="-1" onclick="location.href='@Url.Action("RemoveItem", "Cart", new { subproductId = item.Subproduct.Id, img = item.Subproduct.Image.ImagePath })'">-</button>
+                                                    <input type="text" value="@item.Quantity" class="qty-input" aria-label="Qty.">
+                                                    <button type="button" class="qty-btn qty-plus" value="1" onclick="location.href='@Url.Action("AddItem", "Cart", new { subproductId = item.Subproduct.Id, img = item.Subproduct.Image.ImagePath })'">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="subtotal">
+                                                <label class="td-title">Total:</label>
+                                                @{
+                                                    double? total;
+                                                    if (item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale"))
+                                                    {
+                                                        total = item.Subproduct.Product.PriceAfterDiscount * item.Quantity;
+                                                    }
+                                                    else
+                                                    {
+                                                        total = item.Subproduct.Product.Price * item.Quantity;
+                                                    }
+                                                }
+                                                <span class="product-subtotal">@total @Localizer["JOD"]</span>
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="button-2 wishlist-add-to-cart-button" onclick="setLocation('/')">@Localizer["ContinueShopping"]</button>
+                            @if (Model == null || Model.CartDetails == null || Model.CartDetails.Count == 0)
+                            {
+                                <button type="button" class="button-2 wishlist-add-to-cart-button" disabled>@Localizer["Checkout"]</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="button-2 wishlist-add-to-cart-button" onclick="setLocation('/checkout')">@Localizer["Checkout"]</button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

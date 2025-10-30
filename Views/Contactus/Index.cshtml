@@ -1,0 +1,84 @@
+﻿@model GabriniCosmetics.Areas.Admin.Models.ContactUs
+<div class="master-column-wrapper">
+    <div class="center-1">
+        <div class="page contact-page">
+            <div class="page-title">
+                <h1>@Localizer["ContactUs"]</h1>
+            </div>
+            <div class="page-body">
+                <div class="topic-block">
+                    <div class="topic-block-body">
+                        <p>@Localizer["ContactUsPage"]</p>
+                    </div>
+                </div>
+                <form id="contact-form" method="post" asp-controller="Contactus" asp-action="index" novalidate="novalidate">
+                    <div class="fieldset">
+                        <div class="form-fields">
+                            <div class="inputs">
+                                <label for="FullName">@Localizer["Yourname"]:</label>
+                                <input placeholder="@Localizer["EnterYourName"]" class="fullname" type="text" data-val="true" data-val-required="Enter your name" id="FullName" asp-for="Name">
+                                <span class="required">*</span> 
+                                <span class="field-validation-valid" data-valmsg-for="FullName" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="inputs">
+                                <label for="Email">@Localizer["YourEmail"]:</label>
+                                <input placeholder="@Localizer["EnterYourEmailAddress"]" class="email" type="email" data-val="true" data-val-email="Wrong email" data-val-required="Enter email" id="Email" asp-for="Email">
+                                <span class="required">*</span> 
+                                <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                            </div>
+                            <div class="inputs">
+                                <label for="Enquiry">@Localizer["Enquiry"]:</label>
+                                <textarea placeholder="@Localizer["EnterYourEnquiry"]" class="enquiry" data-val="true" data-val-required="Enter enquiry" id="Enquiry" asp-for="Enquiry"></textarea>
+                                <span class="required">*</span> 
+                                <span class="field-validation-valid" data-valmsg-for="Enquiry" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons"><button type="submit" name="send-email" class="button-1 contact-us-button">@Localizer["Submit"]</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bar-notification-contact" class="bar-notification-container" data-close="Close">
+    <div class="bar-notification success" style="display: none;">
+        <p class="content">@Localizer["successfully"]</p>
+        <span class="close" title="Close"></span>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#contact-form").on("submit", async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Serialize form data
+            var formData = $(this).serialize();
+
+            try {
+                var response = await fetch($(this).attr('action'), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData
+                });
+
+                if (response.status == 200) {
+                    // Show the success notification
+                    $('#bar-notification-contact .bar-notification.success').show();
+
+                    // Wait for 2 seconds
+                    setTimeout(function () {
+                        // Reload the page after 2 seconds
+                        location.reload();
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>نبذة عنا</value>
+  </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>العناوين</value>
+  </data>
+  <data name="AllProducts" xml:space="preserve">
+    <value>جميع المنتجات</value>
+  </data>
+  <data name="Arabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+  <data name="BestSaleProduct" xml:space="preserve">
+    <value>أفضل المنتجات مبيعًا</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>الفئات</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>الدفع</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>&lt;strong&gt;نحن الخيار الأول لمستحضرات التجميل في الأردن&lt;/strong&gt;</value>
+  </data>
+  <data name="ConditionsOfUse" xml:space="preserve">
+    <value>شروط الإستخدام</value>
+  </data>
+  <data name="Contactus" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>&lt;strong&gt;شركة جابريني لمستحضرات التجميل - الأردن&lt;/strong&gt; © 2024 جميع الحقوق محفوظة</value>
+  </data>
+  <data name="Dealofthedays" xml:space="preserve">
+    <value>عرض اليوم</value>
+  </data>
+  <data name="DeliveryReturns" xml:space="preserve">
+    <value>التسليم والإرجاع</value>
+  </data>
+  <data name="desc01" xml:space="preserve">
+    <value>شركة جابريني لمستحضرات التجميل ,</value>
+  </data>
+  <data name="desc02" xml:space="preserve">
+    <value>الأردن، الزرقاء، الرصيفة، شارع الملكة رانيا العبدالله، بالقرب من بلدية الرصيفة، الرمز البريدي 1007.</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>نحن الخيار الأول لمستحضرات التجميل في الأردن.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>الإيميل</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>الإنجليزية</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>أدخل بريدك الإلكتروني هنا ...</value>
+  </data>
+  <data name="FastDelivery" xml:space="preserve">
+    <value>توصيل سريع</value>
+  </data>
+  <data name="FastDeliveryDec" xml:space="preserve">
+    <value>التوصيل داخل عمان خلال 48 ساعة وخارج عمان خلال 72 ساعة.</value>
+  </data>
+  <data name="FeatureProducts" xml:space="preserve">
+    <value>المنتجات المميزة</value>
+  </data>
+  <data name="Followus" xml:space="preserve">
+    <value>تابعنا</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>معلومات</value>
+  </data>
+  <data name="items" xml:space="preserve">
+    <value>عنصر/ عناصر</value>
+  </data>
+  <data name="JOD" xml:space="preserve">
+    <value>د.أ</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>توصيل مجاني, جابريني كوزمتك, أفضل مستحضرات تجميل في الأردن, منتجات التجميل, مستحضرات التجميل, جمال, مكياج, شامبو, شعر, شامبو, زيوت, العلاجات, صبغة, مثبت الشعر, زيوت شعر, إكسسوارات الشعر, بلسم شعر, ميك أب, عمان, الاردن, اربد, الكرك, أفضل محل مستحضرات تجميل في الأردن, عناية البشرة, العناية بالشعر, غارنييه, جونسون, لوريال, ماسون, مافالا, ماكس فاكتور, مايبيلين, ميلسين, نيتروجينا, شوارزكوف, فازلين, كريم واقي شمس, واقي شمس, قناع, غسول, مكياج عيون, مكياج وجه, مكياج الشفاه, عطور, فرشاة, بودرة, فرشاة تشكيل الوجه, ماسكارا, احمر خدود, مسحوق, الايلاينر, قلم تحديد العين, عيون, وجه, شفاه, الاظافر, العناية بالاظافر, منظف مبيض, رعاية شخصية, مستحضرات عناية شخصية, قطن, مزيل مكياج, كنتور, عطور اصلية, عروض مكياج, عروض ميك اب, ماركات مكياج, هايلايتر, بودرة أحمر الخدود, ماسكارا لاش إكسبشنال فيري بلاك, بي بي, دبل فوليوم لونج لاش, كونسيلر, أحمر شفاه, أقلام تحديد العيون, ظلال العيون, كريم أساس, ماسكارا, مرطب, بودرة للجسم, زيت شعر, كريم سي سي, برايمر, ملمع شفاه, كاجال ذا كولور ماكس, رموش, أحمر خدود, مات, ملمع شفاه, بي بي, كريم, دبل فوليوم لونج لاش, مزيل طلاء الأظافر, أسيتون, ديبلينر, مضاد للماء, قلم عيون, قلم شفاه, رموش طويلة, مطفأ, بلسم شفاه, قلم حواجب, فيسبل مات, رموش كاملة, زيت شفاه, هايلايتر, لمعان متوهج, ديرما ميك أب, تاتش مي مات, بودرة غير لامعة, برايمر, قلم كحل ذا كلر ماكس,</value>
+  </data>
+  <data name="LocalDelivery" xml:space="preserve">
+    <value>توصيل محلي</value>
+  </data>
+  <data name="LocalDeliveryDec" xml:space="preserve">
+    <value>التوصيل لجميع مناطق الأردن.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل خروج</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>حسابي</value>
+  </data>
+  <data name="NewProduct" xml:space="preserve">
+    <value>المنتجات الجديدة</value>
+  </data>
+  <data name="newsletter" xml:space="preserve">
+    <value>استرخِ في منزلك واحصلي على احتياجات جمالك من متجرنا</value>
+  </data>
+  <data name="newsletter2" xml:space="preserve">
+    <value>ابدأ التسوق الآن !</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>الطلبات</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>تسجيل جديد</value>
+  </data>
+  <data name="ReturnPolicy" xml:space="preserve">
+    <value>إرجاع خلال 7 أيام</value>
+  </data>
+  <data name="ReturnPolicyDec" xml:space="preserve">
+    <value>يمكنك إرجاع البضائع وإسترداد الأموال بشرط 7 أيام.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="SearchStore" xml:space="preserve">
+    <value>متجر البحث</value>
+  </data>
+  <data name="ShoppingCart" xml:space="preserve">
+    <value>سلة التسوق</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>اشترك</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>دعم 24/7</value>
+  </data>
+  <data name="SupportDec" xml:space="preserve">
+    <value>فريقنا جاهز للإجابة على جميع أسئلتك.</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>الرغبات</value>
+  </data>
+</root>

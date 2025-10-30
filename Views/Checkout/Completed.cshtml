@@ -1,0 +1,33 @@
+﻿
+<div class="master-wrapper-page">
+    <div class="master-wrapper-content">
+        <div class="master-column-wrapper">
+            <div class="center-1">
+                <div class="page checkout-page order-completed-page">
+                    <div class="page-body checkout-data">
+                        <div class="order-progress">
+                            <ul>
+                                <li class="active-step order-progress-cart"><a>@Localizer["Cart"]</a></li>
+                                <li class="active-step order-progress-address"><a>@Localizer["Address"]</a></li>
+                                <li class="active-step order-progress-payment-method"><a>@Localizer["Payment"]</a></li>
+                                <li class="active-step order-progress-confirm"><a>@Localizer["Confirm"]</a></li>
+                                <li class="active-step order-progress-complete"><a>@Localizer["Complete"]</a></li>
+                            </ul>
+                        </div>
+                        <div class="page-title-complete">
+                            <h1>@Localizer["ThankYou"]</h1>
+                        </div>
+                        <div class="section order-completed">
+                            <div class="title-completed"><strong>@Localizer["OrderSuccessfully"]</strong></div>
+                            <div class="details">
+                                <div class="order-number"><strong>@Localizer["OrderNumber"]: @Model.ID</strong></div>
+                                <div class="details-link"><a href="/order/detail?id=@Model.ID">@Localizer["OrderDetails"]</a></div>
+                            </div>
+                            <div class="buttons"><button type="button" onclick="location.href='@Url.Action("index", "Home")'" class="button-1 order-completed-continue-button">@Localizer["Continue"]</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

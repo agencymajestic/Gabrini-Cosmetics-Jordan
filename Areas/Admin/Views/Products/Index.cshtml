@@ -1,0 +1,221 @@
+﻿@using GabriniCosmetics.Areas.Admin.Models.DTOs
+@model List<ProductView>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid product-wrapper">
+    <div class="product-grid">
+        <div class="feature-products">
+            <div class="row">
+                <div class="col-md-6 products-total" style="display:none">
+                    <div class="square-product-setting d-inline-block">
+                        <a class="icon-grid grid-layout-view" href="#" data-original-title="" title=""><i data-feather="grid"></i></a>
+                    </div>
+                    <div class="square-product-setting d-inline-block">
+                        <a class="icon-grid m-0 list-layout-view" href="#" data-original-title="" title=""><i data-feather="list"></i></a>
+                    </div>
+                    <span class="d-none-productlist filter-toggle">
+                        Filters<span class="ms-2"><i class="toggle-data" data-feather="chevron-down"></i></span>
+                    </span>
+                    <div class="grid-options d-inline-block">
+                        <ul>
+                            <li>
+                                <a class="product-2-layout-view" href="#" data-original-title="" title="">
+                                <span class="line-grid line-grid-1 bg-primary"></span>
+                                <span class="line-grid line-grid-2 bg-primary"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="product-3-layout-view" href="#" data-original-title="" title="">
+                                    <span class="line-grid line-grid-3 bg-primary"></span>
+                                    <span class="line-grid line-grid-4 bg-primary"></span>
+                                    <span class="line-grid line-grid-5 bg-primary"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="product-4-layout-view" href="#" data-original-title="" title="">
+                                    <span class="line-grid line-grid-6 bg-primary"></span>
+                                    <span class="line-grid line-grid-7 bg-primary"></span>
+                                    <span class="line-grid line-grid-8 bg-primary"></span>
+                                    <span class="line-grid line-grid-9 bg-primary"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="product-6-layout-view" href="#" data-original-title="" title="">
+                                    <span class="line-grid line-grid-10 bg-primary"></span>
+                                    <span class="line-grid line-grid-11 bg-primary"></span>
+                                    <span class="line-grid line-grid-12 bg-primary"></span>
+                                    <span class="line-grid line-grid-13 bg-primary"></span>
+                                    <span class="line-grid line-grid-14 bg-primary"></span>
+                                    <span class="line-grid line-grid-15 bg-primary"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 text-sm-end d-flex justify-content-end align-items-center gap-3 w-100">
+                    <form class="w-100" method="get" href="/admin/Products/index">
+                        <div class="form-group m-0">
+                            <input class="form-control" name="searchTerm" type="search" placeholder="Search.." data-original-title="" title=""><i class="fa fa-search"></i>
+                        </div>
+                    </form>
+                    <div>
+                        <a style="max-height:50px" class="btn btn-primary" href="/Admin/Products/Create"><i class="fa fa-plus"></i>Add Product</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-wrapper-grid">
+            <div class="row mt-4">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xl-3 col-sm-6 xl-4">
+                        <div class="card">
+                            <div class="product-box">
+                                <div class="product-img">
+                                    @foreach (var itemFlag in item.Flags)
+                                    {
+                                        if (itemFlag.FlagType == "Sale")
+                                        {
+                                            if (item.Flags.Any(x => x.FlagType == "Feature"))
+                                            {
+                                                <div class="ribbon ribbon-danger ribbon-right" style="top:45px;">
+                                                    @itemFlag.FlagType
+                                                </div>
+                                            }
+                                            else{
+                                                <div class="ribbon ribbon-danger">@itemFlag.FlagType</div>
+                                            }
+                                        }
+                                        else if (itemFlag.FlagType == "Feature")
+                                        {
+                                            <div class="ribbon ribbon-secondary ribbon-vertical-left" style="height: 42px"><i class="fa-sharp fa-light fa-star" style="position: relative;bottom: 10px;"></i></div>
+                                        }
+                                        else if (itemFlag.FlagType == "New")
+                                        {
+                                            <div class="ribbon ribbon-success ribbon-right">@itemFlag.FlagType</div>
+                                        }
+                                    }
+                                    <img class="img-fluid" src="~/uploads/@item.Subproducts.First().Image.ImagePath" alt="">
+                                    <div class="product-hover">
+                                        <ul>
+                                            <li><a href="/Admin/Products/Details/@item.Id"><i class="fa-light fa-eye"></i></a></li>
+                                            <li><a href="/Admin/Products/Edit/@item.Id"><i class="fa-light fa-pen-to-square"></i></a></li>
+                                            <li>
+                                                <a class="action-icon" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id">
+                                                    <i class="fa-regular fa-trash"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="detail-@item.Id" tabindex="-1" role="dialog" aria-labelledby="detail-@item.Id" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="product-box row">
+                                                    <div class="product-img col-lg-6"><img class="img-fluid" src="~/uploads/@item.Subproducts.First().Image.ImagePath" alt=""></div>
+                                                    <div class="product-details col-lg-6 text-start">
+                                                        <h4>@item.NameEn</h4>
+                                                        <h4>@item.NameAr</h4>
+                                                        <div class="product-price">
+                                                            @if(item.Flags.Any(x => x.FlagType == "Sale")){
+                                                                @item.PriceAfterDiscount
+                                                                <del>@item.Price</del>
+                                                            }
+                                                            else
+                                                            {
+                                                                @item.Price
+                                                            }
+                                                        </div>
+                                                        <div class="product-view">
+                                                            <h6 class="f-w-600">Product Details</h6>
+                                                            <p class="mb-0">@item.DescriptionEn</p>
+                                                            <p class="mb-0">@item.DescriptionAr</p>
+                                                        </div>
+                                                        <div class="addcart-btn">
+                                                            <a class="btn btn-primary ms-2" href="#">View Details</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-details">
+                                    <a href="#">
+                                        <h4>@item.NameEn</h4>
+                                    </a>
+                                    <p>@item.DescriptionEn</p>
+                                    <div class="product-price">
+                                        @if (item.Flags.Any(x => x.FlagType == "Sale"))
+                                        {
+                                            @item.PriceAfterDiscount
+                                            <del>@item.Price</del>
+                                        }
+                                        else
+                                        {
+                                            @item.Price
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this category?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="confirmDeleteButton">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var categoryId;
+
+        // Ensure the modal event is properly set up
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            categoryId = button.data('id');
+        });
+
+        // Confirm delete button click event
+        $('#confirmDeleteButton').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/Products/DeleteProduct',
+                contentType: 'application/json',
+                data: JSON.stringify(categoryId),
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert('Error deleting category');
+                }
+            });
+        });
+    });
+</script>

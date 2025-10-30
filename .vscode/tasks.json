@@ -1,0 +1,64 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "clean",
+            "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\cmd.exe",
+                    "args": ["/c"]
+                }
+            },
+            "args": [
+                "&&",
+                "msbuild",
+                "${workspaceFolder}/GabriniCosmetics.sln",
+                "/t:Clean"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        
+        {
+            "label": "build",
+            "command": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\VsDevCmd.bat",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "executable": "C:\\Windows\\System32\\cmd.exe",
+                    "args": ["/c"]
+                }
+            },
+            "args": [
+                "&&",
+                "msbuild",
+                "${workspaceFolder}/GabriniCosmetics.sln",
+                "/t:Build"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+
+        {
+            "label": "GabriniCosmetics build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/GabriniCosmetics.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "options": { "cwd": "${workspaceFolder}" },
+        },
+		{
+            "label": "clean and build",
+            "dependsOn": [
+                "clean",
+                "build"
+            ],
+            "dependsOrder": "sequence"
+        }
+	]
+}

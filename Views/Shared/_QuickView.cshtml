@@ -1,0 +1,102 @@
+﻿@using GabriniCosmetics.Areas.Admin.Models.DTOs
+@model List<ProductView>
+
+@foreach (var item in Model)
+{
+    <div id="product-detail-@item.Id" class="mfp-wrap mfp-close-btn-in mfp-auto-cursor quickview-popup mfp-ready" tabindex="-1" style="overflow: hidden auto;">
+        <div class="mfp-container mfp-s-ready mfp-inline-holder">
+            <div class="mfp-content">
+                <div class="qv-modal" id="qv-modal" style="display: block;">
+                    <div class="qv-details">
+                        <div class="page product-details-page">
+                            <div class="page-body">
+                                <div class="product-name">
+                                    <h2 id="product-name" itemprop="name">@item.NameEn</h2>
+                                </div>
+                                <form method="post" id="product-details-form" action="">
+                                    <div itemscope itemtype="http://schema.org/Product" data-productid="@item.Id">
+                                        <div class="product-essential">
+                                            <!-- Product pictures -->
+                                            <div class="gallery" id="product-gallery">
+                                                @foreach (var subproduct in item.Subproducts)
+                                                {
+                                                    <div class="cloud-zoom-thumb" style="margin-top:16px">
+                                                        <a href="@Url.Content($"~/uploads/{subproduct.Image.ImagePath}")" rel="lightbox-p" class="src-zoom-anchor" onclick="return false;">
+                                                            <img src="@Url.Content($"~/uploads/{subproduct.Image.ImagePath}")" alt="Product Image" class="src-zoom-image">
+                                                        </a>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="overview">
+                                                <div class="product-overview-content">
+                                                    <!-- SKU -->
+                                                    <div class="additional-details">
+                                                        <div class="sku">
+                                                            <span class="label">Category:</span>
+                                                            <span class="value" itemprop="sku" id="product-Category">@item.Subcategory.Category.NameEn</span>
+                                                        </div>
+                                                        <div class="sku">
+                                                            <span class="label">Sub Category:</span>
+                                                            <span class="value" itemprop="sku" id="product-subCategory">@item.Subcategory.NameEn</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="product-overview-pricing-cart">
+                                                    <!-- Price & add to cart -->
+                                                    <div class="prices">
+                                                        <div class="product-price">
+                                                            @if (item.Flags.Any(flag => flag.FlagType == "Sale"))
+                                                            {
+                                                                <div class="old-product-price">
+                                                                    <span>Old price:</span>
+                                                                    <span>@item.Price @Localizer["JOD"]</span>
+                                                                </div>
+                                                                <div class="product-price">
+                                                                    <label>Price:</label>
+                                                                    <span class="price-value">@item.PriceAfterDiscount @Localizer["JOD"]</span>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="product-price">
+                                                                    <label>Price:</label>
+                                                                    <span itemprop="price" class="price-value">@item.Price @Localizer["JOD"]</span>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-to-cart">
+                                                        <div class="add-to-cart-panel">
+                                                            <button type="button" id="add-to-cart-button" data-product-id="@item.Id" class="button-1 add-to-cart-button">
+                                                                <i class="icon-cart mr-2"></i> Add to cart
+                                                            </button>
+                                                            <div class="qty-input-wrap">
+                                                                <button type="button" class="qty-btn qty-minus" value="-1">-</button>
+                                                                <input id="product-quantity" class="qty-input" type="text" aria-label="Enter a quantity" value="1">
+                                                                <button type="button" class="qty-btn qty-plus" value="1">+</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Wishlist -->
+                                                    <div class="overview-buttons">
+                                                        <div class="add-to-wishlist">
+                                                            <button type="button" id="add-to-wishlist-button" data-product-id="@item.Id" class="button-2 add-to-wishlist-button AddToWishlist">
+                                                                <i class="icon-heart mr-2"></i> Add to wishlist
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

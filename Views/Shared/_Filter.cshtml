@@ -1,0 +1,118 @@
+﻿@model List<GabriniCosmetics.Areas.Admin.Models.DTOs.ProductDTO>
+@inject GabriniCosmetics.Areas.Admin.Models.Interface.ISubcategory _subcategory;
+@inject GabriniCosmetics.Areas.Admin.Models.Interface.IProduct _products;
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+
+<div class="side-2">
+    <button type="button" class="close-sidebar">
+        <i class="icon icon-close" area-label="title"></i>
+    </button>
+    <button type="button" class="sidebar-toggle">
+        <i class="icon icon-ajax-filter" area-label="title"></i>
+    </button>
+
+    @{
+        var allProducts = await _products.GetProducts();
+        var colorsDictionary = new Dictionary<string, int>();
+        var subCategoryDictionary = new Dictionary<string, int>();
+
+        @if (allProducts != null && allProducts.Count() > 0)
+        {
+
+            foreach (var item in allProducts)
+            {
+                var sucategory = await _subcategory.GetSubcategoryById(item.SubcategoryId);
+                var namesucategory = culture.StartsWith("en") ? sucategory.NameEn : sucategory.NameAr;
+                if (!subCategoryDictionary.ContainsKey(namesucategory))
+                {
+                    subCategoryDictionary.Add(namesucategory, sucategory.Id);
+                }
+            }
+        }
+    }
+    <form asp-controller="Products" asp-action="FeatureProducts" id="filter-form" method="get">
+        <!-- Hidden inputs to pass the current product IDs -->
+        @foreach (var item in allProducts)
+        {
+            <input type="hidden" name="productIds" value="@item.Id" />
+        }
+
+        <!-- Existing filter form -->
+        <div class="side-2-container">
+            <div class="block product-filters">
+                <!-- Filter by Colors -->
+                <div class="product-filter product-spec-filter">
+                    <div class="filter-title"><strong>Filter by attributes</strong></div>
+                    <div class="filter-content">
+                        <strong class="name">Colors</strong>
+                        <ul class="group product-spec-group product-spec-color">
+                            @foreach (var item in colorsDictionary)
+                            {
+                                <li class="item color-item">
+                                    <input id="attribute-option-@item.Value" type="checkbox" name="selectedColors" value="@item.Value"
+                                    @(ViewData["SelectedColors"] is List<string> selectedColors && selectedColors.Contains(item.Value.ToString()) ? "checked" : "") />
+                                    <label for="attribute-option-@item.Value" class="attribute-squares color-squares">
+                                        <span class="attribute-square" style="background-color:@item.Key"></span>
+                                    </label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <!-- Filter by Subcategories -->
+                <div class="product-filter product-manufacturer-filter">
+                    <div class="filter-title"><strong>Filter by sub category</strong></div>
+                    <div class="filter-content">
+                        <ul class="group product-manufacturer-group">
+                            @foreach (var item in subCategoryDictionary)
+                            {
+                                var selectedSubcategories = ViewData["SelectedSubcategories"] as List<string> ?? new List<string>();
+
+                                <li class="item">
+                                    <input id="attribute-manufacturer-@item.Value" type="checkbox" name="selectedSubcategories" value="@item.Value"
+                                    @(selectedSubcategories.Contains(item.Value.ToString()) ? "checked" : "") />
+                                    <label for="attribute-manufacturer-@item.Value"> @item.Key</label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Reset and Apply Buttons -->
+            <div class="filter-actions">
+                <button type="button" id="reset-filters" class="button-1">Reset Filters</button>
+                <button type="submit" id="apply-filters" class="button-1">Apply Filters</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.sidebar-toggle').on('click', function () {
+            $('.side-2').toggleClass('open');
+        });
+
+        $('.close-sidebar').on('click', function () {
+            $('.side-2').removeClass('open');
+        });
+
+        // Handle Reset Filters Button Click
+        $('#reset-filters').on('click', function () {
+            // Uncheck all checkboxes
+            $('input[name="selectedColors"]').prop('checked', false);
+            $('input[name="selectedSubcategories"]').prop('checked', false);
+
+            // Submit the form
+            $('#filter-form').submit();
+        });
+
+        // Handle Apply Filters Button Click
+        $('#apply-filters').on('click', function () {
+            $('#filter-form').submit();
+        });
+    });
+</script>
+

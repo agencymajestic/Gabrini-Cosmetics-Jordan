@@ -1,0 +1,49 @@
+﻿@model List<GabriniCosmetics.Areas.Admin.Models.AnnouncementBar>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="list-product list-subcategory">
+                        <table class="table table-striped" id="subcategory-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox-primary" type="checkbox">
+                                        </div>
+                                    </th>
+                                    <th>Announcement Bar (English)</th>
+                                    <th>Announcement Bar (Arabic)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input checkbox-primary" type="checkbox">
+                                            </div>
+                                        </td>
+                                        <td>@item.AnnouncementEn</td>
+                                        <td>@item.AnnouncementAr</td>
+                                        <td>
+                                            <div class="product-action">
+                                                <a class="action-icon" href="/Admin/AnnouncementBar/Edit/@item.Id">
+                                                    <i class="fa-sharp fa-light fa-pen-to-square"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

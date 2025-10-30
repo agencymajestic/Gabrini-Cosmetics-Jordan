@@ -1,0 +1,145 @@
+﻿@model GabriniCosmetics.Models.Identity.RegisterViewModel
+
+<style>
+    .master-column-wrapper {
+        display: flex;
+        margin-top: 15px;
+    }
+</style> 
+<div class="master-wrapper-content">
+    <div class="master-column-wrapper custom-for-profile">
+        @Html.Partial("_Sidebar")
+
+        <div class="center-2 page-body-responsive" style="padding:0 !important">
+            <div class="page account-page customer-info-page">
+                <div class="page-title">
+                    <h1>@Localizer["CustomerInfo"]</h1>
+                </div>
+                <div class="page-body">
+                    <form asp-action="EditProfile" method="post" novalidate="novalidate">
+                        <div class="fieldset">
+                            <div class="title personal-details"><strong>@Localizer["PersonalDetails"]</strong></div>
+                            <div class="form-fields">
+                                <div class="inputs gender-container">
+                                    <label>@Localizer["Gender"]:</label>
+                                    <div class="gender">
+                                        <span class="male">
+                                            <input type="radio" asp-for="Gender" value="M" id="gender-male">
+                                            <label class="forcheckbox" for="gender-male">@Localizer["Male"]</label>
+                                        </span>
+                                        <span class="female">
+                                            <input type="radio" asp-for="Gender" value="F" id="gender-female">
+                                            <label class="forcheckbox" for="gender-female">@Localizer["Female"]</label>
+                                        </span>
+                                    </div>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="FirstName">@Localizer["FirstName"]:</label>
+                                    <input asp-for="FirstName" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="LastName">@Localizer["LastName"]:</label>
+                                    <input asp-for="LastName" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                                <div class="inputs date-of-birth">
+                                    <label>@Localizer["Dateofbirth"]:</label>
+                                    <div class="date-picker-wrapper">
+                                        <select asp-for="DateOfBirthDay">
+                                            <option value="0">Day</option>
+                                            @for (int i = 1; i <= 31; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        <select asp-for="DateOfBirthMonth">
+                                            <option value="0">Month</option>
+                                            @for (int i = 1; i <= 12; i++)
+                                            {
+                                                <option value="@i">@System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(i)</option>
+                                            }
+                                        </select>
+                                        <select asp-for="DateOfBirthYear">
+                                            <option value="0">Year</option>
+                                            @for (int i = 1970; i <= DateTime.Now.Year; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="DateOfBirthDay" class="text-danger"></span>
+                                    <span asp-validation-for="DateOfBirthMonth" class="text-danger"></span>
+                                    <span asp-validation-for="DateOfBirthYear" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="Email">@Localizer["Email"]:</label>
+                                    <input asp-for="Email" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="button-1 save-customer-info-button">@Localizer["Save"]</button>
+                        </div>
+                        @Html.AntiForgeryToken()
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bar-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification success">
+        <p class="content">@Localizer["SuccessfullyEdit"]</p>
+        <span class="close" title="Close" onclick="hideNotification()"></span>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function showNotification() {
+        var notification = document.getElementById('bar-notification');
+        if (notification) {
+            notification.style.display = 'block';
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+    }
+
+    function hideNotification() {
+        var notification = document.getElementById('bar-notification');
+        if (notification) {
+            notification.style.display = 'none';
+        }
+    }
+
+    $('form').on('submit', async function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        try {
+            var form = $(this);
+            var response = await fetch(form.attr('action'), {
+                method: form.attr('method'),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: form.serialize()
+            });
+
+            if (response.status == 200) {
+                showNotification(); // Show notification on successful response
+                $("#loading-overlay").fadeOut();
+            } else {
+                // Handle errors if needed
+            }
+        } catch (err) {
+            // Handle errors if needed
+        }        
+    });
+</script>

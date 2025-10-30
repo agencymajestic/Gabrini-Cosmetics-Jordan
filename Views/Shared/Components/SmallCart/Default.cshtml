@@ -1,0 +1,116 @@
+﻿@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+
+<div id="flyout-cart" class="flyout-cart advance-cart-flyout-shopping-cart">
+    <div class="mini-shopping-cart">
+        <button class="close-button close-cart" type="button">
+            Close
+        </button>
+        @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
+        {
+        <div class="count">
+                <a href="/cart"><i class="icon icon-shopping-cart-1"></i>@Model.CartDetails.Count @Localizer["items"]</a>
+        </div>
+        <div class="items">
+            @foreach (var item in Model.CartDetails)
+            {
+                    var name = culture.StartsWith("en") ? item.Subproduct.Product.NameEn : item.Subproduct.Product.NameAr;
+                    var subproductName = culture.StartsWith("en") ? item.Subproduct.DescriptionEn : item.Subproduct.DescriptionAr;
+
+                <div class="item item-product">
+                    <div class="picture">
+                            <a title="@Localizer["ShowDetailsFor"] @name">
+                                <img alt="@Localizer["PictureOf"] @name" src="~/uploads/@item.Image" title="@Localizer["ShowDetailsFor"] @name">
+                        </a>
+                    </div>
+                    <div class="product">
+                        <div class="name">
+                                <a>@name</a>
+                        </div>
+                        <div class="name">
+                                <a>@subproductName</a>
+                        </div>
+                            <div class="price"><span class="price-text"> @Localizer["Price"]: </span>
+                                @{
+                                    bool hasSaleFlag = false;
+
+                                    foreach (var flag in item.Subproduct.Product.Flags)
+                                    {
+                                        if (flag.FlagType == "Sale")
+                                        {
+                                            hasSaleFlag = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (hasSaleFlag)
+                                    {
+                                        <span>@item.Subproduct.Product.PriceAfterDiscount</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.Subproduct.Product.Price</span>
+                                    }
+                                }
+                            </div>
+                            <div class="quantity">@Localizer["Quantity"]: <span>@item.Quantity</span></div>
+                    </div>
+                </div>
+
+            }
+            </div>
+        }
+        else
+        {
+            <div class="count">
+                <a href="/cart"><i class="icon icon-shopping-cart-1"></i>0 @Localizer["item"]</a>
+            </div>
+            <div class="items"></div>
+        }
+
+        <div class="flyoutcart-footer">
+            @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
+            {
+                double total = 0;
+                foreach (var item in Model.CartDetails)
+                {
+                    bool hasSaleFlag = false;
+
+                    foreach (var flag in item.Subproduct.Product.Flags)
+                    {
+                        if (flag.FlagType == "Sale")
+                        {
+                            hasSaleFlag = true;
+                            break;
+                        }
+                    }
+
+                    if (hasSaleFlag)
+                    {
+                        total += item.Subproduct.Product.PriceAfterDiscount * item.Quantity;
+                    }
+                    else
+                    {
+                        total += item.Subproduct.Product.Price * item.Quantity;
+                    }
+                }
+                <div class="totals">@Localizer["Sub_Total"]: <strong>@String.Format("{0:F2}", total) @Localizer["JOD"]</strong></div>
+            }
+            else{
+                <div class="totals">@Localizer["Sub_Total"]: <strong>00,00 @Localizer["JOD"]</strong></div>
+            }
+            <div class="buttons" style="margin:0">
+                <a type="button" class="button-1 cart-button" asp-controller="Cart" asp-action="index">@Localizer["GoToCart"]</a>
+                @if (Model == null || Model.CartDetails == null || Model.CartDetails.Count == 0)
+                {
+                    <a type="button" disabled class="button-1 checkout-button">@Localizer["Checkout"]</a>
+                }
+                else
+                {
+                    <a type="button" class="button-1 checkout-button" asp-controller="Checkout" asp-action="index">@Localizer["Checkout"]</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

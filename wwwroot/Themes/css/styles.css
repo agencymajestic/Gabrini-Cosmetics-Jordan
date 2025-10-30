@@ -1,0 +1,384 @@
+﻿.spc .opc {
+    border: 1px solid var(--primary-grey_light);
+    box-shadow: 0 2px 4px rgba(153,153,153,.15);
+    border-radius: 3px;
+    padding: 10px
+}
+
+    .spc .opc .step-title {
+        position: relative;
+        background: var(--primary-green);
+        border-radius: 3px;
+        color: var(--white)
+    }
+
+        .spc .opc .step-title .title {
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 19px;
+            padding: 5px 10px;
+            min-height: initial
+        }
+
+@media(max-width: 991px) {
+    .spc .opc .accordion-title::after {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "icomoon" !important;
+        font-style: normal;
+        font-weight: 600;
+        color: var(--white)
+    }
+
+    .spc .opc .accordion-title.plus + .accordion {
+        display: none
+    }
+
+    .spc .opc .accordion-title.plus::after {
+        content: ""
+    }
+
+    .spc .opc .accordion-title.minus::after {
+        content: ""
+    }
+
+    .spc .opc .accordion {
+        height: auto
+    }
+}
+
+@media(min-width: 992px) {
+    .spc .opc .spc-row {
+        display: flex;
+        flex-wrap: wrap
+    }
+
+        .spc .opc .spc-row .left, .spc .opc .spc-row .right {
+            width: 50%;
+            padding: 10px
+        }
+
+    .spc .opc .spc-row-bottom {
+        padding: 10px
+    }
+}
+
+.spc .opc input[type=text] {
+    border: 1px solid var(--primary-grey_light);
+    box-shadow: inset 2px 3px 5px rgba(0,0,0,.08);
+    border-radius: 3px;
+    height: 35px;
+    width: 100%;
+    padding: 5px 10px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--primary-grey_dark);
+    transition: all .3s
+}
+
+.spc .opc .checkout-data .terms-of-service {
+    display: none
+}
+
+    .spc .opc .checkout-data .terms-of-service label {
+        display: inline
+    }
+
+.spc .opc .spc-row-bottom {
+    padding-top: 10px
+}
+
+.spc .opc .step {
+    padding: 0;
+    border: 0;
+    margin: 15px 0
+}
+
+    .spc .opc .step label {
+        display: flex;
+        text-align: left;
+        font-size: 14px;
+        line-height: 1;
+        font-weight: 600;
+        margin-bottom: 15px
+    }
+
+        .spc .opc .step label::before {
+            margin-right: 5px
+        }
+
+    .spc .opc .step .select-billing-address label {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px
+    }
+
+    .spc .opc .step select {
+        box-shadow: inset 2px 3px 5px rgba(0,0,0,.08);
+        color: var(--primary-grey_dark);
+        padding: 8px 22px 8px 10px
+    }
+
+    .spc .opc .step .edit-address {
+        display: flex;
+        flex-wrap: wrap
+    }
+
+        .spc .opc .step .edit-address label {
+            display: none
+        }
+
+        .spc .opc .step .edit-address .required {
+            top: -10px;
+            right: 5px
+        }
+
+        .spc .opc .step .edit-address .address-input {
+            width: 100%
+        }
+
+    .spc .opc .step.shipping-options {
+        overflow-y: auto;
+        max-height: initial;
+        background: var(--white);
+        background-image: none;
+        margin-bottom: 0
+    }
+
+        .spc .opc .step.shipping-options .country-state-wrapper {
+            display: flex;
+            flex-wrap: wrap
+        }
+
+            .spc .opc .step.shipping-options .country-state-wrapper .country, .spc .opc .step.shipping-options .country-state-wrapper .state {
+                width: calc(50% - 7.5px)
+            }
+
+            .spc .opc .step.shipping-options .country-state-wrapper .state {
+                margin-left: 15px
+            }
+
+        .spc .opc .step.shipping-options .buttons input {
+            background: var(--primary-green_light);
+            display: inline-block;
+            color: var(--primary-green_dark);
+            padding: 5px 9px;
+            border-radius: 3px;
+            border: 1px solid var(--primary-green_light);
+            font-size: 14px;
+            line-height: 18px;
+            transition: all .3s;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,.1)
+        }
+
+            .spc .opc .step.shipping-options .buttons input:not(:disabled) {
+                cursor: pointer
+            }
+
+                .spc .opc .step.shipping-options .buttons input:not(:disabled):hover {
+                    border: 1px solid var(--primary-green);
+                    background: var(--primary-green);
+                    color: var(--white)
+                }
+
+            .spc .opc .step.shipping-options .buttons input:disabled {
+                opacity: .8
+            }
+
+        .spc .opc .step.shipping-options + .estimate-shipping-result .shipping-results {
+            margin: 15px 0
+        }
+
+            .spc .opc .step.shipping-options + .estimate-shipping-result .shipping-results .shipping-option-item {
+                margin: 10px 0
+            }
+
+                .spc .opc .step.shipping-options + .estimate-shipping-result .shipping-results .shipping-option-item strong {
+                    display: inline-block;
+                    color: var(--primary-green_dark);
+                    margin-right: 5px
+                }
+
+.spc .opc .payment-method label[for=UseRewardPoints] {
+    display: block;
+    line-height: 20px
+}
+
+.spc .opc .payment-info input {
+    width: 100% !important;
+    margin-bottom: 5px
+}
+
+.spc .opc .payment-info select {
+    margin-bottom: 5px
+}
+
+.spc .opc .payment-info table tr:nth-child(4) td:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+    .spc .opc .payment-info table tr:nth-child(4) td:nth-child(2) select {
+        width: calc(50% - 10px)
+    }
+
+.spc .opc .method-list {
+    display: block
+}
+
+    .spc .opc .method-list li {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 15px
+    }
+
+        .spc .opc .method-list li label {
+            margin-bottom: 7px
+        }
+
+.spc .opc .order-summary-content {
+    padding: 0
+}
+
+    .spc .opc .order-summary-content .order-details-area {
+        padding: 0
+    }
+
+        .spc .opc .order-summary-content .order-details-area .order-review {
+            text-align: left
+        }
+
+            .spc .opc .order-summary-content .order-details-area .order-review .order-review-data {
+                padding: 0
+            }
+
+                .spc .opc .order-summary-content .order-details-area .order-review .order-review-data .shipping-info, .spc .opc .order-summary-content .order-details-area .order-review .order-review-data .billing-info {
+                    margin-bottom: 10px
+                }
+
+                .spc .opc .order-summary-content .order-details-area .order-review .order-review-data .billing-info-wrap, .spc .opc .order-summary-content .order-details-area .order-review .order-review-data .shipping-info-wrap {
+                    margin-bottom: 20px
+                }
+
+    .spc .opc .order-summary-content table.cart tbody td {
+        vertical-align: middle
+    }
+
+        .spc .opc .order-summary-content table.cart tbody td .jsmartable-subcol {
+            font-size: 13px
+        }
+
+        .spc .opc .order-summary-content table.cart tbody td label {
+            display: none
+        }
+
+        .spc .opc .order-summary-content table.cart tbody td span {
+            font-size: 13px
+        }
+
+        .spc .opc .order-summary-content table.cart tbody td .qty-input-wrap input {
+            display: inline-block;
+            width: auto;
+            max-width: 100px;
+            padding: 8px 25px;
+            box-shadow: none
+        }
+
+    .spc .opc .order-summary-content .cart-footer .step-title {
+        margin-bottom: 7px
+    }
+
+    .spc .opc .order-summary-content .cart-footer .cart-option {
+        margin-bottom: 10px
+    }
+
+    .spc .opc .order-summary-content .cart-footer dl {
+        margin: 0 0 5px
+    }
+
+        .spc .opc .order-summary-content .cart-footer dl dt {
+            position: relative
+        }
+
+            .spc .opc .order-summary-content .cart-footer dl dt .required {
+                position: absolute;
+                color: var(--red);
+                top: 0;
+                right: 0
+            }
+
+            .spc .opc .order-summary-content .cart-footer dl dt .text-prompt {
+                margin-bottom: 5px
+            }
+
+    .spc .opc .order-summary-content .cart-footer .title strong, .spc .opc .order-summary-content .cart-footer dt .text-prompt {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: var(--primary-green_dark)
+    }
+
+    .spc .opc .order-summary-content .cart-footer .cart-total td {
+        vertical-align: middle
+    }
+
+    .spc .opc .order-summary-content .cart-footer .cart-total label {
+        display: inline-block;
+        margin: 0
+    }
+
+    .spc .opc .order-summary-content .cart-footer .buttons {
+        margin: 15px 0
+    }
+
+        .spc .opc .order-summary-content .cart-footer .buttons button {
+            width: 100%;
+            background: var(--black);
+            display: inline-block;
+            color: var(--white);
+            padding: 5px 9px;
+            border-radius: 3px;
+            border: 1px solid var(--black);
+            font-size: 16px;
+            line-height: 18px;
+            transition: all .3s;
+            text-align: center
+        }
+
+            .spc .opc .order-summary-content .cart-footer .buttons button:not(:disabled) {
+                cursor: pointer
+            }
+
+                .spc .opc .order-summary-content .cart-footer .buttons button:not(:disabled):hover {
+                    border: 1px solid var(--primary-green);
+                    background: var(--primary-green);
+                    color: var(--white)
+                }
+
+            .spc .opc .order-summary-content .cart-footer .buttons button:disabled {
+                opacity: .8
+            }
+
+.spc .opc #error-message-list .error-message {
+    border-radius: 3px;
+    background: rgba(244,15,0,.15);
+    box-shadow: 0 2px 4px 0 rgba(245,42,29,.1);
+    margin-bottom: 15px;
+    padding: 10px;
+    color: var(--red);
+    font-size: 15px;
+    width: 100%;
+    max-width: 460px
+}
+
+@media(min-width: 768px) {
+    .spc .opc #error-message-list .error-message {
+        margin-left: auto;
+        margin-right: auto
+    }
+}

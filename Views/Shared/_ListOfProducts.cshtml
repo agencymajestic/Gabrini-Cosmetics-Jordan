@@ -1,0 +1,183 @@
+﻿@using GabriniCosmetics.Areas.Admin.Models.DTOs
+@model List<ProductView>
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+<div class="product-selectors">
+    <div class="product-viewmode">
+        <span>View as</span>
+        <a class="viewmode-icon grid btn-grid selected" data-viewmode="grid" title="Grid" tabindex="0" aria-role="button" href="#">Grid</a>
+        <a class="viewmode-icon list btn-list" data-viewmode="list" title="List" tabindex="0" aria-role="button" href="#">List</a>
+    </div>
+    <div class="product-sorting">
+        <span>@Localizer["Sortby"]</span>
+        <select aria-label="Select product sort order" id="products-orderby">
+            <option value="aToZ">@Localizer["AtoZ"]</option>
+            <option value="zToA">@Localizer["ZtoA"]</option>
+            <option value="lowToHigh">@Localizer["LToH"]</option>
+            <option value="highToLow">@Localizer["HToL"]</option>
+        </select>
+    </div>
+</div>
+<div class="search-results">
+    <div class="products-container">
+        <div class="products-wrapper">
+            <div class="product-grid">
+                <div class="item-grid">
+                    @foreach (var item in Model)
+                    {
+                        var productName = culture.StartsWith("en") ? @item.NameEn : @item.NameAr;
+                        <div class="item-box">
+                            <div class="product-item" data-productid="@item.Id" data-quick-view="true">
+                                <div class="picture">
+                                    <div class="offer-content product-ribbon">
+                                        @if (item.Flags.Any(f => f.FlagType == "New"))
+                                        {
+                                            <div class="new-product-label">@(item.Flags.First(f => f.FlagType == "New").FlagType)</div>
+                                        }
+                                        @if (item.Flags.Any(f => f.FlagType == "Sale"))
+                                        {
+                                            <div class="ribbon ribbon-danger" style="background-color:red">@(item.Flags.First(f => f.FlagType == "Sale").FlagType)</div>
+                                        }
+                                        @if (item.Flags.Any(f => f.FlagType == "Feature"))
+                                        {
+                                            <div class="new-product-label" style="background-color:dodgerblue">@(item.Flags.First(f => f.FlagType == "Feature").FlagType)</div>
+                                        }
+                                    </div>
+                                    <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" id="swiper-@item.Id">
+                                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+                                            @foreach (var subproduct in item.Subproducts)
+                                            {
+                                                <a class="swiper-slide padding-b swiper-slide-active" asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id" title="@Localizer["ShowDetailsFor"] @productName" role="group" aria-label="1 / 2" style="width: 189px;">
+                                                    <img alt="@Localizer["PictureOf"] @productName" src="~/uploads/@subproduct.Image.ImagePath" title="@Localizer["ShowDetailsFor"] @productName">
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                            <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span>
+                                            <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span>
+                                        </div>
+                                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                    </div>
+                                    <div class="buttons">
+                                        <button type="button" class="button-2 add-to-wishlist-button" data-product-Id="@item.Id " title="@Localizer["AddtoWishlist"]">@Localizer["AddtoWishlist"]</button>
+                                        <button type="button" class="button-2 quick-view-btn" data-product-Id="@item.Id" title="@Localizer["QuickView"]"><i class="fa-sharp fa-light fa-magnifying-glass-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="details">
+                                    <h2 class="product-title"><a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">@productName</a></h2>
+                                    <div class="add-info">
+                                        <div class="prices">
+                                            @if (item.Flags.Any(f => f.FlagType == "Sale"))
+                                            {
+                                                <span class="price old-price">@item.Price @Localizer["JOD"]</span>
+                                                <span class="price actual-price">@item.PriceAfterDiscount @Localizer["JOD"]</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="price actual-price">@item.Price @Localizer["JOD"]</span>
+                                            }
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <a href="/Products/Detail?Id=@item.Id" class="button-1 add-to-cart-button">@Localizer["AddToCart"]</a>
+                                            <div class="product-box-advance-cart-button">
+                                                <div class="qty-wrapper qty-input-wrap">
+                                                    <button class="btn-decrease qty-btn qty-minus" type="button">-</button>
+                                                    <input name="EnteredQuantity" value="1" class="qty-input" type="text" aria-label="Enter" a="" quantity="">
+                                                    <button class="btn-increase qty-btn qty-plus" type="button">+</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="product-list" style="display:none">
+                <div class="item-grid">
+                    @foreach (var item in Model)
+                    {
+                        var productName = culture.StartsWith("en") ? @item.NameEn : @item.NameAr;
+                        var productDesc = culture.StartsWith("en") ? @item.DescriptionEn : @item.DescriptionAr;
+                        <div class="item-box">
+                            <div class="product-item" data-productid="@item.Id" data-quick-view="true">
+                                <div class="picture">
+                                    <div class="offer-content product-ribbon">
+                                        @if (item.Flags.Any(f => f.FlagType == "New"))
+                                        {
+                                            <div class="new-product-label">@(item.Flags.First(f => f.FlagType == "New").FlagType)</div>
+                                        }
+                                        @if (item.Flags.Any(f => f.FlagType == "Sale"))
+                                        {
+                                            <div class="ribbon ribbon-danger" style="background-color:#cc0000">@(item.Flags.First(f => f.FlagType == "Sale").FlagType)</div>
+                                        }
+                                        @if (item.Flags.Any(f => f.FlagType == "Feature"))
+                                        {
+                                            <div class="new-product-label" style="background-color:dodgerblue">@(item.Flags.First(f => f.FlagType == "Feature").FlagType)</div>
+                                        }
+                                    </div>
+                                    <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" id="swiper-@item.Id">
+                                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+                                            @foreach (var subproduct in item.Subproducts)
+                                            {
+                                                <a class="swiper-slide padding-b swiper-slide-active" asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id" title="@Localizer["ShowDetailsFor"] @productName" role="group" aria-label="1 / 2" style="width: 189px;">
+                                                    <img alt="@Localizer["PictureOf"] @productName" src="~/uploads/@subproduct.Image.ImagePath" title="@Localizer["ShowDetailsFor"] @productName">
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                            <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span>
+                                            <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span>
+                                        </div>
+                                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                    </div>
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            var mySwiper = new Swiper('#swiper-@item.Id', {
+                                                pagination: {
+                                                    clickable: true,
+                                                    el: '.swiper-pagination',
+                                                },
+                                            });
+                                        });
+                                    </script>
+                                    <div class="buttons">
+                                        <button type="button" class="button-2 add-to-wishlist-button AddToWishlist" data-product-Id="@item.Id " title="@Localizer["AddtoWishlist"]">@Localizer["AddtoWishlist"]</button>
+                                        <button type="button" class="button-2 quick-view-btn" data-product-Id="@item.Id" title="@Localizer["QuickView"]"><i class="fa-sharp fa-light fa-magnifying-glass-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="details">
+                                    <h2 class="product-title"><a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">@productName</a></h2>
+                                    <div class="description" data-short-description="none">@productDesc</div>
+                                    <div class="add-info">
+                                        <div class="prices">
+                                            @if (item.Flags.Any(f => f.FlagType == "Sale"))
+                                            {
+                                                <span class="price old-price">@item.Price @Localizer["JOD"]</span>
+                                                <span class="price actual-price">@item.PriceAfterDiscount @Localizer["JOD"]</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="price actual-price">@item.Price @Localizer["JOD"]</span>
+                                            }
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <a href="/Products/Detail?Id=@item.Id" class="button-1 add-to-cart-button">@Localizer["AddToCart"]</a>
+                                            <div class="qty-input-wrap">
+                                                <button type="button" class="qty-btn qty-minus" value="-1">-</button>
+                                                <input id="product-quantity" class="qty-input" type="text" aria-label="Enter a quantity" value="1">
+                                                <button type="button" class="qty-btn qty-plus" value="1">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@model GabriniCosmetics.Models.Identity.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+
+    var resetPasswordResult = TempData["resetPasswordResult"]?.ToString();
+    var resetPasswordText = TempData["resetPasswordText"]?.ToString();
+
+    var resetPasswordRequestText = TempData["resetPasswordRequestText"]?.ToString();
+    var resetPasswordRequestResult = TempData["resetPasswordRequestResult"]?.ToString();
+
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<div class="master-column-wrapper">
+    <div class="center-1">
+        <div class="page login-page">
+            <div class="page-title">
+                <h1>@Localizer["Welcome"]</h1>
+            </div>
+            <div class="page-body page-body-responsive">
+                <div class="customer-blocks">
+                    <div class="returning-wrapper fieldset">
+                        <form asp-action="Login" method="post" autocomplete="off" novalidate="novalidate">
+                            <div class="alert alert-danger message-error form-fields validation-summary-errors" role="alert" asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <input type="hidden" name="returnUrl" value="@returnUrl" />
+                            
+                            @if(resetPasswordRequestResult is not null && resetPasswordRequestText is not null)
+                            {
+                                <div class="title"><strong style="@(resetPasswordRequestResult == "success" ? "color: green !important" : "")">@resetPasswordRequestText</strong></div>
+                            }
+                            else if(resetPasswordResult is not null && resetPasswordText is not null)
+                            {
+                                <div class="title"><strong style="@(resetPasswordResult == "success" ? "color: green !important" : "")">@resetPasswordText</strong></div>
+                            }
+                            else
+                            {
+                                <div class="title"><strong>@Localizer["ReturningCustomer"]</strong></div>
+                            }
+                            <div class="form-fields">
+                                <div class="inputs">
+                                    <label for="Email">@Localizer["Email"]:</label>
+                                    <input class="email" autofocus="" type="email" asp-for="Email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label for="Password">@Localizer["Password"]:</label>
+                                    <input class="password" type="password" asp-for="Password" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="inputs reversed">
+                                    <input type="checkbox" asp-for="RememberMe" />
+                                    <label for="RememberMe">@Localizer["RememberMe"]?</label>
+                                    <span class="forgot-password"><a href="/account/passwordrecovery">Forgot password?</a></span>
+                              </div>
+                            </div>
+                            <div class="buttons">
+                                <button type="submit" class="button-1 login-button">@Localizer["Login"]</button>
+                            </div>
+                        </form>
+                        <div class="external-authentication"></div>
+                    </div>
+                    <div class="new-wrapper register-block fieldset">
+                        <div class="title"><strong>@Localizer["NewCustomer"]</strong></div>
+                        <div class="text">@Localizer["NewCustomerDesc"]</div>
+                        <div class="buttons">
+                            <a type="button" class="button-1 register-button" asp-controller="Account" asp-action="Register">@Localizer["Register"]</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

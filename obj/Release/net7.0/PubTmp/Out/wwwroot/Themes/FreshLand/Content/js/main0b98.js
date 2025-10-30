@@ -1,0 +1,1 @@
+function qtyUpdate(n,t){var r=t.siblings(".qty-input"),i=parseInt(r.val()),u=parseInt(t.val());return i=i+u,i>=1&&r.val(i),i}function ProductDetailsToolTip(n,t){tippy(n,{content:t,placement:"top"})}$(function(){$(".qty-btn").on("click",function(n){n.stopPropagation();qtyUpdate(n,$(this))})});

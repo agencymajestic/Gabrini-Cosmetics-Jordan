@@ -1,0 +1,78 @@
+﻿@model GabriniCosmetics.Areas.Admin.Models.DTOs.UpdateSubcategoryDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Edit Subcategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Edit Subcategory</h4>
+                </div>
+                <div class="card-body">
+                    <form id="edit-subcategory-form" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="NameEn" class="control-label"></label>
+                            <input asp-for="NameEn" class="form-control"/>
+                            <span asp-validation-for="NameEn" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NameAr" class="control-label"></label>
+                            <input asp-for="NameAr" class="form-control"/>
+                            <span asp-validation-for="NameAr" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Categories"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-flex gap-2 justify-content-end">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="/Admin/SubCategories" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#edit-subcategory-form').submit(function (e) {
+            e.preventDefault(); // Prevent the default form submission
+            $('.text-danger').text('');
+            // Gather form data
+            var formData = new FormData(this);
+            $.ajax({
+                url: '/Admin/SubCategories/Edit', // The server-side URL
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // Handle success (e.g., show a success message or redirect)
+                    window.location.href = "/Admin/Subcategories";
+                },
+                error: function (response) {
+                    if (response.responseJSON && response.responseJSON.errors) {
+                        for (const key in response.responseJSON.errors) {
+                            if (key === '$id') continue;
+                            $(`[name="${key}"]`).next('.text-danger').text(response.responseJSON.errors[key]['$values']);
+                        }
+                    }
+                    else {
+                        alert('An unexpected error occurred.');
+                    }
+                }
+            });
+        });
+    });
+</script>

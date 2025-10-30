@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConditionsofUse" xml:space="preserve">
+    <value>Conditions of Use</value>
+  </data>
+  <data name="ConditionsofUsePage" xml:space="preserve">
+    <value>&lt;p&gt;Thank you for visiting our site which is owned and operated by Gabrini Cosmetics Company - Jordan. Please read these terms of use carefully before using the services. These terms of use set forth the legally binding terms of use for your use of this site and any related services, features, content, widgets offered or any purchases you make.&lt;/p&gt;
+
+&lt;p&gt;These Conditions of Use apply to all users of the Site, including, without limitation, users who are contributors of content, information and other materials or services on the Site. If you do not agree with the Terms of Use, then you do not have the right to access, view, download or otherwise use the Site or purchase any item and, accordingly, you should not do so.&lt;/p&gt;
+
+&lt;p&gt;We may at our sole discretion change, add, or delete portions of these Terms of Use at any time on a going-forward basis. It is your responsibility to check these Terms of Use for changes prior to use of the Site, and your continued use of the Site following the posting of changes to these Terms of Use constitutes your acceptance of any changes.&lt;/p&gt;
+
+&lt;strong&gt;Personal Data Protection&lt;/strong&gt;
+&lt;p&gt;Gabrini Cosmetics Company - Jordan ensures complete confidentiality of all data provided. We have a single view that makes the customer experience: fast access to all products, placed orders and received communications on items , promotions or any other relevant content for visitors. At any time, customers can access their account and change their personal data.&lt;/p&gt;
+
+&lt;strong&gt;Pick Up Orders&lt;/strong&gt;
+&lt;p&gt;Orders can be picked up at our warehouse between 9am and 4pm. However, you still need to place your order through our website so that we can prepare your order. As our website does not offer 'Pick Up' as ordering option you'd have to pay for shipping when you place your order and we will give you a full refund. Before coming to our warehouse please call first at +962-79-619-46-30 to make sure that your order is ready. Translation is too long to be saved.&lt;/p&gt;
+
+&lt;strong&gt;Eligibility&lt;/strong&gt;
+&lt;p&gt;You represent and warrant that you (a) are above the legal age of majority in your jurisdiction of residence, (b) have not previously been suspended or removed from the Site, (c) do not have more than one (1) account at any given time for the Site; (d) you will only provide us with true, accurate, current and complete information if you register for an account and/or Orders (defined below). If we believe or suspect that your information is not true, accurate, current or complete, or suspect fraudulent use of the site via any automated tools or otherwise, we may deny or terminate your access to the Site or Services (or any portion thereof) and (e) that you have full power and authority to enter into the Terms of Use and in doing so will not violate any other agreement to which you are a party.&lt;/p&gt;
+
+&lt;strong&gt;Bulk Specials&lt;/strong&gt;
+&lt;p&gt;These products are typically not in stock and special conditions apply. The lead time varies greatly depending on the product. The customer is advised to look for an email from customer service, after placing an order that includes a bulk special.&lt;/p&gt;
+
+&lt;strong&gt;Back Orders&lt;/strong&gt;
+&lt;p&gt;All products are usually in stock and readily available. However, although we are constantly increasing our inventories, it may happen that an item runs out-of-stock. Please advise us you desire the item back-ordered as out-of-stocks are not automatically back-ordered.&lt;/p&gt;</value>
+  </data>
+</root>

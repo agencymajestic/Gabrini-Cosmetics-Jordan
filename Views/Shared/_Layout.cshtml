@@ -1,0 +1,698 @@
+﻿@using Microsoft.IdentityModel.Tokens
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var iconClass = culture.StartsWith("en") ? "icon icon-flex-right-caret" : "icon icon-flex-left-caret";
+    var iconClassRes = culture.StartsWith("en") ? "icon icon-flex-left-caret" : "icon icon-flex-right-caret";
+    @inject GabriniCosmetics.Areas.Admin.Models.Interface.IAnnouncementBar AnnouncementBar
+    @inject GabriniCosmetics.Areas.Admin.Models.Interface.ISocialMediaService socualMediaService
+    @inject GabriniCosmetics.Areas.Admin.Models.Interface.ICategory Category
+
+    var socialmedia = await socualMediaService.GetAll();
+    var Categories = await Category.GetCategories();
+}
+<!DOCTYPE html>
+<style>
+    .scroll-top-left {
+        position: fixed;
+        left: 30px;
+        bottom: 55px;
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+        background: white;
+        z-index: 10;
+        border-radius: 50%;
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+        .scroll-top-left i {
+            font-size: 50px;
+        }
+
+    .sec-title {
+        margin-bottom: calc(var(--section-title-space) - 12px);
+        margin-top: -0.24em;
+        text-transform: capitalize;
+        font-weight: 600
+    }
+
+    .TalkToUs {
+        z-index: 2;
+        position: fixed;
+        display: block;
+        left: 35px;
+        bottom: 105px;
+    }
+
+    .chat {
+        display: grid;
+        gap: 8px
+    }
+
+    .btn-chat {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid red
+    }
+
+        .btn-chat i {
+            font-size: 50px;
+        }
+
+    .fa-whatsapp {
+        color: #075e54;
+    }
+
+    .fa-facebook-messenger {
+        color: #0099ff;
+    }
+</style>
+<html lang="en" class="html-account-page html-customer-info-page collumn-two-page smart-megamenu-active">
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <title>Gabrini Cosmetics - Jordan</title>
+        <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="description" content="@Localizer["Description"]">
+    <meta name="keywords" content="@Localizer["Keywords"]">
+        <meta name="generator" content="MajesticAgency">
+        <meta name="theme-color" content="#cc0000">
+        <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    <meta name="facebook-domain-verification" content="cmh5r9k2qp3xkrjz3gct6644tite0f" />
+        <link rel="shortcut icon" href="~/images/gabrinicosmetics/gabrini-icone.png">
+
+    @{
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="~/lib_npm/jquery-ui-dist/jquery-ui.min1e84.css">
+
+        <!-- Theme -->
+        <link href="~/themes/css/swiper-bundle.min.css" rel="stylesheet" />
+        <link href="~/themes/css/announcementac.css" rel="stylesheet" />
+        <link href="~/themes/css/picturezoom/styles.css" rel="stylesheet" />
+        <link href="~/themes/css/picturezoom/cloud-zoom.css" rel="stylesheet" />
+        <link href="~/themes/css/quickview/magnific-popup.css" rel="stylesheet" />
+        <link href="~/themes/css/cart/advancecart.css" rel="stylesheet" />
+        <link href="~/themes/css/scale.css" rel="stylesheet" />
+        <link href="~/themes/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+        if (culture.StartsWith("en"))
+        {
+            <link href="~/themes/css/SmartSliders/styles.css" rel="stylesheet" />
+            <link href="~/themes/css/productribbon/productribbon.css" rel="stylesheet" />
+            <link href="~/themes/css/smartdealcarousels/dealscarousel.css" rel="stylesheet" />
+            <link href="~/themes/css/smartcarousels/styles.css" rel="stylesheet" />
+            <link href="~/themes/css/quickview/quickview.css" rel="stylesheet" />
+            <link href="~/themes/css/smartproducttabs/producttab.css" rel="stylesheet" />
+            <link href="~/themes/css/smartmegamenu/styles.css" rel="stylesheet" />
+            <link rel="stylesheet" href="~/Themes/FreshLand/Content/css/freshLand.css">
+            <link href="~/css/site.css" rel="stylesheet" />           
+        }
+        else
+        {
+            <link href="~/themes/css/SmartSliders/styles.rtl.css" rel="stylesheet" />
+            <link href="~/themes/css/productribbon/productribbon.rtl.css" rel="stylesheet" />
+            <link href="~/themes/css/smartdealcarousels/dealscarousel.rtl.css" rel="stylesheet" />
+            <link href="~/themes/css/smartcarousels/styles.rtl.css" rel="stylesheet" />
+            <link href="~/themes/css/quickview/quickview.rtl.css" rel="stylesheet" />
+            <link href="~/themes/css/smartproducttabs/producttab.rtl.css" rel="stylesheet" />
+            <link href="~/themes/css/smartmegamenu/styles.rtl.css" rel="stylesheet" />
+            <link rel="stylesheet" href="~/Themes/FreshLand/Content/css/freshLand.rtl.css">
+            <link href="~/css/siteAr.css" rel="stylesheet" />
+        }
+    }
+    <div id="fb-root"></div>
+    <link rel="stylesheet" href="~/templates/pink/styleee7d.css" />
+    <link rel="stylesheet" href="~/templates/pink/animations.css" type="text/css">
+
+      </head>
+<body>
+      <div class="header-wrapper">
+         <div class="header">
+            <div class="announcement-wrapper announcement-swiper">
+                <div class="swiper">
+                    <div class="announcement-bar swiper-wrapper">
+                        @{
+                            var announcementBar = await AnnouncementBar.GetAllAsync();
+                            var announcementBarFinal = culture.StartsWith("en") ? announcementBar?.FirstOrDefault()?.AnnouncementEn : announcementBar?.FirstOrDefault()?.AnnouncementAr;
+                        }
+                        <div class="swiper-slide">
+                            <span class="announcement-item">@announcementBarFinal</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="icon icon-close" id="announcement-close"></button>
+            </div>
+
+            <div class="header-upper">
+               <div class="header-logo">
+                   <button type="button" class="mobile-nav-toggle"> 
+                       <span class="icon icon-nav"></span> 
+                   </button>
+                    <a href="/">
+                        <img alt="Gabrini Cosmetics" src="~/images/gabrinicosmetics/gabrini-logo.png" />
+                    </a>
+               </div>
+               <div class="header-right">
+                  <div class="header-selectors-wrapper">
+                     <div class="currency-selector">
+                        <select id="customerCurrency" name="customerCurrency" onchange="setLocation(this.value)" aria-label="Currency selector">
+                                <option selected value="#">@Localizer["JOD"]</option>
+                        </select>
+                     </div>
+                     <div class="language-selector">
+                            <select id="changeLanguage" name="customerlanguage" onchange="setLocation(this.value)" aria-label="Languages selector">
+                                <option selected disabled>
+                                    @{
+                                        var cultureSelected = Thread.CurrentThread.CurrentUICulture.Name;
+                                        var localizedText = cultureSelected == "en" ? Localizer["English"] : Localizer["Arabic"];
+                                    }
+                                    @localizedText 
+                                </option>
+                                <option value="/Home/Change?culture=en">@Localizer["English"]</option>
+                                <option value="/Home/Change?culture=ar">@Localizer["Arabic"]</option>
+                        </select>
+                     </div>
+                  </div>
+                    <div class="header-links-wrapper">
+                        <div class="header-links">
+                            <ul>
+                                <li>
+                                    <a asp-controller="Wishlist" asp-action="index" class="ico-wishlist">
+                                        <span class="wishlist-label">@Localizer["Wishlist"]</span>
+                                        <span class="wishlist-qty">0</span>
+                                    </a>
+                                </li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="user-dropdown dropdown">
+                                        <a asp-controller="Account" asp-action="Login" class="ico-login">@Localizer["Login"]</a>
+                                        <ul class="login-dropdown-menu ps-0">
+                                            <li><a asp-controller="Account" asp-action="Register" class="ico-register">@Localizer["Register"]</a></li>
+                                            <li><a asp-controller="Account" asp-action="Login" class="ico-login">@Localizer["Login"]</a></li>
+                                        </ul>
+                                    </li>
+                                }
+                                else
+                                {
+                                <li class="user-dropdown dropdown">
+                                        <a asp-controller="Account" asp-action="Profile" class="ico-login">@Localizer["MyAccount"]</a>
+                                    <ul class="login-dropdown-menu ps-0">
+                                            <li><a asp-controller="Account" asp-action="Profile" class="ico-register">@Localizer["MyAccount"]</a></li>
+                                            <li><a asp-controller="Account" asp-action="Logout" class="ico-login">@Localizer["Logout"]</a></li>
+                                    </ul>
+                                </li>
+                                }
+                                <ul>
+                                    <li id="topcartlink">
+                                        <a href="#" class="ico-cart">
+                                            <span class="cart-label">@Localizer["ShoppingCart"]</span>
+                                            <span id="cartCount" class="cart-qty">0 <span>items</span></span>
+                                        </a>
+                                    </li>
+                                    @{
+                                        int end = 5;
+                                    }
+                                    
+                                </ul>
+                            </ul>
+                        </div>
+                        <div id="mobile-bottom-navigation">
+                            <ul>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="mobile-user-dropdown dropdown">
+                                        <a asp-controller="Account" asp-action="Login" class="ico-login">@Localizer["Login"]</a>
+                                        <ul class="mobile-login-dropdown-menu ps-0">
+                                            <li><a asp-controller="Account" asp-action="Register" class="ico-register">@Localizer["Register"]</a></li>
+                                            <li><a asp-controller="Account" asp-action="Login" class="ico-login">@Localizer["Login"]</a></li>
+                                        </ul>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="mobile-user-dropdown dropdown">
+                                        <a asp-controller="Account" asp-action="Profile" class="ico-login">@Localizer["MyAccount"]</a>
+                                        <ul class="mobile-login-dropdown-menu ps-0">
+                                            <li><a asp-controller="Account" asp-action="Register" class="ico-register">@Localizer["Register"]</a></li>
+                                            <li><a asp-controller="Account" asp-action="Login" class="ico-login">@Localizer["Login"]</a></li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                <li class="wishlist-item">
+                                    <a asp-controller="Wishlist" asp-action="index" class="ico-wishlist">
+                                        <span class="wishlist-label">@Localizer["Wishlist"]</span>
+                                    </a>
+                                </li>
+                                <li class="checkout-item">
+                                    <a asp-controller="Checkout" asp-action="index" class="checkout-link">
+                                        <span>@Localizer["Checkout"]</span>
+                                    </a>
+                                </li>
+                                <li class="cart-item" id="topcartlink-mobile">
+                                    <a asp-controller="Cart" asp-action="index" class="ico-cart">
+                                        <span class="cart-label">@Localizer["ShoppingCart"]</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <script>
+                            window.addEventListener("DOMContentLoaded", function () {
+                                var n = document.getElementById("mobile-bottom-navigation");
+                                document.body.appendChild(n);
+                            });
+                        </script>
+                    </div>
+               </div>
+                <div class="search-box store-search-box">
+                    <form method="get" id="small-search-box-form" asp-controller="Search" asp-action="index">
+                        <input type="text" class="search-box-text" id="small-searchterms" autocomplete="off" name="searchTerm" placeholder="@Localizer["SearchStore"]" aria-label="@Localizer["SearchStore"]">
+                        <button type="submit" class="button-1 search-box-button">@Localizer["Search"]</button>
+                    </form>
+                </div>
+            </div>
+         </div>
+        <div class="header-menu">
+            <div class="container">
+                <div class="top-menu-wrap">
+                    <div class="megamenu-left">
+                        <div class="mm-outer-wrapper grid-view">
+                            <div class="mobile-menu-trigger"><span></span></div>
+                            <div class="menu-overlay"></div>
+                            <nav class="mm-navbar navbar">
+                                <div class="mobile-menu-head">
+                                    <div class="mobile-menu-close">&times;</div>
+                                </div>
+                                <ul class="nav-menu nav-center">
+                                    <li><a href="/"> <span class="category-name">@Localizer["Home"]</span> </a>
+                                    <li><a asp-controller="Home" asp-action="AboutUs"> <span class="category-name"> @Localizer["AboutUs"]</span> </a>
+                                    <li class="has-children">
+                                        <a href="#"> <span class="category-name"> @Localizer["Categories"] </span> </a> <span class="sublist-toggle @iconClass"></span>
+                                        <ul class="sublist" style="flex-direction: column;">
+                                            <li class="parent-back-link"><span class="parent-link-name"><span class="@iconClassRes"></span> @Localizer["Categories"]</span></li>
+                                                @foreach (var item in Categories)
+                                                {
+                                                    var nameCategory = culture.StartsWith("en") ? item.NameEn : item.NameAr;
+                                                    <li class="has-children">
+                                                    <a asp-controller="Categories" asp-action="index" asp-route-id="@item.Id"> <span class="category-name">@nameCategory</span></a>
+                                                        <ul class="sublist">
+                                                            <li class="parent-back-link"><span class="parent-link-name"> <span class="@iconClassRes"></span> @nameCategory </span></li>
+                                                        </ul>
+                                                    </li>
+                                                }
+                                        </ul>
+                                    </li>
+                                    @*<li class="has-children">
+                                        <a href="#"> <span class="category-name"> @Localizer["Categories"] </span> </a>
+                                        <span class="sublist-toggle @iconClass"></span>
+                                        <ul class="sublist">
+                                            <li class="parent-back-link">
+                                                <span class="parent-link-name"> <span class="@iconClassRes"></span> @Localizer["Categories"] </span>
+                                                @inject GabriniCosmetics.Areas.Admin.Models.Interface.ICategory Category
+
+                                                @foreach (var item in await Category.GetCategories())
+                                                {
+                                                    var nameCategory = culture.StartsWith("en") ? item.NameEn : item.NameAr;
+
+                                                <li class="has-children">
+
+                                                    <a asp-controller="Categories" asp-action="index" asp-route-id="@item.Id"> <span class="category-name"> @nameCategory </span> </a> <span class="sublist-toggle @iconClass"></span>
+                                                    <ul class="sublist">
+                                                        <li class="parent-back-link"><span class="parent-link-name"> <span class="@iconClassRes"></span> @nameCategory </span></li>
+                                                    @foreach (var subCategory in item.SubCategories)
+                                                    {
+                                                            var nameSubCategory = culture.StartsWith("en") ? subCategory.NameEn : subCategory.NameAr;
+                                                            <li> <span class="category-name"> @nameSubCategory </span></li>
+                                                }
+                                                    </ul>
+                                            </li>
+                                                }
+                                        </ul>
+                                    </li>*@
+                                    <li class="has-children">
+                                        <a href="#"> <span class="category-name"> @Localizer["Products"] </span> </a> <span class="sublist-toggle @iconClass"></span>
+                                        <ul class="sublist" style="flex-direction: column;">
+                                            <li class="parent-back-link"><span class="parent-link-name"> <span class="@iconClassRes"></span> @Localizer["Products"] </span>
+                                            <li class="has-children">
+                                                <a asp-controller="Products" asp-action="NewProducts"> <span class="category-name"> @Localizer["NewProduct"]</span> </a>
+                                                <ul class="sublist">
+                                                    <li class="parent-back-link"><span class="parent-link-name"> <span class="@iconClassRes"></span> @Localizer["NewProduct"] </span></li>
+                                                </ul>
+                                            </li>
+                                            <li class="has-children">
+                                                <a asp-controller="Products" asp-action="SaleProducts"> <span class="category-name"> @Localizer["BestSaleProduct"]</span> </a>
+                                                <ul class="sublist">
+                                                    <li class="parent-back-link"><span class="parent-link-name"> <span class="@iconClassRes"></span> @Localizer["BestSaleProduct"] </span></li>
+                                                </ul>
+                                            </li>
+                                            <li class="has-children">
+                                                <a asp-controller="Products" asp-action="FeatureProducts"> <span class="category-name"> @Localizer["FeatureProducts"]</span> </a>
+                                                <ul class="sublist">
+                                                    <li class="parent-back-link"><span class="parent-link-name"> <span class="@iconClassRes"></span> @Localizer["FeatureProducts"] </span></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a asp-controller="Products" asp-action="index"> <span class="category-name"> @Localizer["AllProducts"]</span> </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a asp-controller="Contactus" asp-action="index"> <span class="category-name"> @Localizer["Contactus"]</span> </a>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="megamenu-right"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="master-wrapper-page">
+          @RenderBody()
+        <div class="shipping-types-wrapper">
+            <div class="container">
+                <div class="shipping-types row">
+                    <div class="col-md-3 col-xs-3 col-3">
+                        <div class="shipping-type">
+                            <div class="shipping-type--icon"><img src="~/images/gabrinicosmetics/support.png" alt="Picture of Support 24/7" title="Picture of Support 24/7" class="loading" data-was-processed="true"></div>
+                            <div class="shipping-type--info">
+                                <h3 class="shipping-type--title">@Localizer["Support"]</h3>
+                                <div class="shipping-type--desc">
+                                    <p>@Localizer["SupportDec"]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-3">
+                        <div class="shipping-type">
+                            <div class="shipping-type--icon"><img src="~/images/gabrinicosmetics/daysreturn.png" alt="Picture of 30 Days Return" title="Picture of 30 Days Return" class="loading" data-was-processed="true"></div>
+                            <div class="shipping-type--info">
+                                <h3 class="shipping-type--title">@Localizer["ReturnPolicy"]</h3>
+                                <div class="shipping-type--desc">
+                                    <p>@Localizer["ReturnPolicyDec"]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-3">
+                        <div class="shipping-type">
+                            <div class="shipping-type--icon"><img src="~/images/gabrinicosmetics/localdelivery.png" alt="Picture of Global Shipping" title="Picture of Global Shipping" class="loading" data-was-processed="true"></div>
+                            <div class="shipping-type--info">
+                                <h3 class="shipping-type--title">@Localizer["LocalDelivery"]</h3>
+                                <div class="shipping-type--desc">
+                                    <p>@Localizer["LocalDeliveryDec"]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-3">
+                        <div class="shipping-type">
+                            <div class="shipping-type--icon"><img src="~/images/gabrinicosmetics/fastdelivery.png" alt="Picture of Free Delivery" title="Picture of Free Delivery" class="loading" data-was-processed="true"></div>
+                            <div class="shipping-type--info">
+                                <h3 class="shipping-type--title">@Localizer["FastDelivery"]</h3>
+                                <div class="shipping-type--desc">
+                                    <p>@Localizer["FastDeliveryDec"]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="newsletter">
+                <div class="newsletter-container" style="background:url(/images/gabrinicosmetics/slider-email.png)">
+                    <div class="title">@Localizer["newsletter"]</div>
+                    <div class="sub-title">@Localizer["newsletter2"]</div>
+                    <div class="newsletter-subscribe" id="newsletter-subscribe-block">
+                        <div class="newsletter-email">
+                            <input id="newsletter-email" class="newsletter-subscribe-text" placeholder="@Localizer["EnterEmail"]" aria-label="Sign up for our newsletter" type="email" name="NewsletterEmail"> 
+                            <button type="button" id="newsletter-subscribe-button" class="button-1 newsletter-subscribe-button">@Localizer["Subscribe"]</button>
+                        </div>
+                        <div class="newsletter-validation"><span id="subscribe-loading-progress" style="display:none" class="please-wait">Wait...</span> <span class="field-validation-valid" data-valmsg-for="NewsletterEmail" data-valmsg-replace="true"></span></div>
+                    </div>
+                  <div class="newsletter-result" id="newsletter-result-block"></div>
+               </div>
+            </div>
+            <div class="footer-bg">
+               <div class="footer-bg-inner">
+                  <div class="footer-upper">
+                     <div class="footer-block follow-us">
+                        <div class="address-info">
+                                <div class="title"><strong>@Localizer["Contactus"]</strong></div>
+                           <div class="contact-us-details">
+                                    <p>@Localizer["desc01"] @Localizer["desc02"]</p>
+                              <div>&nbsp;</div>
+                                        <div style="line-height:1.5">@Localizer["Email"] : support@gabrinijo.com</div>
+                                        <div style="line-height:1.5">@Localizer["Phone"] : +962-79-619-46-30</div>
+                           </div>
+                        </div>
+                        <div class="social">
+                                <div class="title"><strong>@Localizer["Followus"]</strong></div>
+                           <ul class="networks">
+                                    <li class="facebook">
+                                        <a href="https://www.facebook.com/gabrinijo/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-square-facebook"></i></a>
+                                    <li class="instagram"><a href="https://www.instagram.com/gabrinijo" target="_blank" rel="noopener noreferrer">Instagram</a>
+                                    <li class="whatsapp"><a onclick="window.open('https://wa.me/962796194630', '_blank')" target="_blank" rel="noopener noreferrer">whatsApp</a>
+                           </ul>
+                        </div>
+                            <div class="scroll-top-left socil-links">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 512 512"><path fill="#cc0000" d="M256 48C141.1 48 48 141.1 48 256l0 40c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-40C0 114.6 114.6 0 256 0S512 114.6 512 256l0 144.1c0 48.6-39.4 88-88.1 88L313.6 488c-8.3 14.3-23.8 24-41.6 24l-32 0c-26.5 0-48-21.5-48-48s21.5-48 48-48l32 0c17.8 0 33.3 9.7 41.6 24l110.4 .1c22.1 0 40-17.9 40-40L464 256c0-114.9-93.1-208-208-208zM144 208l16 0c17.7 0 32 14.3 32 32l0 112c0 17.7-14.3 32-32 32l-16 0c-35.3 0-64-28.7-64-64l0-48c0-35.3 28.7-64 64-64zm224 0c35.3 0 64 28.7 64 64l0 48c0 35.3-28.7 64-64 64l-16 0c-17.7 0-32-14.3-32-32l0-112c0-17.7 14.3-32 32-32l16 0z" /></svg>
+                            </div>
+                            <div class="TalkToUs" style="display: none;">
+                                <ul class="networks">                                    
+                                    @foreach (var item in socialmedia)
+                                    {
+                                        <li id="socialMediaLink">
+                                            <a href="@item.Url">
+                                                <img src="~/uploads/@item.Image"
+                                                     style="border-radius: 40px;
+                                                    height: 40px;
+                                                    width: 40px;
+                                                    object-fit: cover;">
+                                            </a>
+                                        </li>
+                                        end += 45;
+                                    }                                    
+                                </ul>
+                                
+                            </div>
+                     </div>
+                     <div class="footer-block information">
+                            <div class="title plus"><strong>@Localizer["Information"]</strong></div>
+                        <ul class="list">
+                                <li><a asp-controller="Home" asp-action="DeliveryReturns"> @Localizer["DeliveryReturns"] </a>
+                                <li><a asp-controller="Home" asp-action="Privacypolicy">@Localizer["PrivacyPolicy"]</a>
+                                <li><a asp-controller="Home" asp-action="ConditionsofUse">@Localizer["ConditionsOfUse"]</a>
+                                <li><a asp-controller="Home" asp-action="AboutUs">@Localizer["AboutUs"]</a>
+                                <li><a asp-controller="Contactus" asp-action="index">@Localizer["Contactus"]</a>
+                                <li><a asp-controller="Qrcode" asp-action="index">@Localizer["Qr Code"]</a>
+                        </ul>
+                     </div>
+                     <div class="footer-block customer-service">
+                            <div class="title plus"><strong>@Localizer["Products"]</strong></div>
+                        <ul class="list">
+                                <li><a asp-controller="Products" asp-action="NewProducts">@Localizer["NewProduct"]</a>
+                                <li><a asp-controller="Products" asp-action="SaleProducts">@Localizer["BestSaleProduct"]</a>
+                                <li><a asp-controller="Products" asp-action="FeatureProducts">@Localizer["FeatureProducts"]</a>
+                                <li><a asp-controller="Products" asp-action="index">@Localizer["AllProducts"]</a>
+                        </ul>
+                     </div>
+                     <div class="footer-block my-account">
+                            <div class="title plus"><strong>@Localizer["MyAccount"]</strong></div>
+                        <ul class="list">
+                                <li><a asp-controller="Account" asp-action="Profile">@Localizer["MyAccount"]</a>
+                                <li><a asp-controller="Order">@Localizer["Orders"]</a>
+                                <li><a asp-controller="Address">@Localizer["Addresses"]</a>
+                                <li><a asp-controller="Cart">@Localizer["ShoppingCart"]</a>
+                                <li><a asp-controller="Wishlist">@Localizer["Wishlist"]</a>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="footer-logo-bg">
+               <div class="footer-logo-container">
+                    <div class="footer-logo-container-res">
+                        <img src="~/images/gabrinicosmetics/gabrini-logo.png" alt="Logo of Gabrini Cosmetics" title="Logo of Gabrini Cosmetics" class="footer-logo">
+                        <div>@Localizer["Company"]</div>
+               </div>
+                    <div class="footer-cards">
+                        <div class="footer-info"><img src="~/images/gabrinicosmetics/card-icon.png" alt="Supported cards" title="Supported cards"></div>
+                  </div>
+               </div>
+            </div>
+            <div class="footer-lower-bg">
+               <div class="footer-lower">
+                    <div class="footer-info"><span class="footer-disclaimer">@Localizer["Copyright"]</span></div>
+                    <div class="footer-powered-by">Powered by <a class="Majestic-lin" href="http://majesticagency.net/" target="_blank" rel="nofollow"><strong>Majestic Agency</strong></a></div>
+               </div>
+            </div>
+         </div>
+      </div>
+    <div class="modal-overlay"></div>
+
+    @await Component.InvokeAsync("SmallCart")
+
+    <script>
+        document.querySelector('.ico-cart').addEventListener('click', function (event) {
+            event.preventDefault();
+            document.getElementById('flyout-cart').classList.toggle('active');
+            document.querySelector('.modal-overlay').classList.toggle('active');
+        });
+
+        document.querySelector('.close-cart').addEventListener('click', function () {
+            document.getElementById('flyout-cart').classList.remove('active');
+            document.querySelector('.modal-overlay').classList.remove('active');
+        });
+
+        document.querySelector('.modal-overlay').addEventListener('click', function () {
+            document.getElementById('flyout-cart').classList.remove('active');
+            document.querySelector('.modal-overlay').classList.remove('active');
+        });
+    </script>
+    <script>
+            document.querySelector('.scroll-top-left').addEventListener('click', function () {
+                var talkToUsDiv = document.querySelector('.TalkToUs');
+                if (talkToUsDiv.style.display === 'none' || talkToUsDiv.style.display === '') {
+                    talkToUsDiv.style.display = 'block';
+                } else {
+                    talkToUsDiv.style.display = 'none';
+                }
+            });
+        loadCartCount();
+        async function loadCartCount() {
+            try {
+                var response = await fetch(`/Cart/GetTotalItemInCart`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result + " @Localizer["items"]";
+                }
+            }
+            catch (err) {
+            }
+        }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select all minus and plus buttons and quantity inputs
+            const minusButtons = document.querySelectorAll('.qty-minus');
+            const plusButtons = document.querySelectorAll('.qty-plus');
+
+            // Function to handle updating quantity
+            function updateQuantity(button, delta) {
+                const input = button.closest('.qty-input-wrap').querySelector('.qty-input');
+                let currentValue = parseInt(input.value, 10);
+
+                if (!isNaN(currentValue)) {
+                    const newValue = currentValue + delta;
+                    input.value = newValue > 0 ? newValue : 1; // Ensure value is at least 1
+                }
+            }
+
+            // Add event listeners to all minus buttons
+            minusButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    updateQuantity(button, -1);
+                });
+            });
+
+            // Add event listeners to all plus buttons
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    updateQuantity(button, 1);
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#announcement-close').on('click', function () {
+                $('.announcement-swiper').css('display', 'none');
+            });
+
+            $(".footer-block .title").click(function () {
+                $(this).toggleClass("plus minus");
+                $(this).siblings(".list").css("display", function (i, display) {
+                    return display === 'none' ? 'block' : 'none';
+                }).css("display", "block !important");
+            });
+        });
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js" defer></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" defer></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" defer></script>
+    <script src="~/lib_npm/jquery-ui-dist/jquery-ui.min.js" defer></script>
+
+    <script src="~/themes/js/public.advancecart.js" defer></script>
+    <script src="~/themes/js/cloud-zoom.js" defer></script>
+    <script src="~/themes/js/jquery.imagesloaded.js" defer></script>
+    <script src="~/themes/js/quickview.js" defer></script>
+    <script src="~/themes/js/jquery.fullscreen-popup.min.js" defer></script>
+    <script src="~/themes/js/jquery.magnific-popup.min.js" defer></script>
+    <script src="~/themes/js/nopstation.carousel.js" defer></script>
+    <script src="~/themes/js/jquery.countdown.min.js" defer></script>
+    <script src="~/themes/js/smartdealcarousels/nopstation.carousel.js" defer></script>
+    <script src="~/themes/js/smartmegamenu.js" defer></script>
+    <script src="~/themes/js/producttab.js" defer></script>
+    <script src="~/themes/js/nopstation.smartslider.js" defer></script>
+    <script src="~/themes/js/swiper-bundle.min.js" defer></script>
+    <script src="~/themes/js/public.commond.js" defer></script>
+    <script src="~/themes/js/animate.js" defer></script>
+
+
+    <script src="~/lib_npm/jquery-ui-dist/jquery-ui.min.js" defer></script>
+    <script src="~/admin/js/jquery.ui.min.js" defer></script>
+
+    <div id="loading-overlay">
+        <div class="loading-content">
+            <img src="~/images/GabriniCosmetics/Gabrini-Icone.png" alt="Loading..." />
+            <p>Loading, please wait...</p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $(document).ajaxStart(function () {
+                $("#loading-overlay").fadeIn();
+            });
+            
+            $(document).ajaxStop(function () {
+                $("#loading-overlay").fadeOut();
+            });
+
+            $("form").on("submit", function (event) {
+                var form = $(this);
+                
+                setTimeout(function () {
+                    var hasErrors = $(".validation-summary-errors:visible").length > 0 || $(".field-validation-error:visible").length > 0;
+                    
+                    if (hasErrors) {
+                        $("#loading-overlay").fadeOut(); 
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // $("#loading-overlay").fadeIn();
+                    $("#loading-overlay").fadeOut();
+                }, 50);
+            });
+            $("#loading-overlay").fadeOut();
+        });
+    </script>
+</body>
+      </html>

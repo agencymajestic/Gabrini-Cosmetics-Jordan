@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@model GabriniCosmetics.Models.ViewModel.OrderVM
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+<style>
+    .master-column-wrapper {
+        display: flex;
+        margin-top: 15px;
+    }
+</style>
+<div class="master-wrapper-content">
+    <div class="master-column-wrapper">
+        @Html.Partial("_Sidebar")
+        <div class="center-2">
+            <div class="page account-page order-list-page">
+                <div class="page-title">
+                    <h1>@Localizer["MyAccount"] - @Localizer["Orders"]</h1>
+                </div>
+                <div class="page-body">
+                    <div class="order-list">
+                        @foreach (var order in Model.Orders)
+                        {
+                            <div class="section order-item">
+                                <div class="title"><strong>@Localizer["OrderNumber"]: @order.ID</strong></div>
+                                <ul class="info fieldset">
+                                    <li>@Localizer["OrderStatus"]: <span class="order-status pending">@order.OrderStatus</span></li>
+                                    <li class="d-flex" style="gap:4px">
+                                        @Localizer["OrderDate"]:
+
+                                        @{
+                                            string timestampString = order.Timestamp;
+                                            string formattedDate = "";
+                                            string formattedTime = "";
+
+                                            DateTime timestamp;
+                                            if (DateTime.TryParseExact(timestampString, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out timestamp))
+                                            {
+                                                DateTime dateOnly = timestamp.Date;
+                                                formattedDate = dateOnly.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo(culture));
+                                                formattedTime = timestamp.ToString("h:mm:ss tt", CultureInfo.GetCultureInfo(culture));
+                                            }
+
+                                        }
+
+                                        <span class="order-date">@formattedDate @formattedTime </span>
+                                    </li>
+                                    @{
+                                        double subtotal = 0;
+                                        foreach (var orderItem in Model.OrderItems.Where(orderItem => orderItem.OrderID == order.ID))
+                                        {
+                                            subtotal += orderItem.Quantity * orderItem.Subproduct.Product.Price;
+                                        }
+                                    }
+                                    @{
+                                        double finalTotal = subtotal;
+                                    }
+                                    @{
+                                        var orderItem1 = Model.OrderItems.Where(orderItem => orderItem.OrderID == order.ID).FirstOrDefault();
+                                        var totalPrice = orderItem1?.TotalPrice;
+                                    }
+
+                                    @if (totalPrice != null)
+                                    {
+                                        <li>@Localizer["OrderTotal"]: <span class="order-total">@totalPrice @Localizer["JOD"]</span></li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Localizer["OrderTotal"]: <span class="order-total">@finalTotal.ToString("F") @Localizer["JOD"]</span></li>
+                                    }
+                                </ul>
+                                <div class="buttons">
+                                    <input type="button" value="@Localizer["Details"]" class="button-2 order-details-button" onclick="location.href='/order/detail?id=@order.ID'">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

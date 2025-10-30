@@ -1,0 +1,107 @@
+﻿@model GabriniCosmetics.Models.Identity.RegisterViewModel
+
+<div class="master-column-wrapper">
+    <div class="center-1">
+        <div class="page registration-page">
+            <div class="page-title">
+                <h1>@Localizer["Register"]</h1>
+            </div>
+            <div class="page-body page-body-responsive">
+                <form asp-action="Register" method="post" autocomplete="off" novalidate="novalidate">
+                    <div class="alert alert-danger" role="alert" asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="fieldset">
+                        <div class="title personal-details"><strong>@Localizer["PersonalDetails"]</strong></div>
+                        <div class="form-fields">
+                            <div class="inputs gender-container">
+                                <label for="Gender">@Localizer["Gender"]:</label>
+                                <span class="required">*</span>
+                                <div id="Gender" class="gender">
+                                    <span class="male">
+                                        <input type="radio" asp-for="Gender" value="M" id="gender-male">
+                                        <label class="forcheckbox" for="gender-male">@Localizer["Male"]</label>
+                                    </span>
+                                    <span class="female">
+                                        <input type="radio" asp-for="Gender" value="F" id="gender-female">
+                                        <label class="forcheckbox" for="gender-female">@Localizer["Female"]</label>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="inputs half-width">
+                                <label for="FirstName">@Localizer["FirstName"]:</label>
+                                <input asp-for="FirstName" />
+                                <span class="required">*</span>
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="inputs half-width">
+                                <label for="LastName">@Localizer["LastName"]:</label>
+                                <input asp-for="LastName" />
+                                <span class="required">*</span>
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="inputs date-of-birth">
+                                <label>@Localizer["Dateofbirth"]:</label>
+                                <div class="date-picker-wrapper">
+                                    <select asp-for="DateOfBirthDay">
+                                        <option value="0">@Localizer["Day"]</option>
+                                        @for (int i = 1; i <= 31; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <select asp-for="DateOfBirthMonth">
+                                        <option value="0">@Localizer["Month"]</option>
+                                        @for (int i = 1; i <= 12; i++)
+                                        {
+                                            <option value="@i">@System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(i)</option>
+                                        }
+                                    </select>
+                                    <select asp-for="DateOfBirthYear">
+                                        <option value="0">@Localizer["Year"]</option>
+                                        @for (int i = 1900; i <= DateTime.Now.Year; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                </div>
+                                <span asp-validation-for="DateOfBirthDay" class="text-danger"></span>
+                                <span asp-validation-for="DateOfBirthMonth" class="text-danger"></span>
+                                <span asp-validation-for="DateOfBirthYear" class="text-danger"></span>
+                            </div>
+                            <div class="inputs">
+                                <label for="Email">@Localizer["Email"]:</label>
+                                <input asp-for="Email" />
+                                <span class="required">*</span>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fieldset">
+                        <div class="title password"><strong>@Localizer["YourPassword"]</strong></div>
+                        <div class="form-fields">
+                            <div class="inputs half-width">
+                                <label for="Password">@Localizer["Password"]:</label>
+                                <input asp-for="Password" type="password" />
+                                <span class="required">*</span>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="inputs half-width">
+                                <label for="ConfirmPassword">@Localizer["ConfirmPassword"]:</label>
+                                <input asp-for="ConfirmPassword" type="password" />
+                                <span class="required">*</span>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" name="register-button" id="register-button" class="button-1 register-next-step-button">@Localizer["Register"]</button>
+                    </div>
+                </form>
+                <div class="external-authentication"></div>
+            </div>
+        </div>
+    </div>
+</div>

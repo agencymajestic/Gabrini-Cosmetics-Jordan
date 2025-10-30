@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ActiveDebugProfile>https</ActiveDebugProfile>
+    <Controller_SelectedScaffolderID>MvcControllerEmptyScaffolder</Controller_SelectedScaffolderID>
+    <Controller_SelectedScaffolderCategoryPath>root/Common/MVC/Controller</Controller_SelectedScaffolderCategoryPath>
+    <View_SelectedScaffolderID>RazorViewEmptyScaffolder</View_SelectedScaffolderID>
+    <View_SelectedScaffolderCategoryPath>root/Common/MVC/View</View_SelectedScaffolderCategoryPath>
+    <_SelectedScaffolderID>AreaScaffolder</_SelectedScaffolderID>
+    <_SelectedScaffolderCategoryPath>root/Common</_SelectedScaffolderCategoryPath>
+    <WebStackScaffolding_DependencyDialogWidth>650</WebStackScaffolding_DependencyDialogWidth>
+    <WebStackScaffolding_EnablerDialogWidth>650</WebStackScaffolding_EnablerDialogWidth>
+    <NameOfLastUsedPublishProfile>C:\Users\mtbakhi\Downloads\GabriniCosmetics\Properties\PublishProfiles\FolderProfile2.pubxml</NameOfLastUsedPublishProfile>
+    <WebStackScaffolding_ViewDialogWidth>650</WebStackScaffolding_ViewDialogWidth>
+    <WebStackScaffolding_LayoutPageFile>~/Areas/Admin/Views/Shared/_Layout.cshtml</WebStackScaffolding_LayoutPageFile>
+    <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
+    <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
+    <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
+    <WebStackScaffolding_DbContextTypeFullName>GabriniCosmetics.Data.GabriniCosmeticsContext</WebStackScaffolding_DbContextTypeFullName>
+    <WebStackScaffolding_ControllerDialogWidth>650</WebStackScaffolding_ControllerDialogWidth>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Views\Address\Create.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Address\Create.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Cart\index.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Checkout\index.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Checkout\index.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\AboutUs.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\ConditionsofUse.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\PrivacyPolicy.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Products\Detail.ar.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Shared\Components\SmallCart\Default.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

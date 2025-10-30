@@ -1,0 +1,1070 @@
+﻿@using System.Globalization
+@model GabriniCosmetics.Models.ViewModel.CheckoutVM
+
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    string[] states = new string[]
+    {
+        "Amman",
+        "Irbid",
+        "Zarqa",
+        "Jerash",
+        "Ma_an",
+        "Al_Salt",
+        "Ajloun",
+        "Aqaba",
+        "Tafilah",
+        "Madaba",
+        "Mafraq",
+        "Karak",
+    };
+}
+
+<style>
+    .hidden-default {
+        display: none;
+    }
+
+    /* For Firefox */
+    select option[hidden] {
+        display: none;
+    }
+
+    table.cart {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        table.cart th,
+        table.cart td {
+            white-space: nowrap;
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px;
+        }
+
+        table.cart th {
+            background-color: #f8f8f8;
+        }
+
+        table.cart .product-picture img {
+            max-width: 60px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        table.cart .product,
+        table.cart .sku,
+        table.cart .unit-price,
+        table.cart .quantity,
+        table.cart .subtotal {
+            text-align: center;
+        }
+
+    .td-title {
+        display: block;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="master-wrapper-page">
+    <div class="master-wrapper-content">
+        <div class="master-column-wrapper">
+            <div class="center-1">
+                <div class="page checkout-page spc">
+                    <div class="page-title">
+                        <h1>@Localizer["Checkout"]</h1>
+                    </div>
+                    <div class="page-body checkout-data" id="opc">
+                        <form asp-controller="Checkout" asp-action="index" method="post" id="opc-billing-form">
+                            <div class="opc" id="checkout-steps">
+                                <div class="spc-row">
+                                    <div class="spc-collumn left">
+                                        <div class="spc-billing" style="display:block">
+                                            <div class="step-title accordion-title minus">
+                                                <h2 class="title">@Localizer["BillingAddress"]</h2>
+                                            </div>
+                                            <div id="checkout-step-billing" style="display:block" class="step a-item accordion">
+                                                <input type="hidden" data-val="true" asp-for="Order.Timestamp" value="@DateTime.Now.ToString(new CultureInfo("en-US")).ToString()">
+                                                <input type="hidden" data-val="true" asp-for="Order.OrderStatus" value="Pending">
+                                                <input type="hidden" data-val="true" asp-for="Order.PaymentStstus" value="UnPaid">
+                                                <input type="hidden" data-val="true" asp-for="Order.PaymentMethod" value="Cash on delivery">
+
+                                                <div id="checkout-billing-load">
+                                                    <div class="checkout-data">
+                                                        <div class="section select-billing-address">
+                                                            <label for="billing-address-select">@Localizer["SelectAddress"]</label>
+                                                            <div>
+                                                                <select id="billing-address-select" class="address-select" asp-for="Order.FullLocation">
+                                                                    <option value="1000000000" selected class="hidden-default">@Localizer["SelectNewAddress"]</option>
+                                                                    <option value="0" data-email="">@Localizer["NewAddress"]</option>
+                                                                    @if (Model != null && Model.Addresses != null)
+                                                                    {
+                                                                        foreach (var item in Model.Addresses)
+                                                                        {
+                                                                            <option value="@item.Id" data-email="@item.Email" data-phone="@item.PhoneNumber" data-name="@item.FirstName @item.LastName" data-city="@item.City" data-address="@item.Address1">@item.FirstName @item.LastName, @item.City , @item.Address1</option>
+                                                                        }
+                                                                    }
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="section new-billing-address" id="billing-new-address-form" style="display: none;">
+                                                            <div class="enter-address">
+                                                                <div class="edit-address">
+                                                                    <div class="inputs">
+                                                                        <label for="BillingNewAddress_FirstName">@Localizer["FirstName"]:</label>
+                                                                        <input id="firstNameInput" asp-for="Order.FirstName" placeholder="@Localizer["FirstName"]" type="text">
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs">
+                                                                        <label for="BillingNewAddress_LastName">@Localizer["LastName"]:</label>
+                                                                        <input id="lastNameInput" asp-for="Order.LastName" placeholder="@Localizer["LastName"]" type="text">
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs address-input">
+                                                                        <label for="BillingNewAddress_Email">@Localizer["Email"]:</label>
+                                                                        <input id="emailInput" asp-for="Order.Email" placeholder="@Localizer["Email"]" type="email">
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs">
+                                                                        <label for="BillingNewAddress_CountryId">Country:</label>
+                                                                        <select id="BillingNewAddress_CountryId" asp-for="Order.Country">
+                                                                            <option value="Jordan">@Localizer["Jordan"]</option>
+                                                                        </select>
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs">
+                                                                        <label for="BillingNewAddress_StateProvinceId">State / province:</label>
+                                                                        <select data-trigger="state-select" id="StateProvinceId" asp-for="Order.City">
+                                                                            <option selected disabled value="0">@Localizer["SelectState"]</option>
+                                                                            @foreach (string state in states)
+                                                                            {
+                                                                                <!option data-tax=2 value="@state">
+                                                                                @Localizer[state]
+                                                                                </!option>
+                                                                            }
+                                                                        </select>
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs">
+                                                                        <label for="BillingNewAddress_PhoneNumber">@Localizer["PhoneNumber"]:</label>
+                                                                        <input id="phoneInput" asp-for="Order.Phone" placeholder="@Localizer["PhoneNumber"]" type="tel">
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs">
+                                                                        <label for="BillingNewAddress_FaxNumber">@Localizer["FaxNumber"]:</label>
+                                                                        <input asp-for="Order.Fax" placeholder="@Localizer["FaxNumber"]" type="text" id="BillingNewAddress_FaxNumber">
+                                                                    </div>
+
+                                                                    <div class="inputs address-input">
+                                                                        <label for="BillingNewAddress_Address1">@Localizer["Address1"]:</label>
+                                                                        <input id="addressInput" asp-for="Order.Address" placeholder="@Localizer["Address1"]" type="text">
+                                                                        <span class="required">*</span>
+                                                                    </div>
+
+                                                                    <div class="inputs address-input">
+                                                                        <label for="BillingNewAddress_Address2">@Localizer["Address2"]:</label>
+                                                                        <input asp-for="Order.Address2" placeholder="@Localizer["Address2"]" type="text" id="BillingNewAddress_Address2">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="spc-estimate-shipping"></div>
+                                    </div>
+                                    <div class="spc-collumn right">
+                                        <div class="checkout-method-wrapper">
+                                            <div class="spc-shipping-method" id="checkout-step-shipping-method">
+                                                <div id="checkout-shipping-method-load">
+                                                    <div class="step-title accordion-title minus">
+                                                        <h2 class="title">@Localizer["PaymentMethod"]</h2>
+                                                    </div>
+                                                    <div class="step a-item accordion" style="display:block">
+                                                        <div class="checkout-data">
+                                                            <div class="section shipping-method">
+                                                                <ul class="method-list">
+                                                                    <li>
+                                                                        <div class="method-name">
+                                                                            <input id="shippingoption_0" type="radio" name="shippingoption" value="Cash on delivery" checked="checked"> <label for="shippingoption_0">@Localizer["COD"]</label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="method-name">
+                                                                            <input id="shippingoption_1" type="radio" name="shippingoption" value="Credit card" disabled> <label for="shippingoption_1">@Localizer["CC"]</label>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="spc-payment-method">
+                                                <div id="checkout-payment-method-load"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spc-row-bottom">
+                                    <div class="step-title">
+                                        <h2 class="title">@Localizer["ConfirmOrder"]</h2>
+                                    </div>
+                                    <div id="checkout-step-confirm-order" class="step a-item">
+                                        <div class="order-summary-content">
+                                            <div class="order-review-wrapper order-details-area">
+                                                <div class="order-review">
+                                                    <div class="order-review-data">
+                                                        <div class="billing-info-wrap">
+                                                            <div id="billing-info" class="billing-info" style="display : none">
+                                                                <div class="title"><strong>@Localizer["BillingAddress"]</strong></div>
+                                                                <ul class="info-list">
+                                                                    <li class="username">
+                                                                        <span id="nameDisplay"></span>
+                                                                    </li>
+                                                                    <li class="phone">
+                                                                        <span id="phoneDisplay">
+                                                                            @*                                                                             @Localizer["Phone"]:
+                                                                            @if (Model?.Addresses != null && Model.Addresses.Count > 0)
+                                                                            {
+                                                                                @Model.Addresses[0].PhoneNumber
+                                                                            } *@
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="email">
+                                                                        <span id="emailDisplay">
+                                                                            @*  @Localizer["Email"]:
+                                                                            @if (Model?.Addresses != null && Model.Addresses.Count > 0)
+                                                                            {
+                                                                                @Model.Addresses[0].Email
+                                                                            } *@
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="City">
+                                                                        <span id="cityDisplay">
+                                                                            @*  @Localizer["Email"]:
+                                                                            @if (Model?.Addresses != null && Model.Addresses.Count > 0)
+                                                                            {
+                                                                                @Model.Addresses[0].Email
+                                                                            } *@
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="address">
+                                                                        <span id="addressDisplay">
+                                                                            @*  @Localizer["Email"]:
+                                                                            @if (Model?.Addresses != null && Model.Addresses.Count > 0)
+                                                                            {
+                                                                                @Model.Addresses[0].Email
+                                                                            } *@
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="payment-method-info">
+                                                                <div class="title"><strong>@Localizer["Payment"]</strong></div>
+                                                                <ul class="info-list">
+                                                                    <li class="payment-method"><span class="label"> @Localizer["PaymentMethod"]: </span> <span class="value"> @Localizer["COD"] </span></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="shopping-cart-items-wrapper">
+                                                <div id="shopping-cart-items">
+                                                    <div class="table-wrapper">
+                                                        <table id="carttabe" class="cart jsmartable jsmatable-initialized">
+                                                            @*  <colgroup>
+                                                                <col class="sku" width="1">
+                                                                <col class="product-picture" width="1">
+                                                                <col class="product">
+                                                                <col class="unit-price" width="1">
+                                                                <col width="1" class="quantity">
+                                                                <col width="1" class="subtotal">
+                                                            </colgroup> *@
+                                                            <colgroup>
+                                                                <col class="sku">
+                                                                <col class="product-picture">
+                                                                <col class="product">
+                                                                <col class="product">
+                                                                <col class="unit-price">
+                                                                <col class="quantity">
+                                                                <col class="subtotal">
+                                                            </colgroup>
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="text-align:center !important" data-breakpoint="md" class="sku">@Localizer["Category"] </th>
+                                                                    <th style="text-align:center !important" class="product-picture">@Localizer["Image"]</th>
+                                                                    <th style="text-align:center !important" data-breakpoint="sm" class="product">@Localizer["Products"]</th>
+                                                                    <th style="text-align:center !important" data-breakpoint="sm" class="product">@Localizer["Subproduct"]</th>
+                                                                    <th style="text-align:center !important" data-breakpoint="md" class="unit-price">@Localizer["Price"]</th>
+                                                                    <th style="text-align:center !important" class="quantity">@Localizer["Quantity"]</th>
+                                                                    <th style="text-align:center !important" class="subtotal">@Localizer["Total"]</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var item in Model.ShoppingCart.CartDetails)
+                                                                {
+                                                                    double? total = 0;
+                                                                    bool hasSaleFlag = false;
+
+                                                                    foreach (var flag in item.Subproduct.Product.Flags)
+                                                                    {
+                                                                        if (flag.FlagType == "Sale")
+                                                                        {
+                                                                            hasSaleFlag = true;
+                                                                            break;
+                                                                        }
+                                                                    }
+
+                                                                    if (hasSaleFlag)
+                                                                    {
+                                                                        total += item.Subproduct.Product.PriceAfterDiscount * item.Quantity;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        total += item.Subproduct.Product.Price * item.Quantity;
+                                                                    }
+                                                                    var name = culture.StartsWith("en") ? item.Subproduct.Product.NameEn : item.Subproduct.Product.NameAr;
+                                                                    var subproductName = culture.StartsWith("en") ? item.Subproduct.DescriptionEn : item.Subproduct.DescriptionAr;
+                                                                    var nameCategory = culture.StartsWith("en") ? item.Subproduct.Product.Subcategory.Category.NameEn : item.Subproduct.Product.Subcategory.Category.NameAr;
+
+                                                                    <tr>
+                                                                        <td style="text-align:center !important" class="sku"><label class="td-title">@Localizer["Category"]:</label> <span class="sku-number">@nameCategory</span></td>
+                                                                        <td style="text-align:center !important" class="product-picture"><a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Subproduct.Product.Id"><img alt="@Localizer["PictureOf"] @name" src="~/uploads/@item.Subproduct.Image.ImagePath" title="@Localizer["ShowDetailsFor"] @name"></a></td>
+                                                                        <td style="text-align:center !important" class="product">
+                                                                            <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Subproduct.Product.Id" class="product-name">@name</a>
+                                                                        </td>
+                                                                        <td style="text-align:center !important" class="product">
+                                                                            <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Subproduct.Product.Id" class="product-name">@subproductName</a>
+                                                                        </td>
+                                                                        <td style="text-align:center !important" class="unit-price">
+                                                                            <label class="td-title">@Localizer["Price"]:</label>
+                                                                            @if (item.Subproduct.Product.Flags.Any(f => f.FlagType == "Sale"))
+                                                                            {
+                                                                                <span class="product-unit-price">@item.Subproduct.Product.PriceAfterDiscount @Localizer["JOD"]</span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span class="product-unit-price">@item.Subproduct.Product.Price @Localizer["JOD"]</span>
+                                                                            }
+
+                                                                        </td>
+                                                                        <td style="text-align:center !important" class="quantity"><label class="td-title">@Localizer["Quantity"].:</label> <span class="product-quantity">@item.Quantity</span></td>
+                                                                        <td style="text-align:center !important" class="subtotal"><label class="td-title">@Localizer["Total"]:</label> <span class="product-subtotal">@String.Format("{0:F2}", total) @Localizer["JOD"]</span></td>
+                                                                    </tr>
+                                                                }
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cart-footer row">
+                                                <div class="cart-options">
+                                                    <div class="cart-collaterals">
+                                                        <div class="deals">
+                                                            <div id="discount-box">
+                                                                <div class="coupon-box">
+                                                                    <div class="title"><strong>Discount Code</strong></div>
+                                                                    <div class="coupon-code">
+                                                                        <input placeholder="Enter your coupon here" asp-for="DiscountCode" id="discountcouponcode" type="text" class="discount-coupon-code" aria-label="Enter discount coupon code">
+                                                                        <button type="button" name="applydiscountcouponcode" id="applydiscountcouponcode" class="button-2 apply-discount-coupon-code-button">Apply coupon</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="checkout-totals">
+                                                    <div class="totals">
+                                                        <div class="totals">
+                                                            <div class="opc-order-total-wrapper">
+                                                                <div class="order-total-custom" id="order-total-custom">
+                                                                    <div class="total-info">
+                                                                        <table class="cart-total">
+                                                                            <tbody>
+                                                                                <tr class="order-subtotal">
+                                                                                    <td class="cart-total-left">
+                                                                                        <label>@Localizer["SubTotal"]:</label>
+                                                                                    </td>
+                                                                                    <td class="cart-total-right">
+                                                                                        <span class="value-summary" id="subtotal-amount">
+                                                                                            @(
+                                                                                                                                                                                        String.Format("{0:F2}", Model.ShoppingCart.CartDetails
+                                                                                                                                                                                        .Select(item => item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale")
+                                                                                                                                                                                        ? item.Subproduct.Product.PriceAfterDiscount * item.Quantity
+                                                                                                                                                                                        : item.Subproduct.Product.Price * item.Quantity)
+                                                                                                                                                                                        .Sum())
+
+                                                                                                                                                                                        )
+                                                                                            @Localizer["JOD"]
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="delivery-value" id="trpriceAfterDiscount" style="display : none">
+                                                                                    <td class="cart-total-left">
+                                                                                        <label>@Localizer["priceAfterDiscount"]:</label>
+                                                                                    </td>
+                                                                                    <td class="cart-total-right">
+                                                                                        <span class="value-summary" id="priceAfterDiscount">0.00 @Localizer["JOD"]</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="delivery-value">
+                                                                                    <td class="cart-total-left">
+                                                                                        <label>@Localizer["DeliveryTax"]:</label>
+                                                                                    </td>
+                                                                                    <td class="cart-total-right">
+                                                                                        <span class="value-summary" id="delivery-amount">0.00 @Localizer["JOD"]</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="tax-value">
+                                                                                    <td class="cart-total-left">
+                                                                                        <label>@Localizer["Tax"]:</label>
+                                                                                    </td>
+                                                                                    <td class="cart-total-right">
+                                                                                        <span id="taxValue" class="value-summary">0.00 @Localizer["JOD"]</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="order-total">
+                                                                                    <td class="cart-total-left">
+                                                                                        <label>@Localizer["Total"]:</label>
+                                                                                    </td>
+                                                                                    <td class="cart-total-right">
+                                                                                        <input type="hidden" name="totalPrice" id="totalPrice" value="@Model.ShoppingCart.CartDetails.Select(item => item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale") ? item.Subproduct.Product.PriceAfterDiscount * item.Quantity : item.Subproduct.Product.Price * item.Quantity).Sum()" />
+                                                                                        <span class="value-summary" id="total-amount">
+                                                                                            <strong>
+                                                                                                @(
+                                                                                                                                                                                                String.Format("{0:F2}", Model.ShoppingCart.CartDetails
+                                                                                                                                                                                                .Select(item => item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale")
+                                                                                                                                                                                                ? item.Subproduct.Product.PriceAfterDiscount * item.Quantity
+                                                                                                                                                                                                : item.Subproduct.Product.Price * item.Quantity)
+                                                                                                                                                                                                .Sum())
+                                                                                                                                                                                                )
+                                                                                                @Localizer["JOD"]
+                                                                                            </strong>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="terms-and-condition">
+                                                                <div id="terms-and-condition-wrapper">
+                                                                    <div class="checkout-data">
+                                                                        <div id="terms-of-service-warning-box" title="Terms of service" style="display:none">
+                                                                            <p>Please accept the terms of service before the next step.</p>
+                                                                        </div>
+                                                                        <div class="terms-of-service" style="display: block;">
+                                                                            <input id="termsofservice" type="checkbox" name="termsofservice">
+                                                                            <label for="termsofservice">@Localizer["Termsofservice"]</label>
+                                                                            <a asp-controller="Home" asp-action="ConditionsofUse" class="read" id="read-terms">(@Localizer["Read"])</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="buttons">
+                                                                <button type="submit" id="confirm-order-button" class="button-1">@Localizer["Confirm"]</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="error-message-list" class="step a-item"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-resizable center-dialog" aria-describedby="terms-of-service-warning-box" aria-labelledby="ui-id-4" style="display: none;">
+    <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+        <span id="ui-id-4" class="ui-dialog-title">@Localizer["TermsOfServiceHeader"]</span>
+        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close">
+            <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
+            <span class="ui-button-icon-space"> </span>Close
+        </button>
+    </div>
+    <div id="terms-of-service-warning-box" class="ui-dialog-content ui-widget-content">
+        <p>@Localizer["TermsOfServiceBody"]</p>
+    </div>
+</div>
+
+@* <div id="success-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification success">
+        <p class="content">@Localizer["DiscountCodeAppliedSuccess"]</p>
+        <span class="close" title="Close" onclick="hideSuccessNotification()"></span>
+    </div>
+</div>
+
+<div id="error-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification error">
+        <p class="content">@Localizer["DiscountCodeAppliedError"]</p>
+        <span class="close" title="Close" onclick="hideErrorNotification()"></span>
+    </div>
+</div> *@
+
+<div id="notification-container" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div id="notification" class="bar-notification">
+        <p class="content" id="notification-message"></p>
+        <span class="close" title="Close" onclick="hideNotification()"></span>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById("confirm-order-button").addEventListener("click", function (e) {
+         if (!$('#termsofservice').is(':checked')) {
+                 e.preventDefault();
+                 $('.center-dialog').show();
+             } else {
+                 const inputs = document.querySelectorAll(".edit-address .inputs");
+        let errorMessage = "";
+        const billingAddressSelect = document.getElementById('billing-address-select');
+         const billingNewAddressForm = document.getElementById('billing-new-address-form');
+
+         // Check on page load if the selected value is "0"
+         if (billingAddressSelect.value === '0') {
+             billingNewAddressForm.style.display = 'block';
+             inputs.forEach(inputGroup => {
+            const required = inputGroup.querySelector("span.required");
+            const input = inputGroup.querySelector("input, select, textarea");
+
+            if (required && input && !input.value.trim()) {
+                const label = inputGroup.querySelector("label");
+                const fieldName = label ? label.textContent.replace(":", "").trim() : "This field";
+                const localizedIsEmpty = "@Localizer["IsEmpty"]";
+                const localizedField = "@Localizer["Field"]";
+                errorMessage = `${localizedField} ${fieldName} ${localizedIsEmpty}`;
+
+            }
+        });
+         } else {
+             billingNewAddressForm.style.display = 'none';
+         }
+
+         // Add change event listener to handle selection changes
+         billingAddressSelect.addEventListener('change', function () {
+             if (billingAddressSelect.value === '0') {
+                 inputs.forEach(inputGroup => {
+            const required = inputGroup.querySelector("span.required");
+            const input = inputGroup.querySelector("input, select, textarea");
+
+            if (required && input && !input.value.trim()) {
+                const label = inputGroup.querySelector("label");
+                const fieldName = label ? label.textContent.replace(":", "").trim() : "This field";
+                const localizedIsEmpty = "@Localizer["IsEmpty"]";
+                const localizedField = "@Localizer["Field"]";
+                errorMessage = `${localizedField} ${fieldName} ${localizedIsEmpty}`;
+
+            }
+        });
+                 billingNewAddressForm.style.display = 'block';
+             } else {
+                 billingNewAddressForm.style.display = 'none';
+             }
+         });        
+        if (errorMessage) {
+            e.preventDefault(); // Stop form submission
+            showNotification({ isSuccess: false, message: errorMessage });
+        }
+        else {
+                 ConfirmOrder.save();
+             }
+             }
+
+
+
+    });
+
+    function showNotification({ isSuccess = true, message = "", duration = 3000 }) {
+        const container = document.getElementById('notification-container');
+        const notification = document.getElementById('notification');
+        const messageElement = document.getElementById('notification-message');
+
+        if (!container || !notification || !messageElement) return;
+
+        messageElement.textContent = message;
+        notification.className = 'bar-notification ' + (isSuccess ? 'success' : 'error');
+        container.style.display = 'block';
+
+        setTimeout(() => {
+            hideNotification();
+        }, duration);
+    }
+
+    function hideNotification() {
+        const container = document.getElementById('notification-container');
+        if (container) {
+            container.style.display = 'none';
+        }
+    }
+</script>
+<script>
+
+
+    function showNotification({ isSuccess = true, message = "", duration = 3000 }) {
+        const container = document.getElementById('notification-container');
+        const notification = document.getElementById('notification');
+        const messageElement = document.getElementById('notification-message');
+
+        if (!container || !notification || !messageElement) return;
+
+        // Set message
+        messageElement.textContent = message;
+
+        // Apply success/error class
+        notification.className = 'bar-notification ' + (isSuccess ? 'success' : 'error');
+
+        // Show notification
+        container.style.display = 'block';
+
+        // Auto hide after duration
+        setTimeout(() => {
+            hideNotification();
+        }, duration);
+    }
+
+    function hideNotification() {
+        const container = document.getElementById('notification-container');
+        if (container) {
+            container.style.display = 'none';
+        }
+    }
+
+
+     function showSuccessNotification() {
+         var notification = document.getElementById('success-notification');
+         if (notification) {
+             notification.style.display = 'block';
+             setTimeout(function() {
+                 notification.style.display = 'none';
+             }, 3000); // 3000 milliseconds = 3 seconds
+         }
+     }
+
+     function hideSuccessNotification() {
+         var notification = document.getElementById('success-notification');
+         if (notification) {
+             notification.style.display = 'none';
+         }
+     }
+
+         function showErrorNotification() {
+         var notification = document.getElementById('error-notification');
+         if (notification) {
+             notification.style.display = 'block';
+             setTimeout(function() {
+                 notification.style.display = 'none';
+             }, 3000); // 3000 milliseconds = 3 seconds
+         }
+     }
+
+     function hideErrorNotification() {
+         var notification = document.getElementById('error-notification');
+         if (notification) {
+             notification.style.display = 'none';
+         }
+     }
+
+
+     $(document).ready(function () {
+         $('#confirm-order-button').on('click', function (e) {
+             if (!$('#termsofservice').is(':checked')) {
+                 e.preventDefault();
+                 $('.center-dialog').show();
+             } else {
+                 ConfirmOrder.save();
+             }
+         });
+
+         $('.ui-dialog-titlebar-close').on('click', function () {
+             $(this).closest('.center-dialog').hide();
+         });
+     });
+     // document.addEventListener('DOMContentLoaded', function () {
+     //     const billingAddressSelect = document.getElementById('billing-address-select');
+     //     const billingNewAddressForm = document.getElementById('billing-new-address-form');
+
+     //     billingAddressSelect.addEventListener('change', function () {
+     //         if (billingAddressSelect.value === '0') {
+     //             billingNewAddressForm.style.display = 'block';
+     //         } else {
+     //             billingNewAddressForm.style.display = 'none';
+     //         }
+     //     });
+     // });
+
+         document.addEventListener('DOMContentLoaded', function () {
+         const billingAddressSelect = document.getElementById('billing-address-select');
+         const billingNewAddressForm = document.getElementById('billing-new-address-form');
+
+         // Check on page load if the selected value is "0"
+         if (billingAddressSelect.value === '0') {
+             billingNewAddressForm.style.display = 'block';
+         } else {
+             billingNewAddressForm.style.display = 'none';
+         }
+
+         // Add change event listener to handle selection changes
+         billingAddressSelect.addEventListener('change', function () {
+             if (billingAddressSelect.value === '0') {
+                 billingNewAddressForm.style.display = 'block';
+             } else {
+                 billingNewAddressForm.style.display = 'none';
+             }
+         });
+     });
+
+     function updateDeliveryBasedOnCity() {
+         const select = document.getElementById('billing-address-select');
+         const selectedOption = select.options[select.selectedIndex];
+         const value = select.value;
+
+         if (value !== "0") {
+             const optionText = selectedOption.textContent;
+             const city = optionText.split(',').pop().trim(); // Get the city from option text
+             debugger;
+             let deliveryCharge = 2;
+
+             // You can now update a hidden input, a span, or send this to server via AJAX
+             console.log("Delivery Charge:", deliveryCharge);
+              document.getElementById('delivery-amount').textContent =`<strong> ${deliveryCharge} @Localizer["JOD"]</strong>`;
+         }
+     }
+
+
+     document.getElementById('emailInput').addEventListener('input', function () {
+         var billingInfo = document.getElementById('billing-info');
+          billingInfo.style.display = 'block';
+         var email = this.value;
+         var localizedEmailText = '@Localizer["Email"]'; // Get the localized text
+         document.getElementById('emailDisplay').textContent = localizedEmailText + ': ' + email;
+     });
+
+     document.getElementById('phoneInput').addEventListener('input', function () {
+          var billingInfo = document.getElementById('billing-info');
+           billingInfo.style.display = 'block';
+         var phone = this.value;
+         var localizedPhoneText = '@Localizer["Phone"]'; // Get the localized text
+         document.getElementById('phoneDisplay').textContent = localizedPhoneText + ': ' + phone;
+     });
+
+        document.getElementById('firstNameInput').addEventListener('input', function () {
+            var billingInfo = document.getElementById('billing-info');
+            billingInfo.style.display = 'block';
+          var phone = this.value;
+          var localizedPhoneText = '@Localizer["Name"]'; // Get the localized text
+          document.getElementById('nameDisplay').textContent = localizedPhoneText + ': ' + phone;
+      });
+
+      document.getElementById('lastNameInput').addEventListener('input', function () {
+           var billingInfo = document.getElementById('billing-info');
+           billingInfo.style.display = 'block';
+         var phone = this.value;
+           var firstname = document.getElementById('firstNameInput').value;
+         var localizedPhoneText = '@Localizer["Name"]'; // Get the localized text
+         document.getElementById('nameDisplay').textContent = localizedPhoneText + ': ' + firstname + ' ' + phone;
+     });
+
+      document.getElementById('StateProvinceId').addEventListener('input', function () {
+           var billingInfo = document.getElementById('billing-info');
+           billingInfo.style.display = 'block';
+         var phone = this.value;
+         var localizedPhoneText = '@Localizer["City"]'; // Get the localized text
+          document.getElementById('cityDisplay').textContent = localizedPhoneText + ': ' + phone;
+     });
+
+      document.getElementById('addressInput').addEventListener('input', function () {
+           var billingInfo = document.getElementById('billing-info');
+           billingInfo.style.display = 'block';
+         var phone = this.value;
+         var localizedPhoneText = '@Localizer["Address"]'; // Get the localized text
+         document.getElementById('addressDisplay').textContent = localizedPhoneText + ': ' + phone;
+     });
+
+     document.getElementById('billing-address-select').addEventListener('change', function () {
+         var selectedOption = this.options[this.selectedIndex];
+          console.log(selectedOption);
+          const select = document.getElementById('billing-address-select');
+          const selectedaddress = select.options[select.selectedIndex];
+          const value = select.value;
+          var billingInfo = document.getElementById('billing-info');
+          billingInfo.style.display = 'none';
+          if (value !== "0")
+          {
+                var billingInfo = document.getElementById('billing-info');
+          var email = selectedOption.getAttribute('data-email');
+          var phone = selectedOption.getAttribute('data-phone');
+          var name = selectedOption.getAttribute('data-name');
+          var cityc = selectedOption.getAttribute('data-city');
+          var address = selectedOption.getAttribute('data-address');
+          var localizedEmailText = '@Localizer["Email"]'; // Get the localized text
+          var localizedPhoneText = '@Localizer["Phone"]'; // Get the localized text
+          var localizedNameText = '@Localizer["Name"]'; // Get the localized text
+          var localizedCityText = '@Localizer["City"]'; // Get the localized text
+          var localizedAddressText = '@Localizer["Address"]'; // Get the localized text
+          document.getElementById('emailDisplay').textContent = localizedEmailText + ': ' + email;
+          document.getElementById('phoneDisplay').textContent = localizedPhoneText + ': ' + phone;
+           document.getElementById('nameDisplay').textContent = localizedNameText + ': ' + name;
+           document.getElementById('cityDisplay').textContent = localizedCityText + ': ' + cityc;
+           document.getElementById('addressDisplay').textContent = localizedAddressText + ': ' + address;
+           billingInfo.style.display = 'block';
+             const optionText = selectedaddress.textContent;
+             const city = optionText.split(',').pop().trim(); // Get the city from option text
+
+              let deliveryCharge = 2;
+           const deliveryTaxElement = document.getElementById('delivery-amount');
+             deliveryTaxElement.textContent = `${deliveryCharge.toFixed(2)} @Localizer["JOD"]`;
+             $.ajax({
+                url: '/Checkout/StateChanged',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    stateId: deliveryCharge,
+                    totalPrice: totalPrice
+                }),
+                success: function (response) {
+                    debugger;
+                    console.log(response);
+    @* var discountedPrice = response; *@
+                    $('#subtotal-amount').text(totalPrice.toFixed(2) + ' @Localizer["JOD"]');
+                    $('#total-amount').html('<strong>' + response.toFixed(2) + ' @Localizer["JOD"]</strong>');
+                    $('#totalPrice').val(response.toFixed(2));
+                },
+                error: function () {
+                    showErrorNotification();
+                }
+             });
+         }
+     });
+
+     // Function to update the delivery tax and total
+         function updateDeliveryTaxAndTotal(zzero) {
+             const stateSelect = document.getElementById('StateProvinceId');
+          const deliveryTaxElement = document.getElementById('delivery-amount');
+         const totalAmountElement = document.getElementById('total-amount');
+         const totalPriceInput = document.getElementById('totalPrice');
+
+         // Define delivery tax values for Amman and other states
+         const deliveryTaxes = {
+             Amman: 2,
+             Default: 3
+         };
+             const selectedState = stateSelect.value;
+             const total = totalPrice;
+             if(selectedState =="0")
+             {
+                 if(zzero != '0' )
+                 {
+                     // Update the delivery tax and total display
+                     deliveryTaxElement.textContent = `0 @Localizer["JOD"]`;
+                     totalAmountElement.innerHTML = `<strong>${zzero} @Localizer["JOD"]</strong>`;
+                     totalPriceInput.value = zzero;
+                 }
+                  else
+                  {
+                     // Update the delivery tax and total display
+                     deliveryTaxElement.textContent = `0 @Localizer["JOD"]`;
+                     totalAmountElement.innerHTML = `<strong>${total.toFixed(2)} @Localizer["JOD"]</strong>`;
+                     totalPriceInput.value = total;
+                  }
+
+             }
+             else
+             {
+                 if(zzero != '0' )
+                 {
+             debugger;
+                     const tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
+                     // Calculate the new total
+                     var nettotal = parseFloat(zzero + tax);
+                     // Update the delivery tax and total display
+                     deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
+                     totalAmountElement.innerHTML = `<strong>${nettotal} @Localizer["JOD"]</strong>`;
+                     totalPriceInput.value = nettotal;
+                 }
+                 else
+                 {
+             debugger;
+                     const tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
+                     // Calculate the new total
+                     const total = totalPrice + tax;
+                     // Update the delivery tax and total display
+                     deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
+                     totalAmountElement.innerHTML = `<strong>${total.toFixed(2)} @Localizer["JOD"]</strong>`;
+                     totalPriceInput.value = total;
+                 }
+
+             }
+
+
+
+         };
+
+
+    @*  $('#applydiscountcouponcode').on('click', function () {
+        var discountCode = $('#discountcouponcode').val();
+        //var test = Convert.ToDouble(item.Subproduct.Product.PriceAfterDiscount.ToString()) * item.Quantity
+        var originalPriceString = "@Model.ShoppingCart.CartDetails.Sum(item => item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale") ? item.Subproduct.Product.PriceAfterDiscount : item.Subproduct.Product.Price)";
+        console.log(originalPriceString);
+        var originalPrice = parseFloat(originalPriceString.replace("&#x66B;", "."));
+        const stateSelect = document.getElementById('StateProvinceId');
+        $.ajax({
+            url: '/Admin/discount/ApplyDiscount',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                code: discountCode,
+                originalPrice: originalPrice
+            }),
+            success: function (response) {
+                const select = document.getElementById('billing-address-select');
+                const selectedaddress = select.options[select.selectedIndex];
+                const value = select.value;
+                    const deliveryTaxElement = document.querySelector('.delivery-value .value-summary');
+                    var tax = 0;
+                 if (value !== "0")
+                 {
+                    const optionText = selectedaddress.textContent;
+                    const city = optionText.split(',').pop().trim();
+
+                    tax = city === "Amman" ? 2 : 3;
+                    deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
+                 }
+                 else{
+                     tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
+                     deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
+                 }
+                 debugger;
+                 const totalafterdiscounted = (parseFloat(response.discountedPrice)) + tax;
+                var discountedPrice = response.discountedPrice;
+                $('#subtotal-amount').text(originalPrice.toFixed(2) + ' @Localizer["JOD"]');
+                $('#total-amount').html('<strong>' + totalafterdiscounted.toFixed(2) + ' @Localizer["JOD"]</strong>');
+                $('#totalPrice').val(totalafterdiscounted.toFixed(2));
+                updateDeliveryTaxAndTotal(parseFloat(totalafterdiscounted.toFixed(2)));
+                showSuccessNotification();
+            },
+            error: function () {
+                showErrorNotification();
+            }
+        });
+    }); *@
+
+         $('#applydiscountcouponcode').on('click', function () {
+         var discountCode = $('#discountcouponcode').val();
+         const stateSelect = document.getElementById('StateProvinceId');
+         const addressSelect = document.getElementById('billing-address-select');
+          const selectedAddress = addressSelect.options[addressSelect.selectedIndex];
+            const deliveryTaxElement = document.getElementById('#taxValue');
+                const trpriceAfterDiscount = document.getElementById('trpriceAfterDiscount');
+
+         let cityName = null;
+         let taxValue = null;
+
+         if (addressSelect.value !== "0") {
+             cityName = selectedAddress.textContent.split(',').pop().trim();
+         } else {
+             taxValue = Number.parseFloat($(stateSelect).find(':selected').data('tax'));
+         }
+         debugger;
+         $.ajax({
+             url: '/Admin/discount/ApplyDiscount',
+             type: 'POST',
+             contentType: 'application/json',
+             data: JSON.stringify({
+                 code: discountCode,
+                 cityName: cityName,
+                 taxValue: taxValue
+             }),
+             success: function (response) {
+                 debugger;
+                    //trpriceAfterDiscount.style.display = 'block';
+                    $("#trpriceAfterDiscount").css("display", "table-row");
+                 $('#subtotal-amount').text(response.originalPrice.toFixed(2) + ' @Localizer["JOD"]');
+                   $('#priceAfterDiscount').text(response.discountedPrice.toFixed(2) + ' @Localizer["JOD"]');
+                    $('#delivery-amount').text(response.deliveryTax.toFixed(2) + ' @Localizer["JOD"]');
+                 $('#total-amount').html('<strong>' + response.totalPrice.toFixed(2) + ' @Localizer["JOD"]</strong>');
+                 $('#totalPrice').val(response.totalPrice.toFixed(2));
+    @* deliveryTaxElement.textContent = `${response.deliveryTax.toFixed(2)} @Localizer["JOD"]`; *@
+    @* updateDeliveryTaxAndTotal(response.totalPrice); *@
+                 @* showSuccessNotification(); *@
+                 showNotification({ isSuccess: true, message: "@Localizer["DiscountCodeAppliedSuccess"]" });
+             },
+             error: function () {
+                 showErrorNotification();
+             }
+         });
+     });
+
+     var totalPricestring = "@Model.ShoppingCart.CartDetails.Select(item => item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale") ? item.Subproduct.Product.PriceAfterDiscount * item.Quantity : item.Subproduct.Product.Price * item.Quantity).Sum()";
+     var totalPrice =  parseFloat(totalPricestring.replace("&#x66B;", "."));
+     document.addEventListener('DOMContentLoaded', function () {
+
+          const stateSelect = document.getElementById('StateProvinceId');
+          const deliveryTaxElement = document.getElementById('delivery-amount');
+         const totalAmountElement = document.getElementById('total-amount');
+         const totalPriceInput = document.getElementById('totalPrice');
+
+         // Add event listener to the state select dropdown
+         stateSelect.addEventListener('change', function() {
+             debugger;
+          const tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
+                     // Calculate the new total
+    @*  var x = document.getElementById('totalPrice').value();
+                    console.log(x); *@
+                     const total = (parseFloat(totalPriceInput.value)) + tax;
+                     // Update the delivery tax and total display
+                     deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
+                     totalAmountElement.innerHTML = `<strong>${total.toFixed(2)} @Localizer["JOD"]</strong>`;
+                     totalPriceInput.value = total;
+                      $.ajax({
+             url: '/Checkout/StateChanged',
+             type: 'POST',
+             contentType: 'application/json',
+             data: JSON.stringify({
+                 stateId: tax,
+                 totalPrice: totalPrice
+             }),
+             success: function (response) {
+                 debugger;
+                 console.log(response);
+    @* var discountedPrice = response; *@
+                 $('#subtotal-amount').text(totalPrice.toFixed(2) + ' @Localizer["JOD"]');
+                 $('#total-amount').html('<strong>' + response.toFixed(2) + ' @Localizer["JOD"]</strong>');
+                 $('#totalPrice').val(response.toFixed(2));
+             },
+             error: function () {
+                 showErrorNotification();
+             }
+         });
+         });
+
+         // Trigger update on page load
+    @* updateDeliveryTaxAndTotal(zzero); *@
+     });
+
+</script>
+
+
