@@ -46,6 +46,7 @@ namespace GabriniCosmetics.Controllers
             var checkoutVM = new CheckoutVM();
             if (User.Identity.IsAuthenticated)
             {
+                ViewBag.isAuth = "True";
                 var user = await _userManager.GetUserAsync(User);
                 checkoutVM.Addresses = await _addresses.GetAddressByUserIdAsync(user.Id);
                 checkoutVM.ShoppingCart = await _shop.GetUserCart();
@@ -71,6 +72,7 @@ namespace GabriniCosmetics.Controllers
             }
             else
             {
+                ViewBag.isAuth = "False";
                 var groupValue = Request.Cookies["_cartgroup"];
                 if (groupValue.IsNullOrEmpty())
                 {

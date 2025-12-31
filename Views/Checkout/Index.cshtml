@@ -94,25 +94,32 @@
 
                                                 <div id="checkout-billing-load">
                                                     <div class="checkout-data">
-                                                        <div class="section select-billing-address">
-                                                            <label for="billing-address-select">@Localizer["SelectAddress"]</label>
-                                                            <div>
-                                                                <select id="billing-address-select" class="address-select" asp-for="Order.FullLocation">
-                                                                    <option value="1000000000" selected class="hidden-default">@Localizer["SelectNewAddress"]</option>
-                                                                    <option value="0" data-email="">@Localizer["NewAddress"]</option>
-                                                                    @if (Model != null && Model.Addresses != null)
-                                                                    {
-                                                                        foreach (var item in Model.Addresses)
+                                                        @{
+                                                            bool hasAddresses = User.Identity.IsAuthenticated && Model != null && Model.Addresses != null && Model.Addresses.Any();
+                                                        }
+                                                        @if (hasAddresses)
+                                                        {
+                                                            <div class="section select-billing-address">
+                                                                <label for="billing-address-select">@Localizer["SelectAddress"]</label>
+                                                                <div>
+                                                                    <select id="billing-address-select" class="address-select" asp-for="Order.FullLocation">
+                                                                        <option value="1000000000" selected class="hidden-default">@Localizer["SelectNewAddress"]</option>
+                                                                        <option value="0" data-email="">@Localizer["NewAddress"]</option>
+                                                                        @foreach (var item in Model.Addresses)
                                                                         {
                                                                             <option value="@item.Id" data-email="@item.Email" data-phone="@item.PhoneNumber" data-name="@item.FirstName @item.LastName" data-city="@item.City" data-address="@item.Address1">@item.FirstName @item.LastName, @item.City , @item.Address1</option>
                                                                         }
-                                                                    }
 
-                                                                </select>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" id="billing-address-select-hidden" asp-for="Order.FullLocation" value="0">
+                                                        }
 
-                                                        <div class="section new-billing-address" id="billing-new-address-form" style="display: none;">
+                                                        <div class="section new-billing-address" id="billing-new-address-form" style="@(hasAddresses ? "display: none;" : "display: block;")">
                                                             <div class="enter-address">
                                                                 <div class="edit-address">
                                                                     <div class="inputs">
@@ -511,20 +518,6 @@
     </div>
 </div>
 
-@* <div id="success-notification" class="bar-notification-container" style="display: none;" data-close="Close">
-    <div class="bar-notification success">
-        <p class="content">@Localizer["DiscountCodeAppliedSuccess"]</p>
-        <span class="close" title="Close" onclick="hideSuccessNotification()"></span>
-    </div>
-</div>
-
-<div id="error-notification" class="bar-notification-container" style="display: none;" data-close="Close">
-    <div class="bar-notification error">
-        <p class="content">@Localizer["DiscountCodeAppliedError"]</p>
-        <span class="close" title="Close" onclick="hideErrorNotification()"></span>
-    </div>
-</div> *@
-
 <div id="notification-container" class="bar-notification-container" style="display: none;" data-close="Close">
     <div id="notification" class="bar-notification">
         <p class="content" id="notification-message"></p>
@@ -544,7 +537,33 @@
         const billingAddressSelect = document.getElementById('billing-address-select');
          const billingNewAddressForm = document.getElementById('billing-new-address-form');
 
-         // Check on page load if the selected value is "0"
+         // If user is not logged in, dropdown doesn't exist - validate form directly
+         if (!billingAddressSelect) {
+             // For non-logged-in users, always validate the form
+             inputs.forEach(inputGroup => {
+                const required = inputGroup.querySelector("span.required");
+                const input = inputGroup.querySelector("input, select, textarea");
+
+                if (required && input && !input.value.trim()) {
+                    const label = inputGroup.querySelector("label");
+                    const fieldName = label ? label.textContent.replace(":", "").trim() : "This field";
+                    const localizedIsEmpty = "@Localizer["IsEmpty"]";
+                    const localizedField = "@Localizer["Field"]";
+                    errorMessage = `${localizedField} ${fieldName} ${localizedIsEmpty}`;
+                }
+            });
+            
+            if (errorMessage) {
+                e.preventDefault();
+                showNotification({ isSuccess: false, message: errorMessage });
+                return;
+            } else {
+                ConfirmOrder.save();
+                return;
+            }
+         }
+
+         // For logged-in users, check dropdown value
          if (billingAddressSelect.value === '0') {
              billingNewAddressForm.style.display = 'block';
              inputs.forEach(inputGroup => {
@@ -564,33 +583,45 @@
              billingNewAddressForm.style.display = 'none';
          }
 
-         // Add change event listener to handle selection changes
-         billingAddressSelect.addEventListener('change', function () {
-             if (billingAddressSelect.value === '0') {
-                 inputs.forEach(inputGroup => {
-            const required = inputGroup.querySelector("span.required");
-            const input = inputGroup.querySelector("input, select, textarea");
+         // Add change event listener to handle selection changes (only for logged-in users)
+         if (billingAddressSelect) {
+             billingAddressSelect.addEventListener('change', function () {
+                 if (billingAddressSelect.value === '0') {
+                     inputs.forEach(inputGroup => {
+                const required = inputGroup.querySelector("span.required");
+                const input = inputGroup.querySelector("input, select, textarea");
 
-            if (required && input && !input.value.trim()) {
-                const label = inputGroup.querySelector("label");
-                const fieldName = label ? label.textContent.replace(":", "").trim() : "This field";
-                const localizedIsEmpty = "@Localizer["IsEmpty"]";
-                const localizedField = "@Localizer["Field"]";
-                errorMessage = `${localizedField} ${fieldName} ${localizedIsEmpty}`;
+                if (required && input && !input.value.trim()) {
+                    const label = inputGroup.querySelector("label");
+                    const fieldName = label ? label.textContent.replace(":", "").trim() : "This field";
+                    const localizedIsEmpty = "@Localizer["IsEmpty"]";
+                    const localizedField = "@Localizer["Field"]";
+                    errorMessage = `${localizedField} ${fieldName} ${localizedIsEmpty}`;
 
-            }
-        });
-                 billingNewAddressForm.style.display = 'block';
-             } else {
-                 billingNewAddressForm.style.display = 'none';
-             }
-         });        
+                }
+            });
+                     billingNewAddressForm.style.display = 'block';
+                 } else {
+                     billingNewAddressForm.style.display = 'none';
+                 }
+             });
+         }
+         
         if (errorMessage) {
             e.preventDefault(); // Stop form submission
             showNotification({ isSuccess: false, message: errorMessage });
         }
         else {
+            
+            if(billingAddressSelect && billingAddressSelect.value ==='1000000000'){
+                const NoAddressSelected = "@Localizer["NoAddressSelected"]";
+                errorMessage = `${NoAddressSelected}`
+                showNotification({ isSuccess: false, message: errorMessage });
+                return;
+            }
+            else{
                  ConfirmOrder.save();
+            }
              }
              }
 
@@ -654,23 +685,6 @@
     }
 
 
-     function showSuccessNotification() {
-         var notification = document.getElementById('success-notification');
-         if (notification) {
-             notification.style.display = 'block';
-             setTimeout(function() {
-                 notification.style.display = 'none';
-             }, 3000); // 3000 milliseconds = 3 seconds
-         }
-     }
-
-     function hideSuccessNotification() {
-         var notification = document.getElementById('success-notification');
-         if (notification) {
-             notification.style.display = 'none';
-         }
-     }
-
          function showErrorNotification() {
          var notification = document.getElementById('error-notification');
          if (notification) {
@@ -681,13 +695,6 @@
          }
      }
 
-     function hideErrorNotification() {
-         var notification = document.getElementById('error-notification');
-         if (notification) {
-             notification.style.display = 'none';
-         }
-     }
-
 
      $(document).ready(function () {
          $('#confirm-order-button').on('click', function (e) {
@@ -695,39 +702,52 @@
                  e.preventDefault();
                  $('.center-dialog').show();
              } else {
+                 const billingAddressSelect = document.getElementById('billing-address-select');
+                 
+                 // Only check dropdown if it exists (logged-in users)
+                 if (billingAddressSelect && billingAddressSelect.value ==='1000000000'){
+                     debugger
+                const NoAddressSelected = "@Localizer["NoAddressSelected"]";
+                errorMessage = `${NoAddressSelected}`
+                showNotification({ isSuccess: false, message: errorMessage });
+                return;
+            }
+            else{
                  ConfirmOrder.save();
+            }
              }
          });
 
          $('.ui-dialog-titlebar-close').on('click', function () {
              $(this).closest('.center-dialog').hide();
          });
-     });
-     // document.addEventListener('DOMContentLoaded', function () {
-     //     const billingAddressSelect = document.getElementById('billing-address-select');
-     //     const billingNewAddressForm = document.getElementById('billing-new-address-form');
-
-     //     billingAddressSelect.addEventListener('change', function () {
-     //         if (billingAddressSelect.value === '0') {
-     //             billingNewAddressForm.style.display = 'block';
-     //         } else {
-     //             billingNewAddressForm.style.display = 'none';
-     //         }
-     //     });
-     // });
+     });     
 
          document.addEventListener('DOMContentLoaded', function () {
+             const submitbutton = document.getElementById('confirm-order-button');
          const billingAddressSelect = document.getElementById('billing-address-select');
          const billingNewAddressForm = document.getElementById('billing-new-address-form');
-
-         // Check on page load if the selected value is "0"
+         
+         // If dropdown doesn't exist (non-logged-in user), form is already visible
+         if (!billingAddressSelect) {
+             billingNewAddressForm.style.display = 'block';
+             submitbutton.disabled = false;
+             return;
+         }
+         
+         // For logged-in users, handle dropdown logic
          if (billingAddressSelect.value === '0') {
              billingNewAddressForm.style.display = 'block';
-         } else {
-             billingNewAddressForm.style.display = 'none';
+             submitbutton.disabled = false;
          }
-
-         // Add change event listener to handle selection changes
+         else if (billingAddressSelect.value === '1000000000'){
+                 
+                 submitbutton.disabled = true;
+         }
+             else {
+             billingNewAddressForm.style.display = 'none';
+             submitbutton.disabled = false;
+         }
          billingAddressSelect.addEventListener('change', function () {
              if (billingAddressSelect.value === '0') {
                  billingNewAddressForm.style.display = 'block';
@@ -739,13 +759,14 @@
 
      function updateDeliveryBasedOnCity() {
          const select = document.getElementById('billing-address-select');
+         if (!select) return; // Exit if dropdown doesn't exist (non-logged-in user)
+         
          const selectedOption = select.options[select.selectedIndex];
          const value = select.value;
 
          if (value !== "0") {
              const optionText = selectedOption.textContent;
-             const city = optionText.split(',').pop().trim(); // Get the city from option text
-             debugger;
+             const city = optionText.split(',').pop().trim(); 
              let deliveryCharge = 2;
 
              // You can now update a hidden input, a span, or send this to server via AJAX
@@ -759,7 +780,7 @@
          var billingInfo = document.getElementById('billing-info');
           billingInfo.style.display = 'block';
          var email = this.value;
-         var localizedEmailText = '@Localizer["Email"]'; // Get the localized text
+         var localizedEmailText = '@Localizer["Email"]'; 
          document.getElementById('emailDisplay').textContent = localizedEmailText + ': ' + email;
      });
 
@@ -767,7 +788,7 @@
           var billingInfo = document.getElementById('billing-info');
            billingInfo.style.display = 'block';
          var phone = this.value;
-         var localizedPhoneText = '@Localizer["Phone"]'; // Get the localized text
+         var localizedPhoneText = '@Localizer["Phone"]'; 
          document.getElementById('phoneDisplay').textContent = localizedPhoneText + ': ' + phone;
      });
 
@@ -775,7 +796,7 @@
             var billingInfo = document.getElementById('billing-info');
             billingInfo.style.display = 'block';
           var phone = this.value;
-          var localizedPhoneText = '@Localizer["Name"]'; // Get the localized text
+          var localizedPhoneText = '@Localizer["Name"]'; 
           document.getElementById('nameDisplay').textContent = localizedPhoneText + ': ' + phone;
       });
 
@@ -784,7 +805,7 @@
            billingInfo.style.display = 'block';
          var phone = this.value;
            var firstname = document.getElementById('firstNameInput').value;
-         var localizedPhoneText = '@Localizer["Name"]'; // Get the localized text
+         var localizedPhoneText = '@Localizer["Name"]'; 
          document.getElementById('nameDisplay').textContent = localizedPhoneText + ': ' + firstname + ' ' + phone;
      });
 
@@ -792,7 +813,7 @@
            var billingInfo = document.getElementById('billing-info');
            billingInfo.style.display = 'block';
          var phone = this.value;
-         var localizedPhoneText = '@Localizer["City"]'; // Get the localized text
+         var localizedPhoneText = '@Localizer["City"]'; 
           document.getElementById('cityDisplay').textContent = localizedPhoneText + ': ' + phone;
      });
 
@@ -800,11 +821,16 @@
            var billingInfo = document.getElementById('billing-info');
            billingInfo.style.display = 'block';
          var phone = this.value;
-         var localizedPhoneText = '@Localizer["Address"]'; // Get the localized text
+         var localizedPhoneText = '@Localizer["Address"]'; 
          document.getElementById('addressDisplay').textContent = localizedPhoneText + ': ' + phone;
      });
 
-     document.getElementById('billing-address-select').addEventListener('change', function () {
+     const billingAddressSelectElement = document.getElementById('billing-address-select');
+     if (billingAddressSelectElement) {
+         billingAddressSelectElement.addEventListener('change', function () {
+         
+         const submitbutton = document.getElementById('confirm-order-button');
+         submitbutton.disabled = false;
          var selectedOption = this.options[this.selectedIndex];
           console.log(selectedOption);
           const select = document.getElementById('billing-address-select');
@@ -820,11 +846,11 @@
           var name = selectedOption.getAttribute('data-name');
           var cityc = selectedOption.getAttribute('data-city');
           var address = selectedOption.getAttribute('data-address');
-          var localizedEmailText = '@Localizer["Email"]'; // Get the localized text
-          var localizedPhoneText = '@Localizer["Phone"]'; // Get the localized text
-          var localizedNameText = '@Localizer["Name"]'; // Get the localized text
-          var localizedCityText = '@Localizer["City"]'; // Get the localized text
-          var localizedAddressText = '@Localizer["Address"]'; // Get the localized text
+          var localizedEmailText = '@Localizer["Email"]'; 
+          var localizedPhoneText = '@Localizer["Phone"]'; 
+          var localizedNameText = '@Localizer["Name"]'; 
+          var localizedCityText = '@Localizer["City"]'; 
+          var localizedAddressText = '@Localizer["Address"]';
           document.getElementById('emailDisplay').textContent = localizedEmailText + ': ' + email;
           document.getElementById('phoneDisplay').textContent = localizedPhoneText + ': ' + phone;
            document.getElementById('nameDisplay').textContent = localizedNameText + ': ' + name;
@@ -846,9 +872,8 @@
                     totalPrice: totalPrice
                 }),
                 success: function (response) {
-                    debugger;
+                    
                     console.log(response);
-    @* var discountedPrice = response; *@
                     $('#subtotal-amount').text(totalPrice.toFixed(2) + ' @Localizer["JOD"]');
                     $('#total-amount').html('<strong>' + response.toFixed(2) + ' @Localizer["JOD"]</strong>');
                     $('#totalPrice').val(response.toFixed(2));
@@ -858,15 +883,14 @@
                 }
              });
          }
-     });
-
+         });
+     }
      // Function to update the delivery tax and total
          function updateDeliveryTaxAndTotal(zzero) {
              const stateSelect = document.getElementById('StateProvinceId');
           const deliveryTaxElement = document.getElementById('delivery-amount');
          const totalAmountElement = document.getElementById('total-amount');
          const totalPriceInput = document.getElementById('totalPrice');
-
          // Define delivery tax values for Amman and other states
          const deliveryTaxes = {
              Amman: 2,
@@ -890,13 +914,12 @@
                      totalAmountElement.innerHTML = `<strong>${total.toFixed(2)} @Localizer["JOD"]</strong>`;
                      totalPriceInput.value = total;
                   }
-
              }
              else
              {
                  if(zzero != '0' )
                  {
-             debugger;
+             
                      const tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
                      // Calculate the new total
                      var nettotal = parseFloat(zzero + tax);
@@ -907,7 +930,7 @@
                  }
                  else
                  {
-             debugger;
+             
                      const tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
                      // Calculate the new total
                      const total = totalPrice + tax;
@@ -916,79 +939,31 @@
                      totalAmountElement.innerHTML = `<strong>${total.toFixed(2)} @Localizer["JOD"]</strong>`;
                      totalPriceInput.value = total;
                  }
-
              }
-
-
-
-         };
-
-
-    @*  $('#applydiscountcouponcode').on('click', function () {
-        var discountCode = $('#discountcouponcode').val();
-        //var test = Convert.ToDouble(item.Subproduct.Product.PriceAfterDiscount.ToString()) * item.Quantity
-        var originalPriceString = "@Model.ShoppingCart.CartDetails.Sum(item => item.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale") ? item.Subproduct.Product.PriceAfterDiscount : item.Subproduct.Product.Price)";
-        console.log(originalPriceString);
-        var originalPrice = parseFloat(originalPriceString.replace("&#x66B;", "."));
-        const stateSelect = document.getElementById('StateProvinceId');
-        $.ajax({
-            url: '/Admin/discount/ApplyDiscount',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                code: discountCode,
-                originalPrice: originalPrice
-            }),
-            success: function (response) {
-                const select = document.getElementById('billing-address-select');
-                const selectedaddress = select.options[select.selectedIndex];
-                const value = select.value;
-                    const deliveryTaxElement = document.querySelector('.delivery-value .value-summary');
-                    var tax = 0;
-                 if (value !== "0")
-                 {
-                    const optionText = selectedaddress.textContent;
-                    const city = optionText.split(',').pop().trim();
-
-                    tax = city === "Amman" ? 2 : 3;
-                    deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
-                 }
-                 else{
-                     tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
-                     deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
-                 }
-                 debugger;
-                 const totalafterdiscounted = (parseFloat(response.discountedPrice)) + tax;
-                var discountedPrice = response.discountedPrice;
-                $('#subtotal-amount').text(originalPrice.toFixed(2) + ' @Localizer["JOD"]');
-                $('#total-amount').html('<strong>' + totalafterdiscounted.toFixed(2) + ' @Localizer["JOD"]</strong>');
-                $('#totalPrice').val(totalafterdiscounted.toFixed(2));
-                updateDeliveryTaxAndTotal(parseFloat(totalafterdiscounted.toFixed(2)));
-                showSuccessNotification();
-            },
-            error: function () {
-                showErrorNotification();
-            }
-        });
-    }); *@
+         };   
 
          $('#applydiscountcouponcode').on('click', function () {
          var discountCode = $('#discountcouponcode').val();
          const stateSelect = document.getElementById('StateProvinceId');
          const addressSelect = document.getElementById('billing-address-select');
-          const selectedAddress = addressSelect.options[addressSelect.selectedIndex];
             const deliveryTaxElement = document.getElementById('#taxValue');
                 const trpriceAfterDiscount = document.getElementById('trpriceAfterDiscount');
 
          let cityName = null;
          let taxValue = null;
 
-         if (addressSelect.value !== "0") {
-             cityName = selectedAddress.textContent.split(',').pop().trim();
-         } else {
+         // If dropdown doesn't exist (non-logged-in user), get tax from state select
+         if (!addressSelect) {
              taxValue = Number.parseFloat($(stateSelect).find(':selected').data('tax'));
+         } else {
+             const selectedAddress = addressSelect.options[addressSelect.selectedIndex];
+             if (addressSelect.value !== "0") {
+                 cityName = selectedAddress.textContent.split(',').pop().trim();
+             } else {
+                 taxValue = Number.parseFloat($(stateSelect).find(':selected').data('tax'));
+             }
          }
-         debugger;
+         
          $.ajax({
              url: '/Admin/discount/ApplyDiscount',
              type: 'POST',
@@ -999,7 +974,7 @@
                  taxValue: taxValue
              }),
              success: function (response) {
-                 debugger;
+                 
                     //trpriceAfterDiscount.style.display = 'block';
                     $("#trpriceAfterDiscount").css("display", "table-row");
                  $('#subtotal-amount').text(response.originalPrice.toFixed(2) + ' @Localizer["JOD"]');
@@ -1007,9 +982,7 @@
                     $('#delivery-amount').text(response.deliveryTax.toFixed(2) + ' @Localizer["JOD"]');
                  $('#total-amount').html('<strong>' + response.totalPrice.toFixed(2) + ' @Localizer["JOD"]</strong>');
                  $('#totalPrice').val(response.totalPrice.toFixed(2));
-    @* deliveryTaxElement.textContent = `${response.deliveryTax.toFixed(2)} @Localizer["JOD"]`; *@
-    @* updateDeliveryTaxAndTotal(response.totalPrice); *@
-                 @* showSuccessNotification(); *@
+
                  showNotification({ isSuccess: true, message: "@Localizer["DiscountCodeAppliedSuccess"]" });
              },
              error: function () {
@@ -1029,13 +1002,11 @@
 
          // Add event listener to the state select dropdown
          stateSelect.addEventListener('change', function() {
-             debugger;
+             
           const tax = Number.parseInt($(stateSelect).find(':selected').data('tax'));
-                     // Calculate the new total
-    @*  var x = document.getElementById('totalPrice').value();
-                    console.log(x); *@
+                     
                      const total = (parseFloat(totalPriceInput.value)) + tax;
-                     // Update the delivery tax and total display
+                     
                      deliveryTaxElement.textContent = `${tax.toFixed(2)} @Localizer["JOD"]`;
                      totalAmountElement.innerHTML = `<strong>${total.toFixed(2)} @Localizer["JOD"]</strong>`;
                      totalPriceInput.value = total;
@@ -1048,9 +1019,8 @@
                  totalPrice: totalPrice
              }),
              success: function (response) {
-                 debugger;
+                 
                  console.log(response);
-    @* var discountedPrice = response; *@
                  $('#subtotal-amount').text(totalPrice.toFixed(2) + ' @Localizer["JOD"]');
                  $('#total-amount').html('<strong>' + response.toFixed(2) + ' @Localizer["JOD"]</strong>');
                  $('#totalPrice').val(response.toFixed(2));
@@ -1060,9 +1030,6 @@
              }
          });
          });
-
-         // Trigger update on page load
-    @* updateDeliveryTaxAndTotal(zzero); *@
      });
 
 </script>

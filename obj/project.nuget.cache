@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BmuoFySPM+w=",
+  "dgSpecHash": "+Zh72ZKOxHw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetics\\GabriniCosmetics\\GabriniCosmetics.csproj",
+  "projectFilePath": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\GabriniCosmetics.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\OlaAlshloul\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\OlaAlshloul\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

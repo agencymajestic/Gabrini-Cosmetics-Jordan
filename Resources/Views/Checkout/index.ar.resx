@@ -297,4 +297,7 @@
   <data name="IsEmpty" xml:space="preserve">
     <value>فارغ</value>
   </data>
+  <data name="NoAddressSelected" xml:space="preserve">
+    <value>لم يتم تحديد عنوان. يُرجى اختيار عنوان لإكمال طلبك.</value>
+  </data>
 </root>

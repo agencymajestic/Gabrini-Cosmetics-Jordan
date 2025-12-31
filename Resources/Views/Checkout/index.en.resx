@@ -285,4 +285,7 @@
   <data name="IsEmpty" xml:space="preserve">
     <value>Is Empty</value>
   </data>
+  <data name="NoAddressSelected" xml:space="preserve">
+    <value>No address selected. Please choose an address to continue with your order.</value>
+  </data>
 </root>

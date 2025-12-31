@@ -9,333 +9,333 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GabriniCosmetics
 build_property.RootNamespace = GabriniCosmetics
-build_property.ProjectDir = C:\Users\OlaAlshloul\Desktop\GabriniCosmetics\GabriniCosmetics\
+build_property.ProjectDir = C:\Users\OlaAlshloul\Desktop\GabriniCosmetic\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\OlaAlshloul\Desktop\GabriniCosmetics\GabriniCosmetics
+build_property.MSBuildProjectDirectory = C:\Users\OlaAlshloul\Desktop\GabriniCosmetic
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 7.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Account/Login.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/AnnouncementBar/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/AnnouncementBar/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQW5ub3VuY2VtZW50QmFyXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/AnnouncementBar/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/AnnouncementBar/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQW5ub3VuY2VtZW50QmFyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Categories/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Categories/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Categories/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Categories/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Categories/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Categories/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/DealOfTheDays/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/DealOfTheDays/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGVhbE9mVGhlRGF5c1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/DealOfTheDays/Update.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/DealOfTheDays/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGVhbE9mVGhlRGF5c1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Discount/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Discount/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGlzY291bnRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Discount/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Discount/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGlzY291bnRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Discount/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Discount/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGlzY291bnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Feedback/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Feedback/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRmVlZGJhY2tcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Home/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Home/test.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Home/test.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVx0ZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Order/Details.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Order/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Order/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Order/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Products/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Products/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Products/Details.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Products/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Products/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Products/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Products/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Products/_SubproductsForm.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Products/_SubproductsForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdHNcX1N1YnByb2R1Y3RzRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SliderAd/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SliderAd/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyQWRcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SliderAd/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SliderAd/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyQWRcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SliderAd/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SliderAd/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyQWRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SliderBanner/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SliderBanner/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyQmFubmVyXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SliderBanner/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SliderBanner/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyQmFubmVyXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SliderBanner/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SliderBanner/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2xpZGVyQmFubmVyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SocialMedia/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SocialMedia/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU29jaWFsTWVkaWFcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SocialMedia/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SocialMedia/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU29jaWFsTWVkaWFcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SocialMedia/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SocialMedia/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU29jaWFsTWVkaWFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SubCategories/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SubCategories/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3ViQ2F0ZWdvcmllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SubCategories/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SubCategories/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3ViQ2F0ZWdvcmllc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/SubCategories/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/SubCategories/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3ViQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Users/Details.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Users/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/_ViewStart.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/AccessDenied.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/ChangePassword.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/Login.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/PasswordRecovery.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/PasswordRecovery.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQYXNzd29yZFJlY292ZXJ5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/Profile.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/Register.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Account/ResetPassword.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Address/Create.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Address/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkcmVzc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Address/Edit.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Address/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkcmVzc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Address/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Address/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkcmVzc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Cart/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Categories/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Categories/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Checkout/Completed.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Checkout/Completed.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcQ29tcGxldGVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Checkout/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Checkout/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Contactus/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Contactus/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Error/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Error/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Flipbook/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Flipbook/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxpcGJvb2tcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Home/AboutUs.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Home/AboutUs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dFVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Home/ConditionsofUse.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Home/ConditionsofUse.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb25kaXRpb25zb2ZVc2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Home/DeliveryReturns.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Home/DeliveryReturns.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZWxpdmVyeVJldHVybnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Home/Error.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Home/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFcnJvci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Home/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Home/PrivacyPolicy.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Home/PrivacyPolicy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5UG9saWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Order/Detail.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Order/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Order/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Order/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Products/Detail.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Products/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Products/FeatureProducts.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Products/FeatureProducts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRmVhdHVyZVByb2R1Y3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Products/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Products/NewProducts.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Products/NewProducts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcTmV3UHJvZHVjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Products/SaleProducts.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Products/SaleProducts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcU2FsZVByb2R1Y3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Qrcode/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Qrcode/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXJjb2RlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Search/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Search/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VhcmNoXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/Components/SmallCart/Default.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/Components/SmallCart/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcU21hbGxDYXJ0XERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/Error.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/_Filter.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/_Filter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9GaWx0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/_ListOfProducts.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/_ListOfProducts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MaXN0T2ZQcm9kdWN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/_QuickView.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/_QuickView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9RdWlja1ZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/_Sidebar.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/_Sidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaWRlYmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Wishlist/Index.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Wishlist/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2lzaGxpc3RcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/_ViewImports.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/_ViewStart.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Areas/Admin/Views/Shared/_Layout.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-qm58l4jrr1
 
-[C:/Users/OlaAlshloul/Desktop/GabriniCosmetics/GabriniCosmetics/Views/Shared/_Layout.cshtml]
+[C:/Users/OlaAlshloul/Desktop/GabriniCosmetic/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-w0k0iu6w7j

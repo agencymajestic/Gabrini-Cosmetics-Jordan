@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetics\\GabriniCosmetics\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|c:\\users\\olaalshloul\\desktop\\gabrinicosmetic\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|solutionrelative:views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|c:\\users\\olaalshloul\\desktop\\gabrinicosmetic\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|solutionrelative:controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|c:\\users\\olaalshloul\\desktop\\gabrinicosmetic\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|solutionrelative:controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|c:\\users\\olaalshloul\\desktop\\gabrinicosmetic\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7508BE1-6BE7-4B81-A9E0-D8E82B52A94E}|GabriniCosmetics.csproj|solutionrelative:data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +26,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 299,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 116,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{65ddf8c3-8f89-4077-a6c6-dbb8853aab13}"
@@ -26,10 +47,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -214,10 +231,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:7:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
@@ -478,6 +491,58 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
+              "ToolTip": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAYwGEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-31T06:39:37.214Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoriesController.cs",
+              "ToolTip": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAArwFkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T06:19:21.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CheckoutController.cs",
+              "DocumentMoniker": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Controllers\\CheckoutController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
+              "ToolTip": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Controllers\\CheckoutController.cs",
+              "RelativeToolTip": "Controllers\\CheckoutController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAArwDMAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T06:19:21.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Data\\SeedData.cs",
+              "RelativeDocumentMoniker": "Data\\SeedData.cs",
+              "ToolTip": "C:\\Users\\OlaAlshloul\\Desktop\\GabriniCosmetic\\Data\\SeedData.cs",
+              "RelativeToolTip": "Data\\SeedData.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBwAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-31T06:21:30.903Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -492,10 +557,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",

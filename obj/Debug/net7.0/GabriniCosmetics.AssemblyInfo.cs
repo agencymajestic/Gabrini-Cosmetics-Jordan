@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GabriniCosmetics")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b2178ebf01465d129bf870c68bc6d6e400df997")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1e5698f8f3f97122fa742409a3cf36cb73a6e53")]
 [assembly: System.Reflection.AssemblyProductAttribute("GabriniCosmetics")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GabriniCosmetics")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
