@@ -1,0 +1,66 @@
+﻿<div class="side-2">
+    <button type="button" class="close-sidebar"><i class="icon icon-close" aria-label="title"></i></button>
+    <button type="button" class="sidebar-toggle"><i class="icon icon-ajax-filter" aria-label="title"></i></button>
+    <div class="side-2-container">
+        <div class="block block-account-navigation">
+            <div class="title"><strong>@Localizer["Myaccount"]</strong></div>
+            <div class="listbox">
+                <ul class="list list-account">
+                    <li class="customer-info"><a href="/Account/Profile">@Localizer["CustomerInfo"]</a></li>
+                    <li class="customer-addresses"><a href="/Address">@Localizer["Addresses"]</a></li>
+                    <li class="customer-orders"><a href="/Order">@Localizer["Orders"]</a></li>
+                    <li class="change-password"><a href="/Account/ChangePassword">@Localizer["ChangePassword"]</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.sidebar-toggle').on('click', function () {
+            $('.side-2').toggleClass('open');
+        });
+
+        $('.close-sidebar').on('click', function () {
+            $('.side-2').removeClass('open');
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the current page URL
+        var currentPageUrl = window.location.pathname;
+
+        // Get all the <a> tags inside the list
+        var anchorTags = document.querySelectorAll('.list-account li a');
+
+        // Function to handle setting the active state based on the current page URL
+        function setActiveState() {
+            // Remove the active class from all parent <li> tags
+            anchorTags.forEach(function (anchor) {
+                anchor.parentElement.classList.remove('active');
+                anchor.parentElement.classList.add('inactive');
+            });
+
+            // Add the active class to the corresponding parent <li> tag based on the current page URL
+            anchorTags.forEach(function (anchor) {
+                if (anchor.getAttribute('href') === currentPageUrl) {
+                    anchor.parentElement.classList.add('active');
+                    anchor.parentElement.classList.remove('inactive');
+                }
+            });
+        }
+
+        // Add the active state on page load
+        setActiveState();
+
+        // Update the active state on navigation click
+        document.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A') {
+                currentPageUrl = event.target.getAttribute('href');
+                setActiveState();
+            }
+        });
+    });
+</script>
+

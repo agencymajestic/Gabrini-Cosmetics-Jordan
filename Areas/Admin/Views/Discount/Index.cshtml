@@ -1,0 +1,126 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<GabriniCosmetics.Areas.Admin.Models.Discount>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="list-product-header">
+                        <div>
+                            <a class="btn btn-primary" href="/Admin/Discount/Create"><i class="fa fa-plus"></i>Add Discount</a>
+                        </div>
+                    </div>
+                    <div class="list-product list-category">
+                        <table class="table table-striped" id="discount-status">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox-primary" type="checkbox">
+                                        </div>
+                                    </th>
+                                    <th><span class="f-light f-w-600">Discount Code</span></th>
+                                    <th><span class="f-light f-w-600">Percentage (%)</span></th>
+                                    <th><span class="f-light f-w-600">Valid From</span></th>
+                                    <th><span class="f-light f-w-600">Valid To</span></th>
+                                    <th><span class="f-light f-w-600">Action</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="discount-removes">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input checkbox-primary" type="checkbox">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="f-light">@item.Code</p>
+                                        </td>
+                                        <td>
+                                            <p class="f-light">@item.Percentage</p>
+                                        </td>
+                                        <td>
+                                            <p class="f-light">@item.ValidFrom.ToShortDateString()</p>
+                                        </td>
+                                        <td>
+                                            <p class="f-light">@item.ValidTo.ToShortDateString()</p>
+                                        </td>
+                                        <td>
+                                            <div class="product-action">
+                                                <a class="action-icon" href="/Admin/Discount/Edit/@item.Id">
+                                                    <i class="fa-sharp fa-light fa-pen-to-square"></i>
+                                                </a>
+                                                <a class="action-icon" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id">
+                                                    <i class="fa-regular fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Modal for delete confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this discount?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="confirmDeleteButton">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var discountId;
+
+        // Setup modal for deleting a discount
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            discountId = button.data('id');
+            console.log('Discount ID to delete:', discountId); // Debug log
+        });
+
+        // Confirm delete button click event
+        $('#confirmDeleteButton').click(function () {
+            console.log('Confirm delete button clicked'); // Debug log
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/Discount/Delete',
+                contentType: 'application/json',
+                data: JSON.stringify(discountId),
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function () {
+                    console.log('Discount deleted successfully'); // Debug log
+                    location.reload();
+                },
+                error: function () {
+                    console.log('Error deleting discount'); // Debug log
+                    alert('Error deleting discount');
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<GabriniCosmetics.Areas.Admin.Models.CustomerInfo.Address>
+
+<style>
+    .master-column-wrapper {
+        display: flex;
+        margin-top: 15px;
+    }
+</style>
+
+<div class="master-wrapper-content">
+    <div class="master-column-wrapper custom-for-profile">
+        @Html.Partial("_Sidebar")
+        <div class="center-2">
+            <div class="page account-page address-list-page">
+                <div class="page-title">
+                    <h1>@Localizer["MyaccountAddresses"]</h1>
+                </div>
+                <div class="page-body">
+                    @if (Model.Count() > 0)
+                    {
+                        <div class="address-list">
+                            @foreach (var address in Model)
+                            {
+                                <div class="section address-item">
+                                    <div class="title"><strong>@address.FirstName @address.LastName</strong></div>
+                                    <div class="address-item-box">
+                                        <ul class="info fieldset">
+                                            <li class="name">@address.FirstName @address.LastName</li>
+                                            <li class="email"><label>@Localizer["Email"]:</label> @address.Email</li>
+                                            <li class="phone"><label>@Localizer["PhoneNumber"]:</label> @address.PhoneNumber</li>
+                                            @if (!string.IsNullOrEmpty(address.FaxNumber))
+                                            {
+                                                <li class="fax"><label>@Localizer["FaxNumber"]:</label> @address.FaxNumber</li>
+                                            }
+                                            <li class="city-state-zip">@Localizer["Address"]: @address.Country, @address.City, @address.Address1, @address.Address2</li>
+                                        </ul>
+                                        <div class="buttons address-list-page">
+                                            <button type="button" class="button-2 edit-address-button" onclick="window.location.href='@Url.Action("Edit", "Address", new { id = address.Id })'">@Localizer["Edit"] </button>
+                                            <button type="button" class="button-2 delete-address-button" onclick="confirmDelete(@address.Id)">@Localizer["Delete"]</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="no-data">@Localizer["NoAddresses"]</div>
+                    }
+                    <div class="add-button">
+                        <button type="button" class="button-1 add-address-button" onclick="window.location.href='@Url.Action("Create", "Address")'">@Localizer["AddNewAddress"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bar-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification success">
+        <p class="content">@Localizer["SuccessfullyDelete"]</p>
+        <span class="close" title="Close" onclick="hideNotification()"></span>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this address?")) {
+            deleteCustomerAddress(id);
+        }
+    }
+
+    function deleteCustomerAddress(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteAddress", "Address")',
+            type: 'POST',
+            data: { id: id },
+            success: function (result) {
+                if (result.success) {
+                    showNotification();
+                    setTimeout(() => {
+                        location.reload(); // Refresh the page or you can remove the deleted row from the table.
+                    }, 2000); // Adjust the delay as needed
+                } else {
+                    alert('Error deleting address: ' + result.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('An error occurred while deleting the address.');
+            }
+        });
+    }
+
+    function showNotification() {
+        var notification = document.getElementById('bar-notification');
+        notification.style.display = 'block';
+    }
+
+    function hideNotification() {
+        var notification = document.getElementById('bar-notification');
+        notification.style.display = 'none';
+    }
+</script>

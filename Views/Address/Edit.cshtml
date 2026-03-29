@@ -1,0 +1,152 @@
+﻿@model GabriniCosmetics.Areas.Admin.Models.CustomerInfo.Address
+
+@{
+    ViewData["Title"] = "Edit Address";
+}
+
+<style>
+    .master-column-wrapper {
+        display: flex;
+        margin-top: 15px;
+    }
+</style>
+
+<div class="master-wrapper-content">
+    <div class="master-column-wrapper custom-for-profile">
+        @await Html.PartialAsync("_Sidebar")
+        <div class="center-2">
+            <form asp-action="Edit" method="post" novalidate id="editAddressForm">
+                @Html.AntiForgeryToken()
+                <div class="page account-page address-edit-page">
+                    <div class="page-title">
+                        <h1>@Localizer["EditAddress"]</h1>
+                    </div>
+                    <div class="page-body">
+                        @Html.HiddenFor(m => m.Id)
+                        <div class="edit-address-container">
+                            <div class="edit-address">
+                                <div class="inputs">
+                                    <label asp-for="FirstName">@Localizer["FirstName"]</label>
+                                    <input asp-for="FirstName" class="input" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="LastName">@Localizer["LastName"]</label>
+                                    <input asp-for="LastName" class="input" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                                <div class="inputs" style="width: calc(100% - 12px)">
+                                    <label asp-for="Email">@Localizer["Email"]</label>
+                                    <input asp-for="Email" class="input" type="email" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="Country">@Localizer["Country"]</label>
+                                    <select asp-for="Country">
+                                        <option value="">@Localizer["SelectCountry"]</option>
+                                        <option value="Jordan">@Localizer["Jordan"]</option>
+                                    </select>
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="City">@Localizer["City"]</label>
+                                    <select asp-for="City">
+                                        <option value="">@Localizer["SelectState"]</option>
+                                        <option value="Amman">@Localizer["Amman"]</option>
+                                        <option value="Irbid">@Localizer["Irbid"]</option>
+                                        <option value="Zarqa">@Localizer["Zarqa"]</option>
+                                        <option value="Jerash">@Localizer["Jerash"]</option>
+                                        <option value="Ma_an">@Localizer["Ma_an"]</option>
+                                        <option value="Al_Salt">@Localizer["Al_Salt"]</option>
+                                        <option value="Ajloun">@Localizer["Ajloun"]</option>
+                                        <option value="Aqaba">@Localizer["Aqaba"]</option>
+                                        <option value="Tafilah">@Localizer["Tafilah"]</option>
+                                        <option value="Madaba">@Localizer["Madaba"]</option>
+                                        <option value="Mafraq">@Localizer["Mafraq"]</option>
+                                        <option value="Karak">@Localizer["Karak"]</option>
+                                    </select>
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="Address1">@Localizer["Address1"]</label>
+                                    <input asp-for="Address1" class="input" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="Address1" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="Address2">@Localizer["Address2"]</label>
+                                    <input asp-for="Address2" class="input" />
+                                    <span asp-validation-for="Address2" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="PhoneNumber">@Localizer["PhoneNumber"]</label>
+                                    <input asp-for="PhoneNumber" class="input" type="tel" />
+                                    <span class="required">*</span>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="inputs">
+                                    <label asp-for="FaxNumber">@Localizer["FaxNumber"]</label>
+                                    <input asp-for="FaxNumber" class="input" />
+                                    <span asp-validation-for="FaxNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" class="button-1 save-address-button">@Localizer["Save"]</button>
+                            <a href="@Url.Action("Index", "Address")" class="button-1 add-address-button">@Localizer["Cancel"]</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="bar-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification success">
+        <p class="content">@Localizer["SuccessfullyEdit"]</p>
+        <span class="close" title="Close" onclick="hideNotification()"></span>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $('#editAddressForm').submit(function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = $(this).serialize(); // Serialize form data
+            var actionUrl = $(this).attr('action'); // Get form action URL
+
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Show the success notification
+                    $('#bar-notification').show()
+                    // Wait for 2 seconds
+                    setTimeout(function () {
+                        // Reload the page after 2 seconds
+                        window.location.href = '/Address/Index';
+                    }, 2000);
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response if needed
+                    console.error('Error submitting form: ' + error);
+                }
+            });
+        });
+    });
+
+    function hideNotification() {
+        $('#bar-notification').hide();
+    }
+</script>
+

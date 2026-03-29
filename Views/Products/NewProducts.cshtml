@@ -1,0 +1,494 @@
+﻿@using GabriniCosmetics.Areas.Admin.Models.DTOs
+@model List<ProductView>
+@inject GabriniCosmetics.Areas.Admin.Models.Interface.ISubcategory _subcategory;
+@inject GabriniCosmetics.Areas.Admin.Models.Interface.ICategory _category;
+@inject GabriniCosmetics.Areas.Admin.Models.Interface.IProduct _products;
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+}
+<div class="breadcrumb">
+    <div class="container">
+        <div class="page-title">
+            <h1>@Localizer["NewProducts"]</h1>
+        </div>
+        <ul>
+            <li><a href="/" title="Home">@Localizer["Home"]</a> <span class="delimiter">/</span></li>
+            <li>
+                <strong class="current-item" itemprop="name">@Localizer["NewProducts"]</strong>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="master-wrapper-content">
+    <div class="master-column-wrapper" style="display:flex;margin-top: 16px;">
+        <div class="side-2">
+            <button type="button" class="close-sidebar">
+                <i class="icon icon-close" aria-label="title"></i>
+            </button>
+            <button type="button" class="sidebar-toggle">
+                <i class="icon icon-ajax-filter" aria-label="title"></i>
+            </button>
+
+            @{
+                var allProducts = await _products.GetProducts();
+                var subCategoryDictionary = new Dictionary<string, int>();
+                var categoryDictionary = new Dictionary<string, int>();
+
+                @if (allProducts != null && allProducts.Count() > 0)
+                {
+                    foreach (var item in allProducts)
+                    {
+                        var subcategory = await _subcategory.GetSubcategoryById(item.SubcategoryId);
+                        var category = await _category.GetCategoryById(subcategory.CategoryId);
+
+                        var namesubcategory = culture.StartsWith("en") ? subcategory.NameEn : subcategory.NameAr;
+                        var namecategory = culture.StartsWith("en") ? category.NameEn : category.NameAr;
+
+                        if (!subCategoryDictionary.ContainsKey(namesubcategory))
+                        {
+                            subCategoryDictionary.Add(namesubcategory, subcategory.Id);
+                        }
+
+                        if (!categoryDictionary.ContainsKey(namecategory))
+                        {
+                            categoryDictionary.Add(namecategory, category.Id);
+                        }
+                    }
+                }
+            }
+            <form asp-controller="Products" asp-action="NewProducts" id="filter-form" method="get">
+                <!-- Hidden inputs to pass the current product IDs -->
+                @foreach (var item in allProducts)
+                {
+                    <input type="hidden" name="productIds" value="@item.Id" />
+                }
+
+                <!-- Existing filter form -->
+                <div class="side-2-container">
+                    <div class="block product-filters">
+                        <!-- Filter by Categories -->
+                        <div class="product-filter product-category-filter">
+                            <div class="filter-title"><strong>@Localizer["FilterbyCategory"]</strong></div>
+                            <div class="filter-content">
+                                <ul class="group product-category-group">
+                                    @foreach (var item in categoryDictionary.OrderBy(x => x.Value))
+                                    {
+                                        var selectedCategories = ViewData["SelectedCategories"] as List<string> ?? new List<string>();
+
+                                        <li class="item">
+                                            <input id="attribute-category-@item.Value" type="checkbox" name="selectedCategories" value="@item.Value"
+                                            @(selectedCategories.Contains(item.Value.ToString()) ? "checked" : "") />
+                                            <label for="attribute-category-@item.Value"> @item.Key</label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Filter by Subcategories -->
+                        <div class="product-filter product-manufacturer-filter">
+                            <div class="filter-title"><strong>@Localizer["Filterbysubcategory"]</strong></div>
+                            <div class="filter-content">
+                                <ul class="group product-manufacturer-group">
+                                    @foreach (var item in subCategoryDictionary.OrderBy(x => x.Value))
+                                    {
+                                        var selectedSubcategories = ViewData["SelectedSubcategories"] as List<string> ?? new List<string>();
+
+                                        <li class="item">
+                                            <input id="attribute-manufacturer-@item.Value" type="checkbox" name="selectedSubcategories" value="@item.Value"
+                                            @(selectedSubcategories.Contains(item.Value.ToString()) ? "checked" : "") />
+                                            <label for="attribute-manufacturer-@item.Value"> @item.Key</label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reset and Apply Buttons -->
+                    <div class="filter-actions">
+                        <button type="button" id="reset-filters" class="button-1">@Localizer["ResetFilters"]</button>
+                        <button type="submit" id="apply-filters" class="button-1">@Localizer["ApplyFilters"]</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="center-2">
+            <div class="page category-page">
+                <div class="page-body">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        @Html.Partial("_ListOfProducts", Model)
+                    }
+                    else
+                    {
+                        <div class="no-result">@Localizer["NotFound"]</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="product-detail" class="mfp-wrap mfp-close-btn-in mfp-auto-cursor quickview-popup mfp-ready" tabindex="-1" style="overflow: hidden auto; display: none;">
+    <div class="mfp-container mfp-s-ready mfp-inline-holder">
+        <div class="mfp-content">
+            <div class="qv-modal" id="qv-modal" style="display: block;">
+                <div class="qv-details">
+                    <div class="page product-details-page">
+                        <div class="page-body">
+                            <div class="product-name">
+                                <h2 id="product-name" itemprop="name"></h2>
+                            </div>
+                            <form method="post" id="product-details-form" action="">
+                                <div data-productid="">
+                                    <div class="product-essential">
+                                        <!-- Product pictures -->
+                                        <div class="gallery" id="product-gallery">
+                                            <!-- Dynamic content will be inserted here -->
+                                        </div>
+                                        <div class="overview">
+                                            <div class="product-overview-content">
+                                                <!-- SKU -->
+                                                <div class="additional-details">
+                                                    <div class="sku">
+                                                        <span class="value">@Localizer["Category"]:</span>
+                                                        <span class="label" id="product-Category"></span>
+                                                    </div>
+                                                    <div class="sku">
+                                                        <span class="value">@Localizer["SubCategory"]:</span>
+                                                        <span class="label" id="product-subCategory"></span>
+                                                    </div>
+                                                    <div class="sku">
+                                                        <span class="value">@Localizer["Product"]:</span>
+                                                        <span class="label" id="products"></span>
+                                                    </div>
+                                                </div>
+                                                <!-- Attributes -->
+                                                <div class="attributes" id="product-attributes">
+                                                    <!-- Dynamic content will be inserted here -->
+                                                </div>
+                                            </div>
+                                            <div class="product-overview-pricing-cart">
+                                                <!-- Price & add to cart -->
+                                                <div class="prices">
+                                                    <div class="product-price">
+                                                        <span itemprop="price" id="product-price" class="price-value"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <div class="add-to-cart-panel">
+                                                        <button type="button" id="add-to-cart-button" data-product-id="" class="button-1 add-to-cart-button">
+                                                            <i class="icon-cart mr-2"></i> @Localizer["AddToCart"]
+                                                        </button>
+                                                        <div class="qty-input-wrap">
+                                                            <button type="button" class="qty-btn qty-minus" value="-1">-</button>
+                                                            <input id="product-quantity" class="qty-input" type="text" aria-label="Enter a quantity" value="1">
+                                                            <button type="button" class="qty-btn qty-plus" value="1">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Wishlist -->
+                                                <div class="overview-buttons">
+                                                    <div class="add-to-wishlist">
+                                                        <button type="button" data-product-id="" class="button-2 AddToWishlistWithQtyAngImg">
+                                                            <i class="icon-heart mr-2"></i> @Localizer["AddtoWishlist"]
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bar-notification-wishlist" class="bar-notification-container" data-close="Close">
+    <div class="bar-notification success" style="display: none;">
+        <p class="content">@Localizer["AlertAdded"] <a href="/Wishlist">@Localizer["wishlist"]</a></p>
+        <span class="close" title="Close"></span>
+    </div>
+</div>
+
+<!-- Error Notification -->
+<div id="bar-notification-error" class="bar-notification-container" data-close="Close">
+    <div class="bar-notification error" style="display: none;">
+        <p class="content">@Localizer["PleaseSelectColor"]</p>
+        <span class="close" title="Close"></span>
+    </div>
+</div>
+
+<script>
+    // Update Product Detail Modal
+    function updateProductDetailModal(product) {
+
+        var culture = "@culture";
+        if (culture.startsWith("en")) {
+            var PNameEn = product.nameEn;
+            var CNameEn = product.subcategory.category.nameEn;
+            var SCNameEn = product.subcategory.nameEn;
+        } else {
+            var PNameEn = product.nameAr;
+            var CNameEn = product.subcategory.category.nameAr;
+            var SCNameEn = product.subcategory.nameAr;
+        }
+        $('#product-name').text(PNameEn);
+        $('#product-Category').text(CNameEn);
+        $('#product-subCategory').text(SCNameEn);
+        $('#products').text(PNameEn);
+        $('#product-quantity').val(1);
+
+        const localizerJOD = "JOD";
+        const gallery = $('#product-gallery');
+        gallery.empty();
+
+        // Add the <dt> and <dd> tags once
+        gallery.append(`
+                    <div id="wrap" style="top:0px;z-index:9999;position:relative;">
+                            <img alt="@Localizer["PictureOf"] ${PNameEn}" src="${window.location.origin}/uploads/${product.subproducts.$values[0].image.imagePath}" title="@Localizer["PictureOf"] ${PNameEn}" style="height: auto; width: 100%; border-width: 0px; display: block;" class="cloud-zoom-image cloud-zoom-image-size" width="400" id="dbrandImage">
+                    </div>
+                `);
+
+        product.subproducts.$values.forEach(subproduct => {
+            gallery.append(`
+                        <div class="cloud-zoom-thumb" style="margin-top:16px">
+                            <a href="${window.location.origin}/uploads/${subproduct.image.imagePath}" rel="lightbox-p" class="src-zoom-anchor" onclick="return false;">
+                                <img src="${window.location.origin}/uploads/${subproduct.image.imagePath}" alt="Product Image" class="src-zoom-image">
+                            </a>
+                        </div>
+                    `);
+        });
+
+        function changeMainImage(newSrc) {
+            document.getElementById('dbrandImage').src = newSrc;
+        }
+
+        $(".cloud-zoom-thumb a").on("click", function () {
+            const newSrc = $(this).attr('href');
+            changeMainImage(newSrc);
+        });
+
+        // Set the data-product-id attribute for the Add to wishlist button
+        $('.AddToWishlistWithQtyAngImg').attr('data-product-id', product.id);
+        $('#add-to-cart-button').attr('data-product-id', product.id);
+
+        // Update price based on flags
+        const priceElement = $('#product-price');
+        priceElement.empty(); // Clear previous price content
+
+        if (product.flags.$values.some(flag => flag.flagType === 'Sale')) {
+            priceElement.append(`
+                        <div class="prices">
+                            <div class="old-product-price">
+                                <span>Old price:</span>
+                                <span>${product.price} ${localizerJOD}</span>
+                            </div>
+                            <div class="product-price">
+                                <label>Price:</label>
+                                <span class="price-value">${product.priceAfterDiscount} ${localizerJOD}</span>
+                            </div>
+                        </div>
+                    `);
+        } else {
+            priceElement.append(`
+                    <div class="product-price">
+                        <label>Price:</label>
+                        <span itemprop="price" class="price-value">${product.price} ${localizerJOD}</span>
+                    </div>
+                    `);
+        }
+    }
+
+    $(document).ready(function () {
+
+        var carousel = new Swiper("#ocarousel", {
+            observer: true,
+            observeParents: true,
+            breakpoints: {
+                0: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 10
+                },
+                480: {
+                    slidesPerView: 3.5,
+                    spaceBetween: 10
+                },
+                767: {
+                    slidesPerView: 4,
+                    spaceBetween: 12
+                },
+                1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 12
+                },
+                1200: {
+                    slidesPerView: 6,
+                    spaceBetween: 12
+                }
+            },
+            lazy: true,
+            loop: true,
+            centeredSlides: false,
+            initialSlide: 0.00,
+            on: {
+                init: function (swiper) {
+                    $(document).trigger({ type: "swiper_initialized", swiper: swiper });
+                },
+            },
+
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+
+            navigation: {
+                nextEl: ".swiper-next",
+                prevEl: ".swiper-prev",
+            },
+        });
+
+        // Quick View Button
+        $(document).on('click', '.quick-view-btn', async function () {
+            const productId = $(this).data('product-id');
+            try {
+
+                const response = await fetch(`/Products/GetProductById/${productId}`);
+                ;
+                if (response.status == 200) {
+                    const product = await response.json();
+                    updateProductDetailModal(product);
+                    $('#product-detail').show();
+                } else {
+                    console.error('Failed to fetch product details');
+                }
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        });
+
+        $('.mfp-close').on('click', function () {
+            $('#product-detail').hide();
+        });
+
+        var productsOrderby = $('#products-orderby');
+        // Load the saved selected option from localStorage
+        var savedValue = localStorage.getItem('selectedOption');
+        if (savedValue) {
+            productsOrderby.val(savedValue);
+        } else {
+            // Set the initial selected option to "A to Z" if no saved value
+            productsOrderby.val('aToZ');
+            // Save the initial selected option to localStorage
+            localStorage.setItem('selectedOption', 'aToZ');
+        }
+
+        // Listen for change event on the select element
+        productsOrderby.change(function () {
+            // Get the selected option value
+            var selectedValue = $(this).val();
+
+            // Save the selected option to localStorage
+            localStorage.setItem('selectedOption', selectedValue);
+            window.location.href = '/Products/NewProducts?sortOrder=' + selectedValue;
+        });
+
+        const $gridButton = $('.btn-grid');
+        const $listButton = $('.btn-list');
+        const $productGrid = $('.product-grid');
+        const $productList = $('.product-list');
+
+        $gridButton.on('click', function (event) {
+            event.preventDefault();
+            $productGrid.show();
+            $productList.hide();
+            $gridButton.addClass('selected');
+            $listButton.removeClass('selected');
+        });
+
+        $listButton.on('click', function (event) {
+            event.preventDefault();
+            $productGrid.hide();
+            $productList.show();
+            $gridButton.removeClass('selected');
+            $listButton.addClass('selected');
+        });
+
+        $(".AddToWishlistWithQtyAngImg").on("click", async function () {
+            var productId = $(this).attr('data-product-id');
+            window.location.href = `/Products/Detail?Id=${productId}`;
+            @* var qty = $('.qty-input').val();
+            var img = $('#dbrandImage').attr('src').split('/').pop();
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <text>
+                                    try {
+                    var response = await fetch(`/WishList/AddItemWithQtyAndImage?productId=${productId}&qty=${qty}&image=${img}`);
+                    if (response.status == 200) {
+                        // Show the success notification
+                        $('#bar-notification-error .bar-notification.error').hide();
+                        $('#bar-notification-wishlist .bar-notification.success').show();
+                        // Wait for 2 seconds
+                        setTimeout(function () {
+                            // Reload the page after 2 seconds
+                            location.reload();
+                        }, 2000);
+                    }
+                } catch (err) {
+                    console.error('Error:', err);
+                }
+        </text>
+    }
+    else
+    {
+        <text>window.open("/Account/Login", "_self"); </text>
+    } *@
+            });
+
+        $('#add-to-cart-button').on('click', function () {
+            var productId = $(this).attr('data-product-Id');
+            window.location.href = `/Products/Detail?Id=${productId}`;
+        });
+
+        // Add to wishlist button click handler
+        $('.add-to-wishlist-button').on('click', function () {
+            var productId = $(this).attr('data-product-id');
+            window.location.href = `/Products/Detail?Id=${productId}`;
+        });
+
+        $('.sidebar-toggle').on('click', function () {
+            $('.side-2').toggleClass('open');
+        });
+
+        $('.close-sidebar').on('click', function () {
+            $('.side-2').removeClass('open');
+        });
+
+        // Handle Reset Filters Button Click
+        $('#reset-filters').on('click', function () {
+            // Uncheck all checkboxes
+            $('input[name="selectedColors"]').prop('checked', false);
+            $('input[name="selectedSubcategories"]').prop('checked', false);
+
+            // Submit the form
+            $('#filter-form').submit();
+        });
+
+        // Handle Apply Filters Button Click
+        $('#apply-filters').on('click', function () {
+            $('#filter-form').submit();
+        });
+    });
+
+</script>
+

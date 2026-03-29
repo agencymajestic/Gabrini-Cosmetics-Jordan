@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="PrivacyPolicyPage" xml:space="preserve">
+    <value>&lt;p&gt;Thank you for visiting us! We value our relationship to our customers, and we place top priority on your privacy. As a company located in Zarqa-Jordan, we want to let you know how we collect information, the type of information we collect, and the potential use of that information. We utilise all resources and information available to us to continuously improve our services that we provide to you and to gain insight on our practices and marketing data. Our motto is to continuously strive as the best and leading industry supplier.&lt;/p&gt;
+&lt;p&gt;This Privacy Policy sets out how Gabrini Cosmetics Company - Jordan Uses and protects any information that you the user provides when you visit the website www.gabrinijo.com Except as otherwise provided herein, this Privacy Policy applies to all services offered by us on this Website. Except as otherwise provided herein, this Privacy Policy applies only to information collected through our Website.&lt;/p&gt;
+&lt;p&gt;We may collect information such as your personal information, payment information, identity verification information, geolocation by using our website, subscribing to our emails, clicking links, purchasing products. You are providing consent to the use and collection of communication and website activity transmitted by electronic device. We may also collect device and online information such as device identifiers, including but not limited to IP addresses and MAC addresses, and online activity such as interaction and activity on our website, type of devices used by you, browser type, and other website activity. By using our website, you provide consent that website activity, communications, and any other information excluding personal information may be collected by us or third parties to improve our business and to gain insight on marketing data or for other purposes.&lt;/p&gt;
+&lt;p&gt;There are various ways through which we collect information. We may directly receive information from you such as when you open a personal account , when you make purchases, use our contact forms or any other fields used for inputting information, and emails. We also use other methods such as cookies and automated data collection methods including but not limited to third parties, such as marketing applications and services, used to collect marketing data for service improvement. There are also other types of third-party data collection methods such as advertisement partners and other business partners or collaborators.&lt;/p&gt;
+&lt;p&gt;This Privacy Policy does not cover the information practices of third parties, including other companies that may advertise on this Website. In addition, the Website may contain links to third party websites. Please note that once you click on such a link, you will have left our Website and should be aware that we do not have any control over third party websites. Use of third party websites, and collection of information by those parties, are governed by their privacy policies. We encourage you to exercise caution and review their privacy policies before using their websites. Nonetheless, we seek to protect the integrity of our Website and welcome any feedback about these third party websites.&lt;/p&gt;
+&lt;p&gt;We value your privacy and do not ever sell your information. We want to make sure that your personal information is protected from accidental, unlawful, or unauthorised use, destruction, loss, alteration, access, and disclosure. All collection of data is intended for the improvement of our services, and any information we share is limited to our business affiliates, service providers, platforms and parties involved in transactions and interactions that make our services possible for you, advertising companies, and other third parties, such as for consumer protection purposes. You have the right to opt-out of services you do not consent to, such as email opt-outs and rejecting or customising cookies, among other options.&lt;/p&gt;
+&lt;p&gt;Please read this Privacy Policy carefully to understand our policies and practices regarding your information and how we will treat it. If you do not agree with our policies and practices, do not use our Website. By accessing or using this Website, you agree to this Privacy Policy. We may revise and update our Privacy Policy from time to time, and all updates will be posted on this page. Unless otherwise required by law, your continued use of this Website after we make changes is deemed to be acceptance of those changes, so please check the Privacy Policy periodically for updates.&lt;/p&gt;
+&lt;p&gt;By using our website, you give us consent to these terms listed above. If you feel any concern or have any questions, please feel free to reach out to us at your convenience so we can help you feel at ease while shopping with us. We are here to make your goals and plans come true.&lt;/p&gt;</value>
+  </data>
+</root>

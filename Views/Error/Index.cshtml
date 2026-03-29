@@ -1,0 +1,41 @@
+﻿
+<style>
+    .page-title{
+        position: relative;
+        background: var(--primary-green_light);
+        color: var(--primary-green_dark);
+        text-align: center;
+        padding: 10px;
+        box-shadow: -1px 1px 2px rgba(0, 0, 0, .1);
+        font-size: 10px !important;
+        font-weight: bolder !important;
+    }
+</style>
+
+<div class="container-fluid p-3">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <div class="page topic-page text-center" id="ph-topic">
+
+                <!-- Title -->
+                <div class="page-title mb-4" id="ph-title">
+                    <h1 class="display-5">@Localizer["title"]</h1>
+                </div>                
+
+                <!-- Error Image Section -->
+                <div class="footer about-us-bg mb-4">
+                    <div class="newsletter">
+                        <div class="newsletter-container about-us-bg-img w-100" style="background: url(/images/gabrinicosmetics/page-not-found.png) no-repeat center center; background-size: contain; height: 250px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div class="page-body master-wrapper-content">
+                    <p class="lead">@Localizer["errormessage"]</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model GabriniCosmetics.Areas.Admin.Models.Discount
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create New Discount</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-wrapper border rounded-3">
+                        <form href="/Admin/Discount/Edit" method="post" class="row g-3" id="editDiscountForm">
+                            <div class="col-md-12">
+                                <label class="form-label" for="Code">Enter Discount Code</label>
+                                <input class="form-control" asp-for="Code" placeholder="Enter 8-digit Discount Code" required maxlength="8">
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="Percentage">Discount Percentage</label>
+                                <input class="form-control" asp-for="Percentage" placeholder="Enter Discount Percentage" type="number" min="0" max="100" required>
+                                <span asp-validation-for="Percentage" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="ValidFrom">Valid From</label>
+                                <input class="form-control" asp-for="ValidFrom" type="date" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="ValidFrom" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="ValidTo">Valid To</label>
+                                <input class="form-control" asp-for="ValidTo" type="date" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="ValidTo" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12 d-flex gap-2 justify-content-end">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                                <a class="btn btn-secondary" href="/Admin/Discount">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

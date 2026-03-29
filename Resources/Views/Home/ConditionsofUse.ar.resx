@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConditionsofUse" xml:space="preserve">
+    <value>شروط الإستخدام</value>
+  </data>
+  <data name="ConditionsofUsePage" xml:space="preserve">
+    <value>&lt;p&gt;شكرا لكم لزيارة موقعنا الذي تملكه وتديره شركة جابريني لمستحضرات التجميل - الأردن. يرجى قراءة شروط الاستخدام هذه بعناية قبل استخدام الخدمات. شروط الاستخدام هذه المنصوص عليها في شروط الاستخدام الملزمة قانوناً لاستخدامك لهذا الموقع وأي خدمات أو مميزات أو محتويات أو عروض مقدمة أو أي عمليات شراء تقوم بها ذات صلة. تنطبق شروط الاستخدام هذه على جميع مستخدمي الموقع، بما في ذلك، على سبيل المثال لا الحصر، المستخدمين المساهمين بالمحتوى والمعلومات والمواد أو الخدمات الأخرى الموجودة على الموقع. إذا كنت لا توافق على شروط الاستخدام ، فلا يحق لك الوصول إلى الموقع أو عرضه أو تنزيله أو استخدامه بأي طريقة أخرى أو شراء أي عنصر، وبالتالي، لا يجب عليك القيام بذلك.&lt;/p&gt;
+
+&lt;p&gt;يجوز لنا وفقاً لتقديرنا الخاص تغيير أو إضافة أو حذف أجزاء من شروط الاستخدام هذه في أي وقت على أساس مستمر. تقع على عاتقك مسؤولية التحقق من شروط الاستخدام هذه لمعرفة التغييرات قبل استخدام الموقع، واستمرار استخدامك للموقع بعد نشر التغييرات على شروط الاستخدام هذه يشكل موافقتك على أي تغييرات.&lt;/p&gt;
+
+&lt;strong&gt;حماية البيانات الشخصية&lt;/strong&gt;
+&lt;p&gt;تضمن شركة جابريني لمستحضرات التجميل - الأردن السرية التامة لجميع البيانات المقدمة. لدينا وجهة نظر واحدة تجعل تجربة العميل: الوصول السريع إلى جميع المنتجات والطلبات المقدمة والاتصالات المستلمة بشأن العناصر أو العروض الترويجية أو أي محتوى آخر ذي صلة للزوار. في أي وقت، يمكن للعملاء الوصول إلى حساباتهم وتغيير بياناتهم الشخصية.&lt;/p&gt;
+
+&lt;strong&gt;إستلام الطلبات&lt;/strong&gt;
+&lt;p&gt;يمكن استلام الطلبات من مستودعاتنا بين الساعة 9 صباحاً و 4 مساءً. ومع ذلك، لا تزال بحاجة إلى تقديم طلبك عبر موقعنا الإلكتروني حتى نتمكن من تجهيز طلبك. نظراً لأن موقعنا لا يقدم خيار "الاستلام" كخيار شحن، فيتعين عليك دفع تكاليف الشحن عند تقديم طلبك وسنقوم برد أموالك بالكامل. قبل القدوم إلى مستودعاتنا، يرجى الاتصال أولاً على +962-79-619-46-30 من أن طلبك جاهز.&lt;/p&gt;
+
+&lt;strong&gt;أهلية&lt;/strong&gt;
+&lt;p&gt;أنت تقر وتتعهد بأنك (أ) تجاوزت سن الرشد القانوني في نطاق اختصاص إقامتك، (ب) لم يتم تعليقك أو إزالتك من الموقع سابقاً، (ج) ليس لديك أكثر من حساب واحد (1) في في أي وقت محدد للموقع؛ (د) سوف تزودنا فقط بمعلومات صحيحة ودقيقة وحديثة وكاملة إذا قمت بالتسجيل للحصول على حساب و / أو طلبات (محددة أدناه). إذا اعتقدنا أو اشتبهنا في أن معلوماتك غير صحيحة أو دقيقة أو حديثة أو كاملة أو اشتبه في استخدام احتيالي للموقع عبر أي أدوات آلية أو غير ذلك، فيجوز لنا رفض أو إنهاء وصولك إلى الموقع أو الخدمات (أو أي جزء منها) و (هـ) أن لديك السلطة الكاملة للدخول في شروط الاستخدام وبقيامك بذلك لن ينتهك أي اتفاقية أخرى أنت طرف فيها.&lt;/p&gt;
+
+&lt;strong&gt;عروض خاصة بالجملة&lt;/strong&gt;
+&lt;p&gt;عادة ما تكون هذه المنتجات غير متوفرة في المخزون ويتم تطبيق شروط خاصة. يختلف المهلة اعتماداً كبيراً على المنتج. يُنصح العميل بالبحث عن بريد إلكتروني من خدمة العملاء، بعد تقديم طلب يتضمن جملة خاصة.&lt;/p&gt;
+
+&lt;strong&gt;عودة الطلبات&lt;/strong&gt;
+&lt;p&gt;عودة الطلبات عادة ما تكون جميع المنتجات في المخزون ومتاحة بسهولة. ومع ذلك، على الرغم من أننا نزيد باستمرار مخزوناتنا، فقد يحدث أن ينفذ أحد العناصر من المخزون. يرجى إبلاغنا برغبتك في إعادة طلب العنصر حيث لا يتم طلب إعادة الطلب تلقائياً&lt;/p&gt;</value>
+  </data>
+</root>

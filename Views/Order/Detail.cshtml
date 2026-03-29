@@ -1,0 +1,450 @@
+﻿@model GabriniCosmetics.Models.ViewModel.OrderDetailVM
+@using System.Globalization
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    string[] states = new string[]
+    {
+        "Amman",
+        "Irbid",
+        "Zarqa",
+        "Jerash",
+        "Ma_an",
+        "Al_Salt",
+        "Ajloun",
+        "Aqaba",
+        "Tafilah",
+        "Madaba",
+        "Mafraq",
+        "Karak",
+    };
+}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+</head>
+<div class="master-column-wrapper">
+    <div class="center-1">
+        <div class="page order-details-page">
+            <div class="page-title">
+                <h1>@Localizer["OrderInformation"]</h1>
+            </div>
+            <div class="page-body master-wrapper-content">
+                <div class="order-details-area">
+                    <div class="order-overview">
+                        <div class="order-number"><strong>@Localizer["OrderNumber"]: @Model.OrderItems.First().OrderID</strong></div>
+                        <ul class="order-overview-content">
+                            <li class="order-date">
+                                @Localizer["OrderDate"]:
+
+                                @{
+                                    // string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+
+                                    string timestampString = @Model.OrderItems.First().Order.Timestamp;
+                                    string formattedDate = "";
+                                    string formattedTime = "";
+
+                                    DateTime timestamp;
+                                    if (DateTime.TryParseExact(timestampString, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out timestamp))
+                                    {
+                                        DateTime dateOnly = timestamp.Date;
+                                        formattedDate = dateOnly.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo(culture));
+                                        formattedTime = timestamp.ToString("h:mm:ss tt", CultureInfo.GetCultureInfo(culture));
+                                    }
+
+                                }
+                                <span>@formattedDate @formattedTime </span>
+                            </li>
+                            <li class="order-status">@Localizer["OrderStatus"]: @Model.OrderItems.First().Order.OrderStatus</li>
+                        </ul>
+                    </div>
+                    <div class="billing-shipping-wrapper">
+                        <div class="billing-info-wrap" style="width : 100% !important">
+                            @if (Model.OrderItems.First().Order.OrderStatus.Trim() == "Pending")
+                            {
+                                <div class="billing-info">
+                                    @*  <div class="title">
+                                        <strong>Billing Address</strong>
+                                    </div> *@
+                                    <div class="master-wrapper-page">
+                                        <div class="master-wrapper-content">
+                                            <div class="master-column-wrapper">
+                                                <div class="center-1">
+                                                    <div class="page checkout-page spc">
+                                                        <form asp-controller="Order" asp-action="UpdateInfo" method="post" id="opc-billing-form">
+                                                            <div class="spc-row">
+                                                                <div class="spc-collumn left">
+                                                                    <div class="spc-billing">
+                                                                        <div id="checkout-step-billing" style="display:block" class="step a-item accordion">
+                                                                            <div class="section new-billing-address" id="billing-new-address-form">
+                                                                                <div class="edit-address">
+                                                                                    <div class="inputs">
+                                                                                        <input type="hidden" asp-for="@Model.OrderItems.First().Order.ID" />
+                                                                                        <label for="BillingNewAddress_FirstName">@Localizer["FirstName"]:</label>
+                                                                                        <input asp-for="@Model.OrderItems.First().Order.FirstName" placeholder="@Localizer["FirstName"]" type="text">
+                                                                                        <span class="required">*</span>
+                                                                                    </div>
+
+                                                                                    <div class="inputs">
+                                                                                        <label for="BillingNewAddress_LastName">@Localizer["LastName"]:</label>
+                                                                                        <input asp-for="@Model.OrderItems.First().Order.LastName" placeholder="@Localizer["LastName"]" type="text">
+                                                                                        <span class="required">*</span>
+                                                                                    </div>
+
+                                                                                    <div class="inputs address-input">
+                                                                                        <label for="BillingNewAddress_Email">@Localizer["Email"]:</label>
+                                                                                        <input id="emailInput" asp-for="@Model.OrderItems.First().Order.Email" placeholder="@Localizer["Email"]" type="email">
+                                                                                        <span class="required">*</span>
+                                                                                    </div>
+
+                                                                                    @* <div class="inputs">
+                                                                                        <label for="BillingNewAddress_CountryId">@Localizer["Country"]:</label>
+                                                                                        <select class="disabled" id="BillingNewAddress_CountryId" asp-for="@Model.OrderItems.First().Order.Country" disabled="disabled">
+                                                                                            <option value="Jordan">@Localizer["Jordan"]</option>
+                                                                                        </select>
+                                                                                        <span class="required">*</span>
+                                                                                    </div>
+
+                                                                                    <div class="inputs">
+                                                                                        <label for="BillingNewAddress_StateProvinceId">@Localizer["State"]:</label>
+                                                                                        <select class="disabled" data-trigger="state-select" id="StateProvinceId" asp-for="@Model.OrderItems.First().Order.City" disabled="disabled">
+                                                                                            <option selected disabled value="@Model.OrderItems.First().Order.City">@Model.OrderItems.First().Order.City</option>
+                                                                                            @foreach (string state in states)
+                                                                                            {
+                                                                                                <!option data-tax="@(state == "Amman" ? "2" : "3")" value="@state">
+                                                                                                    @Localizer[state]
+                                                                                                </!option>
+                                                                                            }
+                                                                                        </select>
+                                                                                        <span class="required">*</span>
+                                                                                    </div> *@
+
+                                                                                    <div class="inputs">
+                                                                                        <label for="BillingNewAddress_PhoneNumber">@Localizer["PhoneNumber"]:</label>
+                                                                                        <input id="phoneInput" asp-for="@Model.OrderItems.First().Order.Phone" placeholder="@Localizer["PhoneNumber"]" type="tel">
+                                                                                        <span class="required">*</span>
+                                                                                    </div>
+
+                                                                                    <div class="inputs">
+                                                                                        <label for="BillingNewAddress_FaxNumber">@Localizer["FaxNumber"]:</label>
+                                                                                        <input asp-for="@Model.OrderItems.First().Order.Fax" placeholder="@Localizer["FaxNumber"]" type="text" id="BillingNewAddress_FaxNumber">
+                                                                                    </div>
+
+                                                                                    <div class="inputs address-input">
+                                                                                        <label for="BillingNewAddress_Address1">@Localizer["Address1"]:</label>
+                                                                                        <input asp-for="@Model.OrderItems.First().Order.Address" placeholder="@Localizer["Address1"]" type="text">
+                                                                                        <span class="required">*</span>
+                                                                                    </div>
+
+                                                                                    <div class="inputs address-input">
+                                                                                        <label for="BillingNewAddress_Address2">@Localizer["Address2"]:</label>
+                                                                                        <input asp-for="@Model.OrderItems.First().Order.Address2" placeholder="@Localizer["Address2"]" type="text" id="BillingNewAddress_Address2">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 d-flex gap-2 justify-content-end" style="display: flex; justify-content: center;">
+                                                                <div class="actions">
+                                                                    <button class="btn  btn-save-order button-1 cart-button" type="submit">Save</button>
+                                                                    <button type="button" class="btn  btn-delete-order button-1 cart-button" onclick="cancelOrder(@Model.OrderItems.First().Order.ID)">@Localizer["CancelOrder"]</button>
+
+                                                                    <button type="button" class="button-1 re-order-button" style="background: white; color: #cc0000;width: fit-content;" onclick="location.href='/order'">@Localizer["Back"]</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="billing-info">
+                                    <div class="title"><strong>@Localizer["BillingAddres"]</strong></div>
+                                    <ul class="info-list info-list-order">
+                                        <li class="name">@Model.OrderItems.First().Order.FirstName @Model.OrderItems.First().Order.LastName</li>
+                                        <li class="email">@Localizer["Email"]: @Model.OrderItems.First().Order.Email</li>
+                                        <li class="phone">@Localizer["PhoneNumber"]: @Model.OrderItems.First().Order.Phone</li>
+                                        <li class="address1">@Localizer["Address"]: @Model.OrderItems.First().Order.Country, @Model.OrderItems.First().Order.City, @Model.OrderItems.First().Order.Address, @Model.OrderItems.First().Order.Address2</li>
+                                        <li class="city-state-zip">@Model.OrderItems.First().Order.Zip</li>
+                                    </ul>
+                                </div>
+                            }
+                            <div class="payment-method-info">
+                                <div class="title"><strong>@Localizer["Payment"]</strong></div>
+                                <ul class="info-list info-list-order">
+                                    <li class="payment-method"><span class="label"> @Localizer["PaymentMethod"]: </span> <span class="value">@Model.OrderItems.First().Order.PaymentMethod </span></li>
+                                    <li class="payment-method-status"><span class="label"> @Localizer["PaymentStatus"]: </span> <span class="value"> @Model.OrderItems.First().Order.PaymentStstus </span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-summary-content">
+                    <div class="section products">
+                        <div class="title"><strong>@Localizer["Products"]</strong></div>
+                        <div class="table-wrapper">
+                            <table class="data-table jsmartable jsmatable-initialized">
+                                <colgroup>
+                                    <col class="table-info" width="1">
+                                    <col width="1">
+                                    <col width="1">
+                                    <col>
+                                    <col width="1">
+                                    <col width="1">
+                                    <col width="1">
+                                    <col width="1">
+                                </colgroup>
+                                <thead>
+                                    <tr style="color: #cc0000">
+                                        @* <th class="table-info">Info</th> *@
+                                        <th class="picture">@Localizer["Image"]</th>
+                                        <th class="name">@Localizer["Name"]</th>
+                                        <th class="name">@Localizer["SelectedSubproduct"]</th>
+                                        <th class="price" data-breakpoint="md">@Localizer["Price"]</th>
+                                        <th class="quantity" data-breakpoint="sm">@Localizer["Quantity"]</th>
+                                        <th class="total">@Localizer["Total"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        double? OrderTotal = 0.0;
+                                        double? PriceAfterDiscount = Math.Round(Convert.ToDouble( Model.PriceAfterDiscount));
+                                    }
+                                    @foreach (var orderItem in Model.OrderItems)
+                                    {
+                                        var productName = culture.StartsWith("en") ? orderItem.Subproduct.Product.NameEn : orderItem.Subproduct.Product.NameAr;
+                                        var subproductDescription = culture.StartsWith("en") ? orderItem.Subproduct.DescriptionEn : orderItem.Subproduct.DescriptionAr;
+
+                                        <tr>
+                                            <td class="product"><a href="/Products/Detail?Id=@orderItem.Subproduct.ProductId"><img src="/uploads/@orderItem.Subproduct.Image.ImagePath" /></a></td>
+                                            <td class="product"><a href="/Products/Detail?Id=@orderItem.Subproduct.ProductId">@productName</a></td>
+                                            <td class="product"><a href="/Products/Detail?Id=@orderItem.Subproduct.ProductId">@subproductDescription</a></td>
+                                            <td class="unit-price">
+                                                <label class="mb-0 td-title">@Localizer["Price"]:</label>
+                                                @if (orderItem.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale"))
+                                                {
+                                                    <span class="product-unit-price">@orderItem.Subproduct.Product.PriceAfterDiscount @Localizer["JOD"]</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="product-unit-price">@orderItem.Subproduct.Product.Price @Localizer["JOD"]</span>
+                                                }
+                                            </td>
+                                            <td class="quantity"><label class="mb-0 td-title">@Localizer["Quantity"]:</label> <span class="product-quantity">@orderItem.Quantity</span></td>
+                                            @{
+                                                double? total;
+                                                if (orderItem.Subproduct.Product.Flags.Any(x => x.FlagType == "Sale"))
+                                                {
+                                                    total = orderItem.Quantity * @orderItem.Subproduct.Product.PriceAfterDiscount;
+                                                }
+                                                else
+                                                {
+                                                    total = orderItem.Quantity * @orderItem.Subproduct.Product.Price;
+                                                }
+                                                OrderTotal += total;
+                                            }
+                                            <td class="total"><label class="mb-0 td-title"> @Localizer["Total"]:</label> <span class="product-subtotal">@total @Localizer["JOD"]</span></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div class="section options">
+                        </div>
+                        <div class="section totals">
+                            <div class="total-info">
+                                <table class="cart-total">
+                                    <tbody>
+                                        @if (!string.IsNullOrEmpty(Model.OrderItems.First().DiscountCode))
+                                        {
+                                            <tr>
+                                                <td class="cart-total-left"><label class="mb-0">@Localizer["DiscountCode"]:</label></td>
+                                                <td class="cart-total-right"><span>@Model.OrderItems.First().DiscountCode</span></td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="cart-total-left"><label class="mb-0">@Localizer["Sub_Total"]:</label></td>
+                                            <td class="cart-total-right"><span>@Math.Round(Convert.ToDouble(OrderTotal), 2) @Localizer["JOD"]</span></td>
+                                        </tr>
+                                        @if (!string.IsNullOrEmpty(Model.OrderItems.First().DiscountCode))
+                                        {
+                                            <tr>
+                                                <td class="cart-total-left"><label class="mb-0">@Localizer["totalAfterDiscount"]:</label></td>
+                                                <td class="cart-total-right">
+                                                    <span>@Math.Round(Convert.ToDouble(Model.PriceAfterDiscount), 2) @Localizer["JOD"]</span>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="cart-total-left"><label>@Localizer["Delivery"]:</label></td>
+                                            <td class="cart-total-right"><span> 2.00 @Localizer["JOD"]</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart-total-left"><label>@Localizer["Tax"]:</label></td>
+                                            <td class="cart-total-right"><span>0.00 @Localizer["JOD"]</span></td>
+                                        </tr>
+                                        @*  <tr>
+                                            <td class="cart-total-left"><label class="mb-0">@Localizer["OrderTotal"]:</label></td>
+                                            <td class="cart-total-right"><span><strong>@Math.Round(Convert.ToDouble(OrderTotal), 2) @Localizer["JOD"]</strong></span></td>
+                                        </tr> *@
+                                        @if (Model.OrderItems.First().TotalPrice != null)
+                                        {
+                                            <tr>
+                                                <td class="cart-total-left"><label class="mb-0">@Localizer["OrderTotal"]:</label></td>
+                                                <td class="cart-total-right"><span><strong>@Math.Round(Convert.ToDouble(@Model.OrderItems.First().TotalPrice), 2) @Localizer["JOD"]</strong></span></td>
+                                            </tr>
+                                            if (Model.OrderItems.First().DiscountCode != null && Model.OrderItems.First().DiscountCode != "" && Model.OrderItems.First().DiscountCode == string.Empty)
+                                            {
+                                                <tr>
+                                                    <td class="cart-total-left"><label class="mb-0">@Localizer["TotalAfterDiscountCode"]:</label></td>
+                                                    <td class="cart-total-right"><span><strong>@Math.Round(Convert.ToDouble(@Model.OrderItems.First().TotalPrice), 2) @Localizer["JOD"]</strong></span></td>
+                                                </tr>
+                                            }
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="actions"><button type="button" class="button-1 re-order-button" style="width:100%" onclick="location.href='/order'">@Localizer["Back"]</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="success-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification success">
+        <p class="content">@Localizer["orderwasCanceledSuccess"]</p>
+        <span class="close" title="Close" onclick="hideSuccessNotification()"></span>
+    </div>
+</div>
+
+<div id="error-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification error">
+        <p class="content">@Localizer["orderwasCanceledError"]</p>
+        <span class="close" title="Close" onclick="hideErrorNotification()"></span>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    function showSuccessNotification() {
+        var notification = document.getElementById('success-notification');
+        if (notification) {
+            notification.style.display = 'block';
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+            setTimeout(function () {
+        location.reload();
+    }, 2000); // 2000 milliseconds = 2 seconds
+    }
+
+    function hideSuccessNotification() {
+        var notification = document.getElementById('success-notification');
+        if (notification) {
+            notification.style.display = 'none';
+        }
+    }
+
+        function showErrorNotification() {
+        var notification = document.getElementById('error-notification');
+        if (notification) {
+            notification.style.display = 'block';
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+    }
+
+    function hideErrorNotification() {
+        var notification = document.getElementById('error-notification');
+        if (notification) {
+            notification.style.display = 'none';
+        }
+    }
+
+
+    // async function cancelOrder(orderId) {
+    //     const userConfirmed = confirm("Are you sure you want to cancel this order?");
+    // if (!userConfirmed) return;
+    //      $.ajax({
+    //            url: '/Order/Cancel?id=' + orderId,
+    //            type: 'POST',
+    //            contentType: 'application/json',
+    //            success: function (response) {
+    //                debugger;
+    //                console.log(response);
+    //                $('#subtotal-amount').text(totalPrice.toFixed(2) + ' @Localizer["JOD"]');
+    //                $('#total-amount').html('<strong>' + response.toFixed(2) + ' @Localizer["JOD"]</strong>');
+    //                $('#totalPrice').val(response.toFixed(2));
+    //            },
+    //            error: function () {
+    //                showErrorNotification();
+    //            }
+    //         });
+    // }
+
+
+        async function cancelOrder(orderId) {
+             const swalTranslations = {
+        title: '@Localizer["AreYouSure"]',
+        text: '@Localizer["DoYouReallyWantToCancelThisOrder"]',
+        confirmButtonText: '@Localizer["YesCancelIt"]',
+        cancelButtonText: '@Localizer["NoKeepIt"]'
+    };
+        await Swal.fire({
+           title: swalTranslations.title,
+    text: swalTranslations.text,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: swalTranslations.confirmButtonText,
+    cancelButtonText: swalTranslations.cancelButtonText
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/Order/Cancel?id=' + orderId,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(response);
+                        // $('#subtotal-amount').text(totalPrice.toFixed(2) + ' @Localizer["JOD"]');
+                        // $('#total-amount').html('<strong>' + response.toFixed(2) + ' @Localizer["JOD"]</strong>');
+                        // $('#totalPrice').val(response.toFixed(2));
+    //                     Swal.fire({
+    //     title: 'Canceled!',
+    //     text: 'The order has been canceled.',
+    //     icon: 'success',
+    //     timer: 1500,
+    //     showConfirmButton: false
+    // }).then(() => {
+    //     location.reload(); // Refresh the page
+    // });
+
+    showSuccessNotification();
+                    },
+                    error: function () {
+                        showErrorNotification();
+                    }
+                });
+            }
+        });
+
+    }
+
+</script>
+

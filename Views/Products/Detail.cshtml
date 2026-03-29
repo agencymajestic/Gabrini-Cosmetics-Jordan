@@ -1,0 +1,600 @@
+﻿@using GabriniCosmetics.Areas.Admin.Models.DTOs
+@model ProductView
+@{
+    string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var productName = culture.StartsWith("en") ? Model.NameEn : Model.NameAr;
+    var productDesc = culture.StartsWith("en") ? Model.DescriptionEn : Model.DescriptionAr;
+    var categoryName = culture.StartsWith("en") ? Model.Subcategory.Category.NameEn : Model.Subcategory.Category.NameAr;
+    var subCategoryName = culture.StartsWith("en") ? Model.Subcategory.NameEn : Model.Subcategory.NameAr;
+    SubproductView firstSubproduct = Model.Subproducts.FirstOrDefault() ?? null;
+    var subproductDesc = culture.StartsWith("en") ? firstSubproduct.DescriptionEn : firstSubproduct.DescriptionAr;
+    List<ProductView> relatedProducts = ViewBag.RelatedProducts ?? new List<ProductView>();
+    List<SubproductView> sproducts = Model.Subproducts;
+    int x = 7;
+}
+<style>
+    .image-container {
+        max-width: 400px; /* Sets the maximum width for the container */
+        height: 100px; /* Define a height for the container, adjust as needed */
+        display: flex;
+        flex-wrap: wrap; /* Ensures items wrap to the next line if necessary */
+        gap: 10px; /* Adds spacing between the images */
+    }
+
+    .image-box {
+        flex: 1 1 calc(33.33% - 10px); /* Each image gets 1/3 of the row width, minus the gap */
+        height: 100px; /* Define height for each image container */
+        position: relative;
+        overflow: hidden; /* Prevents overflow of images */
+    }
+
+        .image-box img {
+            width: auto;
+            height: 115px;
+            object-fit: cover; /* Ensures the image fills the container while maintaining aspect ratio */
+            display: block; /* Prevents inline spacing */
+        }
+</style>
+<div class="master-wrapper-page">
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="page-title">
+                <h1>@productName</h1>
+            </div>
+            <ul>
+                <li><span> <a href="/"> <span>@Localizer["Home"]</span> </a> </span> <span class="delimiter">/</span></li>
+                <li>
+                    <a asp-controller="Categories" asp-action="index" asp-route-id="@Model.Subcategory.CategoryId"> <span itemprop="name">@categoryName</span> </a> <span class="delimiter">/</span>
+                </li>
+                <li>
+                    <span itemprop="name">@subCategoryName</span> <span class="delimiter">/</span>
+                </li>
+                <li>
+                    <strong class="current-item">@productName</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="master-wrapper-content" style="margin-top:16px;">
+        <div class="master-column-wrapper">
+            <div class="center-1">
+                <div class="page product-details-page">
+                    <div class="page-body">
+                        <form method="post" id="product-details-form" novalidate="novalidate">
+                            <div data-productid="107">
+                                <div class="product-essential">
+                                    <div class="gallery">
+                                        <div>
+                                            <div class="offer-content product-ribbon"></div>
+                                            <div id="wrap">
+                                                <a id="selected-image-view" href="~/uploads/@firstSubproduct.Image.ImagePath" class="cloud-zoom">
+                                                    <img alt="@Localizer["PictureOf"] @productName" src="~/uploads/@firstSubproduct.Image.ImagePath" title="@Localizer["PictureOf"] @productName" class="cloud-zoom-image cloud-zoom-image-size" style="width: 400px; max-height: 400px" id="dbrandImage">
+                                                </a>
+                                            </div>
+                                            <div class="cloud-zoom-thumb-container" style="max-width:400px">
+                                                @foreach (var item in Model.Subproducts)
+                                                {
+                                                    <div id="image-@item.Id" class="cloud-zoom-thumb" onclick="selectProduct(@item.Id)" data-product-Id="@item.Id">
+                                                        <a href="javascript:void(0);" class="src-zoom-anchor">
+                                                            <img src="~/uploads/@item.Image.ImagePath" alt="@Localizer["PictureOf"] @productName" title="@Localizer["PictureOf"] @productName" class="src-zoom-image">
+                                                        </a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="overview">
+                                        <div class="product-overview-content">
+                                            <div class="additional-details">
+                                                <div class="sku"><span class="value">@Localizer["Category"] : </span> <span class="label" id="sku-107">@categoryName</span></div>
+                                                <div class="sku"><span class="value">@Localizer["SubCategory"] : </span> <span class="label" id="sku-107">@subCategoryName</span></div>
+                                                <div class="sku"><span class="value">@Localizer["Product"] : </span> <span class="label" id="sku-107">@productName</span></div>
+                                                <div class="sku"><span class="value">@Localizer["SelectedSubproduct"] : </span> <span id="subproduct-description" class="label" id="sku-107">@subproductDesc</span></div>
+                                                <div class="sku">
+                                                    <span class="value">@Localizer["ChooseSubProduct"] : </span>
+                                                    <select data-trigger="state-subproduct" id="subproduct-dropdown" onchange="selectProductFromDropdown(this)" style="width : 40%;">
+                                                        <option selected disabled value="0">@Localizer["ChooseSubProduct"] </option>
+                                                        @foreach (var item in Model.Subproducts)
+                                                        {
+                                                            <!option  value="@item.Id">
+                                                                @item.DescriptionEn
+                                                            </!option>
+                                                        }
+                                                    </select> @* <span id="subproduct-description" class="label" id="sku-107">@subproductDesc</span> *@
+                                                </div>
+                                            </div>
+                                            <div class="short-description">
+                                                <p>@productDesc</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-overview-pricing-cart">
+                                            <div class="availability">
+                                                <div class="stock">
+                                                    <span class="label">@Localizer["Availability"]:</span>
+                                                    @if (Model.Subproducts.FirstOrDefault().IsAvailability)
+                                                    {
+                                                        <span class="value in-stock" id="stock-available">@Localizer["InStock"]</span>
+                                                        <span class="value in-stock" id="stock-unavailable" style="display: none;">@Localizer["OutSold"]</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="value in-stock" id="stock-available" style="display: none;">@Localizer["InStock"]</span>
+                                                        <span class="value in-stock" id="stock-unavailable">@Localizer["OutSold"]</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="prices">
+                                                <div class="product-price">
+                                                    @if (Model.Flags.Any(f => f.FlagType == "Sale"))
+                                                    {
+                                                        <span class="price old-price-detail">@Model.Price @Localizer["JOD"]</span>
+                                                        <span class="price actual-price">@Model.PriceAfterDiscount @Localizer["JOD"]</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="price actual-price">@Model.Price @Localizer["JOD"]</span>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <div class="add-to-cart-panel">
+                                                    <button type="button" id="add-to-cart" class="button-1 AddToCartAccourdingQty" data-product-Id="@Model.Id"> @Localizer["AddToCart"]</button>
+                                                    <label class="qty-label" for="addtocart_107_EnteredQuantity">Qty:</label>
+                                                    <div class="qty-input-wrap">
+                                                        <button type="button" class="qty-btn qty-minus" value="-1">-</button>
+                                                        <input id="EnteredQuantity" class="qty-input" type="text" aria-label="Enter a quantity" data-val="true" value="1">
+                                                        <button type="button" class="qty-btn qty-plus" value="1">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="overview-buttons">
+                                                <div class="add-to-wishlist">
+                                                    <button type="button" class="button-2 AddToWishlistWithQtyAngImg" data-product-Id="@Model.Id">@Localizer["AddtoWishlist"]</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="related-carousel">
+                                    <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                        <div class="title">
+                                            <strong>Customers who bought this item also bought</strong>
+                                            <div class="swiper-nav">
+                                                <div class="icon-right-arrow-2" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper" aria-disabled="false"></div>
+                                                <div class="icon-left-arrow-2 swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper" aria-disabled="true"></div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-wrapper" id="swiper-wrapper" aria-live="polite">
+                                            @foreach (var item in relatedProducts)
+                                            {
+                                                var name = culture.StartsWith("en") ? item.NameEn : item.NameAr;
+                                                <div class="item-box swiper-slide">
+                                                    <div class="product-item" data-productid="@item.Id" data-quick-view="true">
+                                                        <div class="picture">
+                                                            <div class="offer-content product-ribbon"></div>
+                                                            <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden" id="swiper-@item.Id" style="overflow: unset;">
+                                                                <div class="swiper-wrapper" id="swiper-wrapper">
+                                                                    @foreach (var subproduct in item.Subproducts)
+                                                                    {
+                                                                        <a class="swiper-slide padding-b swiper-slide-prev" asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id" title="@Localizer["ShowDetailsFor"] @name" style="width: 199px;">
+                                                                            <img alt="@Localizer["PictureOf"] @name" src="~/uploads/@subproduct.Image.ImagePath" title="@Localizer["ShowDetailsFor"] @name">
+                                                                        </a>
+                                                                    }
+                                                                </div>
+                                                                <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                                                    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+                                                                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true"></span>
+                                                                </div>
+                                                                <script>
+                                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                                        var mySwiper = new Swiper('#swiper-@item.Id', {
+                                                                            pagination: {
+                                                                                clickable: true,
+                                                                                el: '.swiper-pagination',
+                                                                            },
+                                                                        });
+                                                                    });
+                                                                </script>
+                                                            </div>
+                                                            <div class="buttons">
+                                                                <button type="button" class="button-2 add-to-wishlist-button" data-product-Id="@item.Id" title="@Localizer["AddToWishlist"]">@Localizer["AddToWishlist"]</button>
+                                                                <button type="button" class="button-2 quick-view-btn" data-product-Id="@item.Id" title="@Localizer["QuickView"]">
+                                                                    <i class="fa-sharp fa-light fa-magnifying-glass-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="details">
+                                                            <h2 class="product-title">
+                                                                <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Id">@name</a>
+                                                            </h2>
+                                                            <div class="add-info">
+                                                                <div class="prices">
+                                                                    @if (item.Flags.Any(f => f.FlagType == "Sale"))
+                                                                    {
+                                                                        <span class="price old-price">@item.Price @Localizer["JOD"]</span>
+                                                                        <span class="price actual-price">@item.PriceAfterDiscount @Localizer["JOD"]</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="price actual-price">@item.Price @Localizer["JOD"]</span>
+                                                                    }
+                                                                </div>
+                                                                <div class="add-to-cart">
+                                                                    <button type="button" class="button-1 add-to-cart-button" data-product-Id="@item.Id">@Localizer["AddToCart"]</button>
+                                                                    <div class="qty-input-wrap">
+                                                                        <button type="button" class="qty-btn qty-minus" value="-1">-</button>
+                                                                        <input id="product-quantity" class="qty-input" type="text" aria-label="Enter a quantity" value="1">
+                                                                        <button type="button" class="qty-btn qty-plus" value="1">+</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<!-- Product Detail Quick View Modal -->
+<div id="product-detail" class="mfp-wrap mfp-close-btn-in mfp-auto-cursor quickview-popup mfp-ready" tabindex="-1" style="overflow: hidden auto; display: none;">
+    <div class="mfp-container mfp-s-ready mfp-inline-holder">
+        <div class="mfp-content">
+            <div class="qv-modal" id="qv-modal" style="display: block;">
+                <div class="qv-details">
+                    <div class="page product-details-page">
+                        <div class="page-body">
+                            <div class="product-name">
+                                <h2 id="product-name" itemprop="name"></h2>
+                            </div>
+                            <form method="post" id="product-details-form" action="">
+                                <div data-productid="">
+                                    <div class="product-essential">
+                                        <!-- Product pictures -->
+                                        <div class="gallery" id="product-gallery">
+                                            <!-- Dynamic content will be inserted here -->
+                                        </div>
+                                        <div class="overview">
+                                            <div class="product-overview-content">
+                                                <!-- SKU -->
+                                                <div class="additional-details">
+                                                    <div class="sku">
+                                                        <span class="value">@Localizer["Category"]:</span>
+                                                        <span class="label" id="product-Category"></span>
+                                                    </div>
+                                                    <div class="sku">
+                                                        <span class="value">@Localizer["SubCategory"]:</span>
+                                                        <span class="label" id="product-subCategory"></span>
+                                                    </div>
+                                                    <div class="sku">
+                                                        <span class="value">@Localizer["Product"]:</span>
+                                                        <span class="label" id="products"></span>
+                                                    </div>
+                                                </div>
+                                                <!-- Attributes -->
+                                                <div class="attributes" id="product-attributes">
+                                                    <!-- Dynamic content will be inserted here -->
+                                                </div>
+                                            </div>
+                                            <div class="product-overview-pricing-cart">
+                                                <!-- Price & add to cart -->
+                                                <div class="prices">
+                                                    <div class="product-price">
+                                                        <span itemprop="price" id="product-price" class="price-value"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <div class="add-to-cart-panel">
+                                                        <button type="button" id="add-to-cart-button" data-product-id="" class="button-1 add-to-cart-button mx-1">
+                                                            <i class="icon-cart mr-2"></i> @Localizer["AddToCart"]
+                                                        </button>
+                                                        <div class="qty-input-wrap">
+                                                            <button id="product-quantity-minus" type="button" class="qty-btn qty-minus" value="-1">-</button>
+                                                            <input id="product-quantity" class="qty-input" type="text" aria-label="Enter a quantity" value="1">
+                                                            <button id="product-quantity-plus" type="button" class="qty-btn qty-plus" value="1">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Wishlist -->
+                                                <div class="overview-buttons">
+                                                    <div class="add-to-wishlist">
+                                                        <button type="button" id="add-to-wishlist-button" data-product-id="" class="button-2 AddToWishlistWithQtyAngImg">
+                                                            <i class="icon-heart mr-2"></i> @Localizer["AddToWishlist"]
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bar-notification-wishlist" class="bar-notification-container" data-close="Close">
+    <div class="bar-notification success" style="display: none;">
+        <p class="content">@Localizer["AlertAdded"] <a href="/Wishlist">@Localizer["wishlist"]</a></p>
+        <span class="close" title="Close"></span>
+    </div>
+</div>
+<div id="bar-notification-cart" class="bar-notification-container" data-close="Close">
+    <div class="bar-notification success" style="display: none;">
+        <p class="content">@Localizer["AlertAdded"] <a href="/cart">@Localizer["cart"]</a></p>
+        <span class="close" title="Close"></span>
+    </div>
+</div>
+<div id="error-notification" class="bar-notification-container" style="display: none;" data-close="Close">
+    <div class="bar-notification error">
+        <p class="content">@Localizer["ItemOutOfStock"]</p>
+        <span class="close" title="Close" onclick="hideErrorNotification()"></span>
+    </div>
+</div>
+
+<script async="false">
+
+    function showErrorNotification() {
+        var notification = document.getElementById('error-notification');
+        if (notification) {
+            notification.style.display = 'block';
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+    }
+
+    function hideErrorNotification() {
+        var notification = document.getElementById('error-notification');
+        if (notification) {
+            notification.style.display = 'none';
+        }
+    }
+    const currentCulture = '@Html.Raw(culture.StartsWith("en") ? "en" : "ar")';
+    const subproducts = Array.from((@Html.Raw(Json.Serialize(Model.Subproducts)))["$values"]);
+    var selectedSubproduct = subproducts[0];
+    selectProduct(selectedSubproduct.id);
+    function selectProduct(id) {
+
+        selectedSubproduct = subproducts.find(sp => sp.id == id);
+
+        console.log(selectedSubproduct);
+        changeMainImage(`../../uploads/${selectedSubproduct['image']['imagePath']}`);
+
+        const subproductDescription = currentCulture == 'en' ? selectedSubproduct.descriptionEn : selectedSubproduct.descriptionAr;
+        $("#subproduct-description").text(subproductDescription);
+
+        if(selectedSubproduct.isAvailability)
+        {
+            $('#add-to-cart').prop('disabled', false);
+            $('#product-quantity').prop('disabled', false);
+            $('#product-quantity-minus').prop('disabled', false);
+            $('#product-quantity-plus').prop('disabled', false);
+            $("#stock-available").show();
+            $("#stock-unavailable").hide();
+        }
+        else
+        {
+            // $('#add-to-cart').prop('disabled', true);
+            $('#product-quantity').prop('disabled', true);
+            $('#product-quantity-minus').prop('disabled', true);
+            $('#product-quantity-plus').prop('disabled', true);
+            $("#stock-available").hide();
+            $("#stock-unavailable").show();
+        }
+
+        const dropdown = $('#subproduct-dropdown');
+        dropdown.val(selectedSubproduct.id);
+    }
+
+
+    // Function to change the main image
+    function changeMainImage(newSrc, isQuickView = false) {
+        $('#selected-image-view').attr('href', newSrc);
+        if (isQuickView) {
+            // Update the image inside the quick view modal
+            $('#dbrandImageQ').attr('src', newSrc);
+        } else {
+            // Update the main image outside the quick view
+            $('#dbrandImage').attr('src', newSrc);        
+        }
+    }
+
+        // This function will be triggered when the user selects a product from the dropdown
+    function selectProductFromDropdown(dropdown) {
+        const selectedId = $(dropdown).val();
+        if (selectedId != 0) {
+            // Find the selected subproduct based on the dropdown selection
+            selectedSubproduct = subproducts.find(sp => sp.id == selectedId);
+
+        console.log(selectedSubproduct);
+
+            // Update the image and product details based on the selection
+            changeMainImage(`../../uploads/${selectedSubproduct['image']['imagePath']}`);
+
+            // Update the description
+            const subproductDescription = currentCulture == 'en' ? selectedSubproduct.descriptionEn : selectedSubproduct.descriptionAr;
+            $("#subproduct-description").text(subproductDescription);
+
+            // Enable or disable the UI elements based on availability
+            if (selectedSubproduct.isAvailability) {
+                $('#add-to-cart').prop('disabled', false);
+                $('#product-quantity').prop('disabled', false);
+                $('#product-quantity-minus').prop('disabled', false);
+                $('#product-quantity-plus').prop('disabled', false);
+                $("#stock-available").show();
+                $("#stock-unavailable").hide();
+            } else {
+                $('#product-quantity').prop('disabled', true);
+                $('#product-quantity-minus').prop('disabled', true);
+                $('#product-quantity-plus').prop('disabled', true);
+                $("#stock-available").hide();
+                $("#stock-unavailable").show();
+            }
+        }
+    }
+
+    function updateProductDetailModal(product) {
+        const culture = "@culture";
+        const PName = culture.startsWith("en") ? product.nameEn : product.nameAr;
+        const CName = culture.startsWith("en") ? product.subcategory.category.nameEn : product.subcategory.category.nameAr;
+        const SCName = culture.startsWith("en") ? product.subcategory.nameEn : product.subcategory.nameAr;
+
+        $('#product-name').text(PName);
+        $('#product-Category').text(CName);
+        $('#product-subCategory').text(SCName);
+        $('#products').text(PName);
+        $('#product-quantity').val(1);
+
+        const localizerJOD = "JOD";
+        const gallery = $('#product-gallery').empty();
+
+        gallery.append(`
+            <div id="wrap" style="top:0px;z-index:9999;position:relative;">
+                    <img alt="@Localizer["PictureOf"] ${PName}" src="${window.location.origin}/uploads/${product.subproducts.$values[0].image.imagePath}" title="@Localizer["PictureOf"] ${PName}" style="height: auto; width: 100%; border-width: 0px; display: block;" class="cloud-zoom-image cloud-zoom-image-size" width="400" id="dbrandImageQ">
+            </div>
+        `);
+
+        product.subproducts.$values.forEach(subproduct => {
+            gallery.append(`
+                <div class="cloud-zoom-thumb" style="margin-top:16px">
+                    <a href="${window.location.origin}/uploads/${subproduct.image.imagePath}" rel="lightbox-p" class="src-zoom-anchor" onclick="return false;">
+                        <img src="${window.location.origin}/uploads/${subproduct.image.imagePath}" alt="Product Image" class="src-zoom-image">
+                    </a>
+                </div>
+            `);
+        });
+
+        $(".cloud-zoom-thumb a").on("click", function () {
+            const newSrc = $(this).attr('href');
+            changeMainImage(newSrc, true); // Pass true for quick view
+        });
+
+
+        $('.AddToWishlistWithQtyAngImg').attr('data-product-id', product.id);
+        $('#add-to-cart-button').attr('data-product-id', product.id);
+
+        const priceElement = $('#product-price').empty();
+
+        if (product.flags.$values.some(flag => flag.flagType === 'Sale')) {
+            priceElement.append(`
+                <div class="prices">
+                    <div class="old-product-price">
+                        <span>Old price:</span>
+                        <span>${product.price} ${localizerJOD}</span>
+                    </div>
+                    <div class="product-price">
+                        <label>Price:</label>
+                        <span class="price-value">${product.priceAfterDiscount} ${localizerJOD}</span>
+                    </div>
+                </div>
+            `);
+        } else {
+            priceElement.append(`
+                <div class="product-price">
+                    <label>Price:</label>
+                    <span itemprop="price" class="price-value">${product.price} ${localizerJOD}</span>
+                </div>
+            `);
+        }
+    }
+
+    let hrefValue = "";
+    $(".cloud-zoom-thumb").on("click", function () {
+        hrefValue = $('#dbrandImage').attr('src');
+    });
+
+    $(".AddToCartAccourdingQty").on("click",async function () {
+        if(hrefValue== ""){
+            hrefValue = selectedSubproduct.image.imagePath;
+        }
+        const modifiedPath = hrefValue.replace("/images/", "");
+        const inputValue = $('#EnteredQuantity').val();
+        const subproductId = selectedSubproduct.id;
+    debugger;
+        if(!selectedSubproduct.isAvailability){
+            showErrorNotification()
+        }
+        else{
+            var response = await fetch(`/Cart/AddItemWithQtyAndImage?subproductId=${subproductId}&qty=${inputValue}&image=${modifiedPath}`);
+                if (response.status == 200) {
+                $('#bar-notification-error .bar-notification.error').hide();
+                $('#bar-notification-cart .bar-notification.success').show();
+
+                    // Wait for 2 seconds
+                    setTimeout(function () {
+                        // Reload the page after 2 seconds
+                        location.reload();
+                    }, 2000);
+                }
+        }
+    });
+
+    // Add to cart button click handler
+    $('.add-to-cart-button').on('click', function () {
+        var productId = $(this).attr('data-product-Id');
+        window.location.href = `/Products/Detail?Id=${productId}`;
+    });
+
+    // Add to wishlist button click handler
+    $('.add-to-wishlist-button').on('click', function () {
+        var productId = $(this).attr('data-product-id');
+        window.location.href = `/Products/Detail?Id=${productId}`;
+    });
+
+    // Wishlist button with quantity and image click handler
+    $(".AddToWishlistWithQtyAngImg").on("click", async function () {
+        const subproductId = selectedSubproduct.id;
+        var qty = $('.qty-input').val();
+        var img = $('#dbrandImage').attr('src').split('/').pop();
+
+        var response = await fetch(`/WishList/AddItemWithQtyAndImage?subproductId=${subproductId}&qty=${qty}&image=${img}`);
+                if (response.status == 200) {
+                    // Show the success notification
+                    $('#bar-notification-error .bar-notification.error').hide();
+                    $('#bar-notification-wishlist .bar-notification.success').show();
+                    // Wait for 2 seconds
+                    setTimeout(function () {
+                        // Reload the page after 2 seconds
+                        location.reload();
+                    }, 2000);
+                }
+    });
+
+    // Quick View Button
+    $(document).on('click', '.quick-view-btn', async function () {
+        const productId = $(this).data('product-id');
+        try {
+            const response = await fetch(`/Products/GetProductById/${productId}`);
+            if (response.status == 200) {
+                const product = await response.json();
+                updateProductDetailModal(product);
+                $('#product-detail').show();
+            } else {
+                console.error('Failed to fetch product details');
+            }
+        } catch (err) {
+            console.error('Error:', err);
+        }
+    });
+
+    $('.mfp-close').on('click', function () {
+        $('#product-detail').hide();
+    });
+</script>

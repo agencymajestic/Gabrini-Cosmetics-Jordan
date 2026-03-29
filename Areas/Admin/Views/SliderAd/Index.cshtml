@@ -1,0 +1,123 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<GabriniCosmetics.Areas.Admin.Models.DTOs.SliderAdDTO>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="list-product-header">
+                        <div>
+                            @if(Model.Count < 5)
+                            {
+                                <a class="btn btn-primary" href="/Admin/SliderAd/Create"><i class="fa fa-plus"></i> Add Slider Ad</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="list-product list-sliderAd">
+                        <table class="table table-striped" id="sliderAd-status">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input checkbox-primary" type="checkbox">
+                                        </div>
+                                    </th>
+                                    <th><span class="f-light f-w-600">Image</span></th>
+                                    <th><span class="f-light f-w-600">Link</span></th>
+                                    <th><span class="f-light f-w-600">Action</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="sliderAd-removes">
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input checkbox-primary" type="checkbox">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="sliderAd-images">
+                                                <div class="light-sliderAd-box">
+                                                    <img class="img-fluid" src="~/uploads/@item.ImageUrl" alt="Slider Ad Image" style="max-width: 200px;">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.Link</td>
+                                        <td>
+                                            <div class="sliderAd-action">
+                                                <a class="action-icon" href="/Admin/SliderAd/Edit/@item.Id">
+                                                    <i class="fa-sharp fa-light fa-pen-to-square"></i>
+                                                </a>
+                                                <a class="action-icon" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id">
+                                                    <i class="fa-regular fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this slider ad?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="confirmDeleteButton">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var sliderAdId;
+
+        // Ensure the modal event is properly set up
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            sliderAdId = button.data('id');
+            console.log('Slider Ad ID to delete:', sliderAdId); // Debug log
+        });
+
+        // Confirm delete button click event
+        $('#confirmDeleteButton').click(function () {
+            console.log('Confirm delete button clicked'); // Debug log
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/SliderAd/Delete',
+                contentType: 'application/json',
+                data: JSON.stringify(sliderAdId),
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function () {
+                    console.log('Slider Ad deleted successfully'); // Debug log
+                    location.reload();
+                },
+                error: function () {
+                    console.log('Error deleting slider ad'); // Debug log
+                    alert('Error deleting slider ad');
+                }
+            });
+        });
+    });
+</script>
